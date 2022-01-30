@@ -33,7 +33,16 @@
                                     <td>Tidak Izin</td>
                                 </tr>
                                 <?php
-
+                                $no = 1;
+                                foreach ($data as $d) {
+                                ?>
+                                    <tr>
+                                        <td><?= $no++; ?></td>
+                                        <td><?= $d->namalengkap ?></td>
+                                        <td><?= date('F', $d->jammasuk) ?></td>
+                                    </tr>
+                                <?php
+                                }
                                 ?>
                             </table>
                         </div>

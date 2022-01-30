@@ -96,10 +96,16 @@ class Absensi extends MX_Controller
 	}
 	public function laporan()
 	{
+		$data = array(
+			'data' => $this->absensi->get(),
+			'tepatwaktu' => $this->absensi->tepatwaktu()
+		);
+		var_dump($data['tepatwaktu']);
+		die;
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
 		$this->load->view('template/topbar');
-		$this->load->view('laporan',);
+		$this->load->view('laporan', $data);
 		$this->load->view('template/footer');
 	}
 }

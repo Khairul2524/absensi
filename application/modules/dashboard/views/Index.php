@@ -12,7 +12,7 @@
                     <div class="row align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Hadir</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">40,000</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $hadir; ?> Orang</div>
                             <div class="mt-2 mb-0 text-muted text-xs">
                                 <span><?= date('d F y'); ?> </span>
                             </div>
@@ -31,7 +31,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-uppercase mb-1">Hadir Tepat Waktu</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">650</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $tepatwaktu[0]->totalst; ?> Orang</div>
                             <div class="mt-2 mb-0 text-muted text-xs">
                                 <span><?= date('d F y'); ?></span>
                             </div>
@@ -50,7 +50,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-uppercase mb-1">Hadir Tidak Tepat Waktu</div>
-                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">366</div>
+                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?= $tepatwaktu[0]->totalst; ?> Orang</div>
                             <div class="mt-2 mb-0 text-muted text-xs">
 
                                 <span><?= date('d F y'); ?></span>
@@ -70,7 +70,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-uppercase mb-1">Tidak Hadir</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $izin[0]->totalst; ?> Orang</div>
                             <div class="mt-2 mb-0 text-muted text-xs">
 
                                 <span><?= date('d F y'); ?></span>
@@ -85,7 +85,7 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <!-- <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -96,7 +96,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </div>
 <!---Container Fluid-->

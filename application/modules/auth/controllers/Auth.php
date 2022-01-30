@@ -66,7 +66,8 @@ class Auth extends MY_Controller
 				$data = array(
 					'namalengkap' => $cekuser['namalengkap'],
 					'email' => $cekuser['email'],
-					'role'		=> $cekuser['idrole']
+					'role'		=> $cekuser['idrole'],
+					'opd'		=> $cekuser['idopd']
 				);
 				// var_dump($data);
 				// die;

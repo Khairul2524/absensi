@@ -98,15 +98,18 @@ class Dashboard extends MY_Controller
 
 	public function dash()
 	{
-		$datas = array(
-			'email' => $this->session->userdata('email')
+		$data = array(
+			'tepatwaktu' => $this->all->tepatwaktu(),
+			'tidaktepatwaktu' => $this->all->tidaktepatwaktu(),
+			'izin' => $this->all->izin(),
 		);
-		// var_dump($datas);
-		// die;
+		$ya = $data['tepatwaktu'][0]->totalst;
+		$tidak = $data['tidaktepatwaktu'][0]->totalst;
+		$data['hadir'] = $ya + $tidak;
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
 		$this->load->view('template/topbar');
-		$this->load->view('index');
+		$this->load->view('index', $data);
 		$this->load->view('template/footer');
 	}
 }

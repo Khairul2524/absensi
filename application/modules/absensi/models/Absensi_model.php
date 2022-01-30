@@ -21,9 +21,4 @@ class Absensi_model extends CI_Model
         $this->db->where($this->id, $id);
         $this->db->update($this->tabel, $data);
     }
-    public function delete($id)
-    {
-        $this->db->where($this->id, $id);
-        $this->db->delete($this->tabel);
-    }
 }
