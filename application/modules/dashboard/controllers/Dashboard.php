@@ -103,8 +103,18 @@ class Dashboard extends MY_Controller
 			'tidaktepatwaktu' => $this->all->tidaktepatwaktu(),
 			'izin' => $this->all->izin(),
 		);
-		$ya = $data['tepatwaktu'][0]->totalst;
-		$tidak = $data['tidaktepatwaktu'][0]->totalst;
+		if ($data['tepatwaktu']) {
+			$ya = $data['tepatwaktu'][0]->totalst;
+		} else {
+			$ya = 0;
+		}
+		if ($data['tidaktepatwaktu']) {
+			$tidak = $data['tidaktepatwaktu'][0]->totalst;
+		} else {
+			$tidak = 0;
+		}
+
+
 		$data['hadir'] = $ya + $tidak;
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
