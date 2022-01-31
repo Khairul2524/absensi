@@ -34,12 +34,10 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                 <?php
                                 if ($tepatwaktu) {
-                                    $tepatwaktu[0]->totalst;
+                                    echo  $tepatwaktu[0]->totalst;
                                 } else {
                                     echo '0 ';
                                 }
-
-
                                 ?> Orang
                             </div>
                             <div class="mt-2 mb-0 text-muted text-xs">
@@ -62,8 +60,8 @@
                             <div class="text-xs font-weight-bold text-uppercase mb-1">Hadir Tidak Tepat Waktu</div>
                             <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
                                 <?php
-                                if ($tepatwaktu) {
-                                    $tepatwaktu[0]->totalst;
+                                if ($tidaktepatwaktu) {
+                                    echo $tidaktepatwaktu[0]->totalst;
                                 } else {
                                     echo "0";
                                 } ?>

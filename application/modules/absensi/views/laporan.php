@@ -8,7 +8,7 @@
             <div class="col-lg-12">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <a href="#" class="btn btn-success btn-icon-split mb-2 tombol-tambah" data-toggle="modal" data-target="#menumodal">
+                        <a href="<?= site_url('absensi/print') ?>" class="btn btn-success btn-icon-split mb-2 ">
                             <span class="icon text-white-50">
                                 <i class="fas fa-print"></i>
                             </span>
@@ -35,13 +35,24 @@
                                 <?php
                                 $no = 1;
                                 foreach ($data as $d) {
-                                ?>
-                                    <tr>
-                                        <td><?= $no++; ?></td>
-                                        <td><?= $d->namalengkap ?></td>
-                                        <td><?= date('F', $d->jammasuk) ?></td>
-                                    </tr>
-                                <?php
+                                    echo '<tr>';
+                                    if ($d->idopd == $this->session->userdata('opd')) {
+                                        if ($d->idrole == 5) {
+                                            echo "<td>"     . $no++ . "</td>";
+                                            echo "<td>"     . $d->namalengkap . "</td>";
+                                            echo "<td>"     . date('F') . "</td>";
+                                            $absenya = $this->db->select('statusmasuk, COUNT(statusmasuk) as totalst')->from('absensi')->where(['statusmasuk' => 1, 'iduser' => $d->iduser])->get()->result();
+                                            // var_dump($absen[0]->totalst);
+                                            echo '<td>' . $absenya[0]->totalst . '</td>';
+                                            $absentidak = $this->db->select('statusmasuk, COUNT(statusmasuk) as totalst')->from('absensi')->where(['statusmasuk' => 2, 'iduser' => $d->iduser])->get()->result();
+                                            echo '<td>' . $absentidak[0]->totalst . '</td>';
+                                            $izin = $this->db->select('statusmasuk, COUNT(statusmasuk) as totalst')->from('absensi')->where(['statusmasuk' => 3, 'iduser' => $d->iduser])->get()->result();
+                                            echo '<td>' . $izin[0]->totalst . '</td>';
+                                            $izin = $this->db->select('statusmasuk, COUNT(statusmasuk) as totalst')->from('absensi')->where(['statusmasuk' => 4, 'iduser' => $d->iduser])->get()->result();
+                                            echo '<td>' . $absentidak[0]->totalst . '</td>';
+                                        }
+                                    }
+                                    echo '</tr>';
                                 }
                                 ?>
                             </table>
