@@ -6,7 +6,7 @@ require APPPATH . 'libraries/RestController.php';
 require APPPATH . 'libraries/Format.php';
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Api_key extends RestController
+class Api_role extends RestController
 {
 
     function __construct()
@@ -16,17 +16,21 @@ class Api_key extends RestController
     }
     public function index_get()
     {
-        $user = $this->all->getuser();
-
-        if ($user) {
+        $id = $this->get('id');
+        if ($id === null) {
+            $role = $this->all->getrole();
+        } else {
+            $role = $this->all->getidrole($id);
+        }
+        if ($role) {
             $this->response([
                 'status' => true,
-                'data' => $user
+                'data' => $role
             ], 200);
         } else {
             $this->response([
                 'status' => false,
-                'pesan' => 'User tidak di temukan'
+                'pesan' => 'Role tidak di temukan'
             ], 404);
         }
     }

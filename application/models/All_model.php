@@ -2,14 +2,29 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class All_model extends CI_Model
 {
-
+    public function getabsensi()
+    {
+        return $this->db->get('absensi')->result();
+    }
+    public function getidabsensi($id)
+    {
+        return $this->db->get_where('absensi', ['idabsensi' => $id])->result();
+    }
     public function getopd()
     {
         return $this->db->get('opd')->result();
     }
+    public function getidopd($id)
+    {
+        return $this->db->get_where('opd', ['idopd' => $id])->result();
+    }
     public function getrole()
     {
         return $this->db->get('role')->result();
+    }
+    public function getidrole($id)
+    {
+        return $this->db->get_where('role', ['idrole' => $id])->result();
     }
     public function getuser()
     {
