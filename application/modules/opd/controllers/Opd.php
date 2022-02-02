@@ -35,28 +35,29 @@ class Opd extends MX_Controller
 	public function tambah()
 	{
 		$opd = htmlspecialchars($this->input->post('opd'));
+		// $opdhash = password_hash($opd, PASSWORD_DEFAULT);
 
 		$cek = $this->db->get_where('opd', ['opd' => htmlspecialchars($this->input->post('opd'))])->row();
 		// var_dump($cek);
 		if (!$cek) {
-			$this->load->library('ciqrcode'); //pemanggilan library QR CODE
-			$config['cacheable']    = true; //boolean, the default is true
-			$config['cachedir']     = './assets/'; //string, the default is application/cache/
-			$config['errorlog']     = './assets/'; //string, the default is application/logs/
-			$config['imagedir']     = './assets/backand/img/qrcode/'; //direktori penyimpanan qr code
-			$config['quality']      = true; //boolean, the default is true
-			$config['size']         = '1024'; //interger, the default is 1024
-			$config['black']        = array(224, 255, 255); // array, default is array(255,255,255)
-			$config['white']        = array(70, 130, 180); // array, default is array(0,0,0)
+			$this->load->library('ciqrcode');
+			$config['cacheable']    = true;
+			$config['cachedir']     = './assets/';
+			$config['errorlog']     = './assets/';
+			$config['imagedir']     = './assets/backand/img/qrcode/';
+			$config['quality']      = true;
+			$config['size']         = '1024';
+			$config['black']        = array(224, 255, 255);
+			$config['white']        = array(70, 130, 180);
 			$this->ciqrcode->initialize($config);
 
-			$image_name = $opd . '.png'; //buat name dari qr code sesuai dengan nim
+			$image_name = $opd . '.png';
 
-			$params['data'] = $opd . ' Qithmir25'; //data yang akan di jadikan QR CODE
-			$params['level'] = 'H'; //H=High
+			$params['data'] = $opd;
+			$params['level'] = 'H';
 			$params['size'] = 10;
-			$params['savename'] = FCPATH . $config['imagedir'] . $image_name; //simpan image QR CODE ke folder assets/images/
-			$this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
+			$params['savename'] = FCPATH . $config['imagedir'] . $image_name;
+			$this->ciqrcode->generate($params);
 			$data = array(
 				'opd' => $opd,
 				'qr_code' => $image_name
@@ -82,24 +83,24 @@ class Opd extends MX_Controller
 		// var_dump($cek);
 		// die;
 		unlink("./assets/backand/img/qrcode/" . $cek->qr_code);
-		$this->load->library('ciqrcode'); //pemanggilan library QR CODE
-		$config['cacheable']    = true; //boolean, the default is true
-		$config['cachedir']     = './assets/'; //string, the default is application/cache/
-		$config['errorlog']     = './assets/'; //string, the default is application/logs/
-		$config['imagedir']     = './assets/backand/img/qrcode/'; //direktori penyimpanan qr code
-		$config['quality']      = true; //boolean, the default is true
-		$config['size']         = '1024'; //interger, the default is 1024
-		$config['black']        = array(224, 255, 255); // array, default is array(255,255,255)
-		$config['white']        = array(70, 130, 180); // array, default is array(0,0,0)
+		$this->load->library('ciqrcode');
+		$config['cacheable']    = true;
+		$config['cachedir']     = './assets/';
+		$config['errorlog']     = './assets/';
+		$config['imagedir']     = './assets/backand/img/qrcode/';
+		$config['quality']      = true;
+		$config['size']         = '1024';
+		$config['black']        = array(224, 255, 255);
+		$config['white']        = array(70, 130, 180);
 		$this->ciqrcode->initialize($config);
 
-		$image_name = $opd . '.png'; //buat name dari qr code sesuai dengan nim
+		$image_name = $opd . '.png';
 
-		$params['data'] = $opd . 'Qithmir25'; //data yang akan di jadikan QR CODE
-		$params['level'] = 'H'; //H=High
+		$params['data'] = $opd;
+		$params['level'] = 'H';
 		$params['size'] = 10;
-		$params['savename'] = FCPATH . $config['imagedir'] . $image_name; //simpan image QR CODE ke folder assets/images/
-		$this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
+		$params['savename'] = FCPATH . $config['imagedir'] . $image_name;
+		$this->ciqrcode->generate($params);
 		$data = array(
 			'idopd' => htmlspecialchars($this->input->post('id')),
 			'opd' => $opd,
@@ -120,47 +121,5 @@ class Opd extends MX_Controller
 		$this->opd->delete($id);
 		$this->session->set_flashdata('berhasil', 'opd Berhasil Dihapus!');
 		redirect('opd');
-	}
-	public function hakakses()
-	{
-		$id = $this->session->userdata('idodp');
-		$data = array(
-			'judul' => 'Hak Akses User',
-			'data' => $this->odp->get(),
-			'odp' => $this->all->getidodp($id)
-		);
-		$this->load->view('template/header');
-		$this->load->view('template/navbar', $data);
-		$this->load->view('template/sidebar', $data);
-		$this->load->view('hakakses', $data);
-		$this->load->view('template/footer');
-	}
-	public function aksesmenu($id)
-	{
-		$idr = $this->session->userdata('idodp');
-		$data = array(
-			'judul' => 'Hak Akses User',
-			'idodp' => $this->all->getidodp($id),
-			'odp' => $this->all->getidodp($idr),
-			'menu' => $this->all->getmenu(),
-		);
-		$this->load->view('template/header');
-		$this->load->view('template/navbar', $data);
-		$this->load->view('template/sidebar', $data);
-		$this->load->view('aksesmenu', $data);
-		$this->load->view('template/footer');
-	}
-	public function insertakses()
-	{
-		$data = array(
-			'idmenu' => $this->input->post('menuid'),
-			'idodp' => $this->input->post('odpid'),
-		);
-		$cek = $this->db->get_where('aksesmenu', $data)->row();
-		if ($cek) {
-			$this->all->deleteakses($cek->id);
-		} else {
-			$this->all->inserthakakses($data);
-		}
 	}
 }
