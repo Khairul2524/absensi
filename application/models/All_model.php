@@ -10,6 +10,7 @@ class All_model extends CI_Model
     {
         return $this->db->get_where('absensi', ['idabsensi' => $id])->result();
     }
+    // Awal Query OPD
     public function getopd()
     {
         return $this->db->get('opd')->result();
@@ -18,6 +19,22 @@ class All_model extends CI_Model
     {
         return $this->db->get_where('opd', ['idopd' => $id])->result();
     }
+    public function insertopd($data)
+    {
+        $this->db->insert('opd', $data);
+        return $this->db->affected_rows();
+    }
+    public function updateopd($data, $id)
+    {
+        $this->db->update('opd', $data, ['idopd' => $id]);
+        return $this->db->affected_rows();
+    }
+    public function deleteopd($id)
+    {
+        $this->db->delete('opd', ['idopd' => $id]);
+        return $this->db->affected_rows();
+    }
+    // Akhir Query OPD
     // Awal Query Tabel Role
     public function getrole()
     {
