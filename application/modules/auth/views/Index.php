@@ -32,12 +32,26 @@
                                     </div>
                                     <div class="flash-gagal" data-flashgagal="<?= $this->session->flashdata('gagal') ?>"></div>
                                     <div class="flash-berhasil" data-flashberhasil="<?= $this->session->flashdata('berhasil') ?>"></div>
-                                    <a href="<?= site_url('auth/akun') ?>" class="btn btn-danger btn-block">
-                                        <i class="fab fa-google fa-fw"></i> Login with Google
-                                    </a>
+
+                                    <form class="user" method="post" action="<?= base_url('auth/login') ?>">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter Email Address" autocomplete="off" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                        </div>
+                                    </form>
                                     <hr>
                                     <div class="text-center">
+                                        <a href="<?= site_url('auth/akun') ?>" class="btn btn-danger btn-block">
+                                            <i class="fab fa-google fa-fw"></i> Login with Google
+                                        </a>
                                         <a class="font-weight-bold small" href="<?= base_url('auth/register') ?>">Create an Account!</a>
+
                                     </div>
                                     <div class="text-center">
                                     </div>

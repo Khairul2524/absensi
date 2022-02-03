@@ -28,12 +28,12 @@
                                 <input type="email" class="form-control" id="email" name="email" value="<?= $this->session->userdata('email') ?>" readonly>
                             </div>
                         </div>
-                        <!-- <div class="form-group row">
+                        <div class="form-group row">
                             <label for="password" class="col-sm-3 col-form-label">Password</label>
                             <div class="col-sm-9">
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                             </div>
-                        </div> -->
+                        </div>
                         <div class="form-group row">
                             <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                             <div class="col-sm-9">

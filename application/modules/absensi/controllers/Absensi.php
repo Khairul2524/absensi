@@ -22,7 +22,6 @@ class Absensi extends MX_Controller
 		$data = array(
 			'judul' => 'Absensi',
 			'data' => $this->absensi->get(),
-			// 'opd' => $this->all->getopd(),
 			'user' => $this->all->getuser(),
 		);
 		// var_dump($data['data']);

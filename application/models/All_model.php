@@ -2,6 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class All_model extends CI_Model
 {
+    // Awal Query Absensi
     public function getabsensi()
     {
         return $this->db->get('absensi')->result();
@@ -10,6 +11,17 @@ class All_model extends CI_Model
     {
         return $this->db->get_where('absensi', ['idabsensi' => $id])->result();
     }
+    public function insertabsensi($data)
+    {
+        $this->db->insert('absensi', $data);
+        return $this->db->affected_rows();
+    }
+    public function updateabsensi($data, $id)
+    {
+        $this->db->update('absensi', $data, ['idabsensi' => $id]);
+        return $this->db->affected_rows();
+    }
+    // Akhir Query Absensi
     // Awal Query OPD
     public function getopd()
     {
