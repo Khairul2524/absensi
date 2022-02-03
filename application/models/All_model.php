@@ -18,6 +18,7 @@ class All_model extends CI_Model
     {
         return $this->db->get_where('opd', ['idopd' => $id])->result();
     }
+    // Awal Query Tabel Role
     public function getrole()
     {
         return $this->db->get('role')->result();
@@ -26,6 +27,22 @@ class All_model extends CI_Model
     {
         return $this->db->get_where('role', ['idrole' => $id])->result();
     }
+    public function insertrole($data)
+    {
+        $this->db->insert('role', $data);
+        return $this->db->affected_rows();
+    }
+    public function updaterole($data, $id)
+    {
+        $this->db->update('role', $data, ['idrole' => $id]);
+        return $this->db->affected_rows();
+    }
+    public function deleterole($id)
+    {
+        $this->db->delete('role', ['idrole' => $id]);
+        return $this->db->affected_rows();
+    }
+    // Akhir Query Role
     public function getuser()
     {
         return $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->get()->result();
