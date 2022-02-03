@@ -6,7 +6,7 @@ require APPPATH . 'libraries/RestController.php';
 require APPPATH . 'libraries/Format.php';
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Api_opd extends RestController
+class Opd extends RestController
 {
 
     function __construct()

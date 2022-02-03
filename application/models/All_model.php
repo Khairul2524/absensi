@@ -81,6 +81,25 @@ class All_model extends CI_Model
     {
         return $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->where(['iduser' => $id])->get()->row();
     }
+    public function getemailuser($email)
+    {
+        return $this->db->get_where('user', ['email' => $email])->row();
+    }
+    public function insertuser($data)
+    {
+        $this->db->insert('user', $data);
+        return $this->db->affected_rows();
+    }
+    public function updateuser($data, $id)
+    {
+        $this->db->update('user', $data, ['iduser' => $id]);
+        return $this->db->affected_rows();
+    }
+    public function deleteuser($id)
+    {
+        $this->db->delete('user', ['iduser' => $id]);
+        return $this->db->affected_rows();
+    }
     // Awal Query User
 
     public function tepatwaktu()
