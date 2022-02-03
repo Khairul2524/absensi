@@ -34,7 +34,21 @@ class Api_user extends RestController
             ], 404);
         }
     }
-    public function users_get()
+    public function index_post()
     {
+        $data = [
+            'role' => htmlspecialchars($this->post('role'))
+        ];
+        if ($this->all->insertrole($data)) {
+            $this->response([
+                'status' => true,
+                'pesan' => 'Role Berhasil Di Tambah'
+            ], 200);
+        } else {
+            $this->response([
+                'status' => false,
+                'pesan' => 'Role Gagal Di Tambah'
+            ], 404);
+        }
     }
 }

@@ -72,6 +72,7 @@ class All_model extends CI_Model
         return $this->db->affected_rows();
     }
     // Akhir Query Role
+    // Awal Query User
     public function getuser()
     {
         return $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->get()->result();
@@ -80,6 +81,7 @@ class All_model extends CI_Model
     {
         return $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->where(['iduser' => $id])->get()->row();
     }
+    // Awal Query User
 
     public function tepatwaktu()
     {
