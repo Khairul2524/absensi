@@ -78,7 +78,7 @@ class Dashboard extends MY_Controller
 	{
 		$data = array(
 			'email' => $this->input->post('email'),
-			'password' => password_hash(htmlspecialchars($this->input->post('password')), PASSWORD_DEFAULT),
+			'password' => password_hash(htmlspecialchars('-'), PASSWORD_DEFAULT),
 			'namalengkap' => $this->input->post('nama'),
 			'nik'	=> htmlspecialchars($this->input->post('nik')),
 			'nip'	=> htmlspecialchars($this->input->post('nip')),

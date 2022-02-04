@@ -62,6 +62,16 @@ if ($this->session->userdata('role') == 5) {
             </li>
             <hr class="sidebar-divider">
             <div class="sidebar-heading" <?= $hide; ?>>
+                Setting
+            </div>
+            <li class="nav-item" <?= $hide; ?>>
+                <a class="nav-link" href="<?= base_url('jam_kerja') ?>">
+                    <i class="fas fa-fw fa-user-clock"></i>
+                    <span>Jam Kerja</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading" <?= $hide; ?>>
                 Manajemen User
             </div>
             <li class="nav-item" <?= $hide; ?>>

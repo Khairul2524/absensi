@@ -33,7 +33,8 @@
                         <?php
                         $no = 1;
                         foreach ($user as $d) {
-                            if ($d->idrole != 1 && $d->idrole == 5) {
+                            if ($this->session->userdata('role') == 1) {
+
                         ?>
                                 <tr>
                                     <td scope="row"><?= $no++; ?></td>
@@ -49,7 +50,65 @@
                                         </a>
                                     </td>
                                 </tr>
+                                <?php
+
+                            } elseif ($this->session->userdata('role') == 2) {
+                                if ($d->idrole == 3 || $d->idrole == 4 || $d->idrole == 5) {
+                                ?>
+                                    <tr>
+                                        <td scope="row"><?= $no++; ?></td>
+                                        <td><?= $d->namalengkap; ?></td>
+                                        <td><?= $d->email; ?></td>
+                                        <td><?= $d->opd; ?></td>
+                                        <td>
+                                            <a href="<?= base_url('user/edit/') . $d->iduser ?>" class="btn btn-warning btn-circle ">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="<?= base_url('user/profile/') . $d->iduser ?>" class="btn btn-primary btn-circle ">
+                                                <i class="fas fa-user"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                }
+                            } elseif ($this->session->userdata('role') == 3) {
+                                if ($d->idrole == 4 || $d->idrole == 5) {
+                                ?>
+                                    <tr>
+                                        <td scope="row"><?= $no++; ?></td>
+                                        <td><?= $d->namalengkap; ?></td>
+                                        <td><?= $d->email; ?></td>
+                                        <td><?= $d->opd; ?></td>
+                                        <td>
+                                            <a href="<?= base_url('user/edit/') . $d->iduser ?>" class="btn btn-warning btn-circle ">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="<?= base_url('user/profile/') . $d->iduser ?>" class="btn btn-primary btn-circle ">
+                                                <i class="fas fa-user"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                }
+                            } elseif ($this->session->userdata('role') == 4) {
+                                if ($d->idrole == 5) {
+                                ?>
+                                    <tr>
+                                        <td scope="row"><?= $no++; ?></td>
+                                        <td><?= $d->namalengkap; ?></td>
+                                        <td><?= $d->email; ?></td>
+                                        <td><?= $d->opd; ?></td>
+                                        <td>
+                                            <a href="<?= base_url('user/edit/') . $d->iduser ?>" class="btn btn-warning btn-circle ">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="<?= base_url('user/profile/') . $d->iduser ?>" class="btn btn-primary btn-circle ">
+                                                <i class="fas fa-user"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
                         <?php
+                                }
                             }
                         }
                         ?>
