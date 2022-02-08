@@ -55,28 +55,55 @@
 					</thead>
 					<tbody>
 						<?php
+						// echo $this->session->userdata('email');
+						$cek = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row();
+						// var_dump($cek);
+						// die;
 						$no = 1;
+						// echo $this->session->userdata('opd');
 						foreach ($data as $d) {
+							if ($d->idopd == $this->session->userdata('opd')) {
+								if ($this->session->userdata('role') == 5) {
+									if ($cek->iduser == $d->iduser) {
 						?>
-							<tr>
-								<td scope="row"><?= $no++; ?></td>
-								<td><?= $d->tanggal; ?></td>
-								<td><?= $d->namalengkap; ?></td>
-								<td><?= $d->nik; ?></td>
-								<td><?= $d->keterangan; ?></td>
-								<td><?= $d->absen_masuk; ?></td>
-								<?php
-								if ($this->session->userdata('role') != 5) {
-								?>
-									<td>
-										<a href="#" class="btn btn-warning btn-circle tombol-ubah" data-toggle="modal" data-target="#menumodal" data-id="<?= $d->idabsensi; ?>">
-											<i class="fas fa-edit"></i>
-										</a>
+										<tr>
+											<td scope="row"><?= $no++; ?></td>
+											<td><?= $d->tanggal; ?></td>
+											<td><?= $d->namalengkap; ?></td>
+											<td><?= $d->nik; ?></td>
+											<td><?= $d->keterangan; ?></td>
+											<td><?= $d->absen_masuk; ?></td>
+											<?php
+											if ($this->session->userdata('role') != 5) {
+											?>
+												<td>
+													<a href="#" class="btn btn-warning btn-circle tombol-ubah" data-toggle="modal" data-target="#menumodal" data-id="<?= $d->idabsensi; ?>">
+														<i class="fas fa-edit"></i>
+													</a>
 
-									</td>
-								<?php } ?>
-							</tr>
-						<?php }
+												</td>
+											<?php } ?>
+										</tr>
+									<?php }
+								} else {
+									?>
+									<tr>
+										<td scope="row"><?= $no++; ?></td>
+										<td><?= $d->tanggal; ?></td>
+										<td><?= $d->namalengkap; ?></td>
+										<td><?= $d->nik; ?></td>
+										<td><?= $d->keterangan; ?></td>
+										<td><?= $d->absen_masuk; ?></td>
+										<td>
+											<a href="#" class="btn btn-warning btn-circle tombol-ubah" data-toggle="modal" data-target="#menumodal" data-id="<?= $d->idabsensi; ?>">
+												<i class="fas fa-edit"></i>
+											</a>
+										</td>
+									</tr>
+						<?php
+								}
+							}
+						}
 						?>
 					</tbody>
 				</table>

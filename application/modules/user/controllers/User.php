@@ -93,6 +93,11 @@ class User extends MY_Controller
 		$this->load->view('form', $data);
 		$this->load->view('template/footer');
 	}
+	public function getubah()
+	{
+		$id = $_POST['id'];
+		echo json_encode($this->user->getid($id));
+	}
 	public function ubah()
 	{
 		$id = $this->input->post('id');
@@ -109,9 +114,21 @@ class User extends MY_Controller
 			'idrole' => 5,
 			'created_at' => time()
 		);
-		print_r($data);
-		die;
+
 		$this->user->update($id, $data);
+		redirect('user');
+	}
+	public function ubah_password()
+	{
+		$id = $this->input->post('id');
+		$data = array(
+			'iduser' => $id,
+			'password' => password_hash(htmlspecialchars($this->input->post('password')), PASSWORD_DEFAULT),
+		);
+		// print_r($data);
+		// die;
+		$this->user->update($id, $data);
+		$this->session->set_flashdata('berhasil', 'Password Berhasil Diubah!');
 		redirect('user');
 	}
 	public function profile($id)
