@@ -102,40 +102,40 @@ class All_model extends CI_Model
     }
     // Awal Query User
 
-    public function tepatwaktu()
-    {
-        $opd = $this->session->userdata('opd');
-        $this->db->select('statusmasuk,  idopd, COUNT(statusmasuk) as totalst');
-        $this->db->join('user', 'user.iduser=absensi.iduser');
-        $this->db->group_by('statusmasuk');
-        $this->db->order_by('totalst');
-        $this->db->where(['statusmasuk' => 1]);
-        $this->db->where(['idopd' => $opd]);
-        $hasil = $this->db->get('absensi')->result();
-        return $hasil;
-    }
-    public function tidaktepatwaktu()
-    {
-        $opd = $this->session->userdata('opd');
-        $this->db->select('statusmasuk,  idopd, COUNT(statusmasuk) as totalst');
-        $this->db->join('user', 'user.iduser=absensi.iduser');
-        $this->db->group_by('statusmasuk');
-        $this->db->order_by('totalst');
-        $this->db->where(['statusmasuk' => 2]);
-        $this->db->where(['idopd' => $opd]);
-        $hasil = $this->db->get('absensi')->result();
-        return $hasil;
-    }
-    public function izin()
-    {
-        $opd = $this->session->userdata('opd');
-        $this->db->select('statusmasuk,  idopd, COUNT(statusmasuk) as totalst');
-        $this->db->join('user', 'user.iduser=absensi.iduser');
-        $this->db->group_by('statusmasuk');
-        $this->db->order_by('totalst');
-        $this->db->where(['statusmasuk' => 3]);
-        $this->db->where(['idopd' => $opd]);
-        $hasil = $this->db->get('absensi')->result();
-        return $hasil;
-    }
+    // public function tepatwaktu()
+    // {
+    //     $opd = $this->session->userdata('opd');
+    //     $this->db->select('statusmasuk,  idopd, COUNT(statusmasuk) as totalst');
+    //     $this->db->join('user', 'user.iduser=absensi.iduser');
+    //     $this->db->group_by('statusmasuk');
+    //     $this->db->order_by('totalst');
+    //     $this->db->where(['statusmasuk' => 1]);
+    //     $this->db->where(['idopd' => $opd]);
+    //     $hasil = $this->db->get('absensi')->result();
+    //     return $hasil;
+    // }
+    // public function tidaktepatwaktu()
+    // {
+    //     $opd = $this->session->userdata('opd');
+    //     $this->db->select('statusmasuk,  idopd, COUNT(statusmasuk) as totalst');
+    //     $this->db->join('user', 'user.iduser=absensi.iduser');
+    //     $this->db->group_by('statusmasuk');
+    //     $this->db->order_by('totalst');
+    //     $this->db->where(['statusmasuk' => 2]);
+    //     $this->db->where(['idopd' => $opd]);
+    //     $hasil = $this->db->get('absensi')->result();
+    //     return $hasil;
+    // }
+    // public function izin()
+    // {
+    //     $opd = $this->session->userdata('opd');
+    //     $this->db->select('statusmasuk,  idopd, COUNT(statusmasuk) as totalst');
+    //     $this->db->join('user', 'user.iduser=absensi.iduser');
+    //     $this->db->group_by('statusmasuk');
+    //     $this->db->order_by('totalst');
+    //     $this->db->where(['statusmasuk' => 3]);
+    //     $this->db->where(['idopd' => $opd]);
+    //     $hasil = $this->db->get('absensi')->result();
+    //     return $hasil;
+    // }
 }

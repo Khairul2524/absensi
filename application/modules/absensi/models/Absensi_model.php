@@ -6,7 +6,7 @@ class Absensi_model extends CI_Model
     public $id  = 'idabsensi';
     public function get()
     {
-        return  $this->db->from($this->tabel)->join('user', 'user.iduser=absensi.iduser')->order_by($this->id, 'DESC')->get()->result();
+        return  $this->db->from($this->tabel)->join('user', 'user.iduser=absensi.iduser')->join('jam_kerja', 'jam_kerja.id_jk=absensi.id_jam_kerja')->order_by($this->id, 'DESC')->get()->result();
     }
     public function insert($data)
     {

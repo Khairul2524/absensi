@@ -35,44 +35,77 @@ class Absensi extends MX_Controller
 
 	public function tambah()
 	{
+
 		$id = htmlspecialchars($this->input->post('pegawai'));
-		$jammasuk = time();
-		$jamjadwalmasuk = strtotime("07:30:00");
-		$keterangan = htmlspecialchars($this->input->post('ket'));
-		$statusmasuk = 3;
-		if ($keterangan == null) {
-			if ($jammasuk > $jamjadwalmasuk) {
-				$selisih = $jammasuk - $jamjadwalmasuk;
-				$jam = floor($selisih / (60 * 60));
-				$menit    = $selisih - $jam * (60 * 60);
-				$selisihmenit = floor($menit / 60);
-				$keterangan = "Anda Telat Masuk Kerja " . $jam . " Jam " . $selisihmenit . " Menit";
-				$statusmasuk = 2; //telat
-			} elseif ($jammasuk < $jamjadwalmasuk) {
-				$selisih = $jamjadwalmasuk - $jammasuk;
-				$jam = floor($selisih / (60 * 60));
-				$menit    = $selisih - $jam * (60 * 60);
-				$selisihmenit = floor($menit / 60);
-				$keterangan = "Anda Tepat Waktu Masuk Kerja " . $jam . " Jam " . $selisihmenit . " Menit";
-				$statusmasuk = 1; //tepat
+		$jam_absen = time();
+		$tanggal =  date('Y-m-d', $jam_absen);
+		$jam_kerja = date('H:i', $jam_absen);
+
+		$cek_jam_kerja = $this->db->get_where('jam_kerja', ['tanggal' => $tanggal])->row();
+
+
+		if ($cek_jam_kerja) {
+			$cek_absen = $this->db->get_where('absensi', ['id_jam_kerja' => $cek_jam_kerja->id_jk, 'iduser' => $id])->row();
+			// var_dump($cek_absen);
+			// die;
+			$mulai_masuk = $cek_jam_kerja->mulai_masuk;
+			$jam_masuk = $cek_jam_kerja->jam_masuk;
+			$batas_masuk = $cek_jam_kerja->batas_masuk;
+			$mulai_pulang = $cek_jam_kerja->mulai_pulang;
+			$jam_pulang = $cek_jam_kerja->jam_pulang;
+			$batas_pulang = $cek_jam_kerja->batas_pulang;
+			$keterangan = htmlspecialchars($this->input->post('ket'));
+			$statusmasuk = 3;
+			if (!$cek_absen) {
+				if ($keterangan == null) {
+					if ($jam_kerja <= $mulai_masuk) {
+						$this->session->set_flashdata('gagal', 'Anda Tidak Dapat Absen Masuk');
+					} elseif ($jam_kerja >= $mulai_masuk && $batas_masuk >= $jam_kerja) {
+						if ($jam_kerja <= $jam_masuk) {
+							$jam1 = strtotime($jam_kerja);
+							$jam2 = strtotime($jam_masuk);
+							$selisih = $jam2 - $jam1;
+							$jam = floor($selisih / (60 * 60));
+							$menit    = $selisih - $jam * (60 * 60);
+							$selisihmenit = floor($menit / 60);
+							$keterangan = "Anda Tepat Waktu Masuk Kerja " . $jam . " Jam " . $selisihmenit . " Menit";
+							$statusmasuk = 1; //tepat
+
+							$this->session->set_flashdata('berhasil', $keterangan);
+						} elseif ($jam_kerja > $jam_masuk) {
+							$jam1 = strtotime($jam_kerja);
+							$jam2 = strtotime($jam_masuk);
+							$selisih = $jam1 - $jam2;
+							$jam = floor($selisih / (60 * 60));
+							$menit    = $selisih - $jam * (60 * 60);
+							$selisihmenit = floor($menit / 60);
+							$keterangan = "Anda Telat Masuk Kerja " . $jam . " Jam " . $selisihmenit . " Menit";
+							$statusmasuk = 2; //telat
+							$this->session->set_flashdata('info', $keterangan);
+						}
+					}
+				}
+				$data = array(
+					'iduser' => $id,
+					'id_jam_kerja' => $cek_jam_kerja->id_jk,
+					'absen_masuk' => $jam_kerja,
+					'keterangan' => $keterangan,
+					'status_masuk' => $statusmasuk,
+					'jam_keluar'	 => 1,
+					'status_keluar' => 1,
+					'lat' => htmlspecialchars($this->input->post('lat')),
+					'long' => htmlspecialchars($this->input->post('long')),
+				);
+				// print_r($data);
+				// die;
+
+				$this->absensi->insert($data);
+			} else {
+				$this->session->set_flashdata('info', "Anda Sudah Absen ");
 			}
 		}
 
-		$data = array(
-			'iduser' => $id,
-			'jammasuk' => $jammasuk,
-			'keterangan' => $keterangan,
-			'statusmasuk' => $statusmasuk,
-			'jamkeluar'	 => 1,
-			'statuskeluar' => 1,
-			'lat' => htmlspecialchars($this->input->post('lat')),
-			'long' => htmlspecialchars($this->input->post('long')),
-		);
-		// print_r($data);
-		// die;
 
-		$this->absensi->insert($data);
-		$this->session->set_flashdata('berhasil', 'Absensi Berhasil Ditambah!');
 
 		redirect('absensi');
 	}

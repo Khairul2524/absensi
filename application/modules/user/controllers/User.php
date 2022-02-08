@@ -109,6 +109,8 @@ class User extends MY_Controller
 			'idrole' => 5,
 			'created_at' => time()
 		);
+		print_r($data);
+		die;
 		$this->user->update($id, $data);
 		redirect('user');
 	}

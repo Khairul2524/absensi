@@ -4,6 +4,9 @@
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800"><?= $judul; ?></h1>
+	<div class="flash-gagal" data-flashgagal="<?= $this->session->flashdata('gagal') ?>"></div>
+	<div class="flash-info" data-flashinfo="<?= $this->session->flashdata('info') ?>"></div>
+	<div class="flash-berhasil" data-flashberhasil="<?= $this->session->flashdata('berhasil') ?>"></div>
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
@@ -57,11 +60,11 @@
 						?>
 							<tr>
 								<td scope="row"><?= $no++; ?></td>
-								<td><?= date('d, M, Y', $d->jammasuk); ?></td>
+								<td><?= $d->tanggal; ?></td>
 								<td><?= $d->namalengkap; ?></td>
 								<td><?= $d->nik; ?></td>
 								<td><?= $d->keterangan; ?></td>
-								<td><?= date('H:i:s', $d->jammasuk); ?></td>
+								<td><?= $d->absen_masuk; ?></td>
 								<?php
 								if ($this->session->userdata('role') != 5) {
 								?>
@@ -89,6 +92,8 @@
 		<div class="modal-dialog" role="document">
 			<form method="POST" action="<?= site_url('absensi/tambah') ?>">
 				<input type="text" id="id" name="id" hidden>
+				<input type="text" id="lat" name="lat" hidden>
+				<input type="text" id="long" name="long" hidden>
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel"></h5>
@@ -125,8 +130,8 @@
 			<form method="POST" action="<?= site_url('absensi/tambah') ?>">
 				<input type="text" id="id" name="id" hidden>
 				<input type="text" id="pegawai" name="pegawai" value="<?= $getuser->iduser ?>" hidden>
-				<input type="text" id="lat" name="lat" hidden>
-				<input type="text" id="long" name="long" hidden>
+				<input type="text" id="lata" name="lat" hidden>
+				<input type="text" id="longa" name="long" hidden>
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Absen Keadiran</h5>
@@ -195,7 +200,7 @@
 			$('.tombol-tambah').on('click', function() {
 				$('.modal-title').html('Absensi')
 				$('#forminput').html(`<label for="pegawai">Pegawai</label>
-							<select name="pegawai" id="pegawai" class="form-control">
+							<select name="pegawai" id="pegawai" class="form-control" required>
 								<option value="">pilih Pegawai</option>
 								<?php
 								foreach ($user as $user) {
@@ -208,6 +213,17 @@
 				$('.modal-footer button[type= submit] span[class="icon text-white-50"]').html('	<i class="fas fa-plus-square"></i>')
 				$('.modal-footer button[type= submit] span[class="text"]').html('Simpan')
 				$('#id').val('')
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(showPosition);
+				} else {
+					$('.demo') = "Geolocation is not supported by this browser.";
+				}
+
+				function showPosition(position) {
+					$('#lat').val(position.coords.latitude)
+					$('#long').val(position.coords.longitude)
+					// console.log(position.coords.longitude)
+				}
 			})
 			// ubah
 			$('.tombol-ubah').on('click', function() {
@@ -240,9 +256,10 @@
 				}
 
 				function showPosition(position) {
-					$('#lat').val(position.coords.latitude)
-					$('#long').val(position.coords.longitude)
+					$('#lata').val(position.coords.latitude)
+					$('#longa').val(position.coords.longitude)
 					// console.log(position.coords.longitude)
+					// console.log(position.coords.latitude)
 				}
 			})
 			$('#ya').on('click', function() {

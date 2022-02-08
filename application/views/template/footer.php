@@ -46,6 +46,42 @@
 <script src="<?= base_url('assets/backand/') ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?= base_url('assets/backand/') ?>vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="<?= base_url('assets/backand/') ?>js/ruang-admin.min.js"></script>
+<script src="<?= base_url('assets/backand/') ?>js/sweetalert2.all.min.js"></script>
+<script src="<?= base_url('assets/backand/') ?>vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="<?= base_url('assets/backand/') ?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+
+<script>
+    // sweat alert
+    const flashGagal = $('.flash-gagal').data('flashgagal')
+    // console.log(flashData) 
+    if (flashGagal) {
+        Swal.fire(
+            flashGagal,
+            '',
+            'error'
+        )
+    }
+    const flashberhasil = $('.flash-berhasil').data('flashberhasil')
+    // console.log(flashberhasil)
+    if (flashberhasil) {
+        Swal.fire(
+            flashberhasil,
+            '',
+            'success'
+        )
+    }
+    const flashinfo = $('.flash-info').data('flashinfo')
+    // console.log(flashinfo)
+    if (flashinfo) {
+        Swal.fire(
+            flashinfo,
+            '',
+            'info'
+        )
+    }
+</script>
 
 </body>
 

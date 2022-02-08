@@ -62,7 +62,7 @@
                         <div class="form-group row">
                             <label for="no" class="col-sm-3 col-form-label">NO HP</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="no" name="no" placeholder="NO HP" required autocomplete="off" value="<?= $no ?>">
+                                <input type="number" class="form-control" id="no" name="no" placeholder="NO HP" required autocomplete="off" value="<?= $no ?>">
                             </div>
                         </div>
                         <div class="form-group row">

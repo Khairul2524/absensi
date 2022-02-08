@@ -44,7 +44,7 @@ class Auth extends MY_Controller
 			$data = array(
 				'nama' => $nama,
 				'email' => $email,
-				'role'		=> 5
+				'role'		=> 5,
 			);
 			$this->session->set_userdata($data);
 			redirect('dashboard/cek');
@@ -84,8 +84,12 @@ class Auth extends MY_Controller
 	}
 	public function logout()
 	{
+
 		$this->session->unset_userdata('email');
 		$this->session->unset_userdata('namalengkap');
+		$this->session->unset_userdata('role');
+		$this->session->unset_userdata('opd');
+
 		redirect('auth');
 	}
 }

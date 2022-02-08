@@ -35,86 +35,56 @@ class Jam_kerja extends MX_Controller
 	public function tambah()
 	{
 		$data = array(
-			'role' => htmlspecialchars($this->input->post('role')),
+			'tanggal' => htmlspecialchars($this->input->post('tgl')),
+			'mulai_masuk' => htmlspecialchars($this->input->post('mulai_masuk')),
+			'jam_masuk' => htmlspecialchars($this->input->post('jam_masuk')),
+			'batas_masuk' => htmlspecialchars($this->input->post('batas_masuk')),
+			'mulai_pulang' => htmlspecialchars($this->input->post('mulai_pulang')),
+			'jam_pulang' => htmlspecialchars($this->input->post('jam_pulang')),
+			'batas_pulang' => htmlspecialchars($this->input->post('batas_pulang')),
 		);
 		// print_r($data);
 		// die;
-		$cek = $this->db->get_where('role', ['role' => htmlspecialchars($this->input->post('role'))])->row();
+		$cek = $this->db->get_where('jam_kerja', ['tanggal' => htmlspecialchars($this->input->post('tgl'))])->row();
 		// var_dump($cek);
 		if (!$cek) {
-			$this->role->insert($data);
-			$this->session->set_flashdata('berhasil', 'Role Berhasil Ditambah!');
-			redirect('role');
+			$this->jk->insert($data);
+			$this->session->set_flashdata('berhasil', 'Jam Kerja Berhasil Ditambah!');
+			redirect('jam_kerja');
 		} else {
-			$this->session->set_flashdata('gagal', 'Role Gagal Ditambah!');
-			redirect('role');
+			$this->session->set_flashdata('gagal', 'Jam Kerja Gagal Ditambah!');
+			redirect('jam_kerja');
 		}
 	}
 	public function getubah()
 	{
 		$id = $_POST['id'];
-		echo json_encode($this->role->getid($id));
+		echo json_encode($this->jk->getid($id));
 	}
 	public function ubah()
 	{
 		$data = array(
-			'idrole' => htmlspecialchars($this->input->post('id')),
-			'role' => htmlspecialchars($this->input->post('role')),
+			'id_jk' => htmlspecialchars($this->input->post('id')),
+			'tanggal' => htmlspecialchars($this->input->post('tgl')),
+			'mulai_masuk' => htmlspecialchars($this->input->post('mulai_masuk')),
+			'jam_masuk' => htmlspecialchars($this->input->post('jam_masuk')),
+			'batas_masuk' => htmlspecialchars($this->input->post('batas_masuk')),
+			'mulai_pulang' => htmlspecialchars($this->input->post('mulai_pulang')),
+			'jam_pulang' => htmlspecialchars($this->input->post('jam_pulang')),
+			'batas_pulang' => htmlspecialchars($this->input->post('batas_pulang')),
 		);
 		// print_r($data);
 		// die;
-		$this->role->update(htmlspecialchars($this->input->post('id')), $data);
-		$this->session->set_flashdata('berhasil', 'Role Berhasil Diubah!');
-		redirect('role');
+		$this->jk->update(htmlspecialchars($this->input->post('id')), $data);
+		$this->session->set_flashdata('berhasil', 'Jam Kerja Berhasil Diubah!');
+		redirect('jam_kerja');
 	}
 	public function hapus($id)
 	{
 		// var_dump($id);
 		// die;
-		$this->role->delete($id);
-		$this->session->set_flashdata('berhasil', 'Role Berhasil Dihapus!');
-		redirect('role');
-	}
-	public function hakakses()
-	{
-		$id = $this->session->userdata('idrole');
-		$data = array(
-			'judul' => 'Hak Akses User',
-			'data' => $this->role->get(),
-			'role' => $this->all->getidrole($id)
-		);
-		$this->load->view('template/header');
-		$this->load->view('template/navbar', $data);
-		$this->load->view('template/sidebar', $data);
-		$this->load->view('hakakses', $data);
-		$this->load->view('template/footer');
-	}
-	public function aksesmenu($id)
-	{
-		$idr = $this->session->userdata('idrole');
-		$data = array(
-			'judul' => 'Hak Akses User',
-			'idrole' => $this->all->getidrole($id),
-			'role' => $this->all->getidrole($idr),
-			'menu' => $this->all->getmenu(),
-		);
-		$this->load->view('template/header');
-		$this->load->view('template/navbar', $data);
-		$this->load->view('template/sidebar', $data);
-		$this->load->view('aksesmenu', $data);
-		$this->load->view('template/footer');
-	}
-	public function insertakses()
-	{
-		$data = array(
-			'idmenu' => $this->input->post('menuid'),
-			'idrole' => $this->input->post('roleid'),
-		);
-		$cek = $this->db->get_where('aksesmenu', $data)->row();
-		if ($cek) {
-			$this->all->deleteakses($cek->id);
-		} else {
-			$this->all->inserthakakses($data);
-		}
+		$this->jk->delete($id);
+		$this->session->set_flashdata('berhasil', 'Jam Kerja Berhasil Dihapus!');
+		redirect('jam_kerja');
 	}
 }

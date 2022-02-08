@@ -42,10 +42,7 @@ class Dashboard extends MY_Controller
 		$cek = $this->db->get_where('user', ['email' => $email])->row();
 		// var_dump($cek);
 		if (!$cek) {
-			$datas = array(
-				'role' => 5
-			);
-			$this->session->set_userdata($datas);
+
 			$data = array(
 				'opd' => $this->all->getopd(),
 			);
@@ -58,6 +55,11 @@ class Dashboard extends MY_Controller
 			if (!$this->session->userdata('email')) {
 				redirect('auth');
 			}
+			$datas = array(
+				'role' =>  $cek->idrole,
+				'opd' => $cek->idopd,
+			);
+			$this->session->set_userdata($datas);
 			$data = array(
 				'email' => $email,
 				'nama'	=> $cek->namalengkap,
@@ -99,9 +101,9 @@ class Dashboard extends MY_Controller
 	public function dash()
 	{
 		$data = array(
-			'tepatwaktu' => $this->all->tepatwaktu(),
-			'tidaktepatwaktu' => $this->all->tidaktepatwaktu(),
-			'izin' => $this->all->izin(),
+			// 'tepatwaktu' => $this->all->tepatwaktu(),
+			// 'tidaktepatwaktu' => $this->all->tidaktepatwaktu(),
+			// 'izin' => $this->all->izin(),
 		);
 		if ($data['tepatwaktu']) {
 			$ya = $data['tepatwaktu'][0]->totalst;

@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Jam_kerja_model extends CI_Model
 {
     public $tabel = 'jam_kerja';
-    public $id  = 'idjk';
+    public $id  = 'id_jk';
     public function get()
     {
         return  $this->db->get($this->tabel)->result();
