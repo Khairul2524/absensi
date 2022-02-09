@@ -50,9 +50,15 @@ if ($this->session->userdata('role') == 5) {
                     Absensi
                 </div>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('absensi') ?>">
+                    <a class="nav-link" href="<?= base_url('absen_masuk') ?>">
                         <i class="fas fa-fw fa-user"></i>
-                        <span>Absensi</span>
+                        <span>Absen Masuk</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url('absen_pulang') ?>">
+                        <i class="fas fa-fw fa-user"></i>
+                        <span>Absen Pulang</span>
                     </a>
                 </li>
             <?php } ?>

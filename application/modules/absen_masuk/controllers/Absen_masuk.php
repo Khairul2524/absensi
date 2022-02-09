@@ -2,7 +2,7 @@
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Absensi extends MX_Controller
+class Absen_masuk extends MX_Controller
 {
 
 	public function __construct()
@@ -12,7 +12,7 @@ class Absensi extends MX_Controller
 		if (!$this->session->userdata('email')) {
 			redirect('auth');
 		}
-		$this->load->model('Absensi_model', 'absensi');
+		$this->load->model('Absen_masuk_model', 'absen_masuk');
 		$this->load->model('All_model', 'all');
 	}
 
@@ -20,8 +20,8 @@ class Absensi extends MX_Controller
 	{
 
 		$data = array(
-			'judul' => 'Absensi',
-			'data' => $this->absensi->get(),
+			'judul' => 'Absen Masuk',
+			'data' => $this->absen_masuk->get(),
 			'user' => $this->all->getuser(),
 		);
 		// var_dump($data['data']);
@@ -45,7 +45,7 @@ class Absensi extends MX_Controller
 
 
 		if ($cek_jam_kerja) {
-			$cek_absen = $this->db->get_where('absensi', ['id_jam_kerja' => $cek_jam_kerja->id_jk, 'iduser' => $id])->row();
+			$cek_absen = $this->db->get_where('absen_masuk', ['id_jam_kerja' => $cek_jam_kerja->id_jk, 'iduser' => $id])->row();
 			// var_dump($cek_absen);
 			// die;
 			$mulai_masuk = $cek_jam_kerja->mulai_masuk;
@@ -91,40 +91,35 @@ class Absensi extends MX_Controller
 					'absen_masuk' => $jam_kerja,
 					'keterangan' => $keterangan,
 					'status_masuk' => $statusmasuk,
-					'jam_keluar'	 => 1,
-					'status_keluar' => 1,
 					'lat' => htmlspecialchars($this->input->post('lat')),
 					'long' => htmlspecialchars($this->input->post('long')),
 				);
 				// print_r($data);
 				// die;
 
-				$this->absensi->insert($data);
+				$this->absen_masuk->insert($data);
 			} else {
 				$this->session->set_flashdata('info', "Anda Sudah Absen ");
 			}
 		}
-
-
-
-		redirect('absensi');
+		redirect('absen_masuk');
 	}
 	public function getubah()
 	{
 		$id = $_POST['id'];
-		echo json_encode($this->absensi->getid($id));
+		echo json_encode($this->absen_masuk->getid($id));
 	}
 	public function ubah()
 	{
 		$data = array(
-			'idabsensi' => htmlspecialchars($this->input->post('id')),
+			'id_absen_masuk' => htmlspecialchars($this->input->post('id')),
 			'keterangan' => htmlspecialchars($this->input->post('ket')),
 		);
 		// print_r($data);
 		// die;
-		$this->absensi->update(htmlspecialchars($this->input->post('id')), $data);
-		$this->session->set_flashdata('berhasil', 'absensi Berhasil Diubah!');
-		redirect('absensi');
+		$this->absen_masuk->update(htmlspecialchars($this->input->post('id')), $data);
+		$this->session->set_flashdata('berhasil', 'Absen Masuk Berhasil Diubah!');
+		redirect('absen_masuk');
 	}
 	public function laporan()
 	{

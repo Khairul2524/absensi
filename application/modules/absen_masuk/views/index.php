@@ -22,7 +22,13 @@
 					<span class="icon text-white-50">
 						<i class="fas fa-user"></i>
 					</span>
-					<span class="text">Absen</span>
+					<span class="text">Absen Masuk</span>
+				</a>
+				<a href="#" class="btn btn-warning btn-icon-split mb-2 tombol-absen" data-toggle="modal" data-target="#absenmodal">
+					<span class="icon text-white-50">
+						<i class="fas fa-user"></i>
+					</span>
+					<span class="text">Absen Pulang</span>
 				</a>
 			<?php
 			} else {
@@ -77,7 +83,7 @@
 											if ($this->session->userdata('role') != 5) {
 											?>
 												<td>
-													<a href="#" class="btn btn-warning btn-circle tombol-ubah" data-toggle="modal" data-target="#menumodal" data-id="<?= $d->idabsensi; ?>">
+													<a href="#" class="btn btn-warning btn-circle tombol-ubah" data-toggle="modal" data-target="#menumodal" data-id="<?= $d->id_absen_masuk; ?>">
 														<i class="fas fa-edit"></i>
 													</a>
 
@@ -95,7 +101,7 @@
 										<td><?= $d->keterangan; ?></td>
 										<td><?= $d->absen_masuk; ?></td>
 										<td>
-											<a href="#" class="btn btn-warning btn-circle tombol-ubah" data-toggle="modal" data-target="#menumodal" data-id="<?= $d->idabsensi; ?>">
+											<a href="#" class="btn btn-warning btn-circle tombol-ubah" data-toggle="modal" data-target="#menumodal" data-id="<?= $d->id_absen_masuk; ?>">
 												<i class="fas fa-edit"></i>
 											</a>
 										</td>
@@ -117,7 +123,7 @@
 	<!-- End of Main Content -->
 	<div class="modal fade" id="menumodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
-			<form method="POST" action="<?= site_url('absensi/tambah') ?>">
+			<form method="POST" action="<?= site_url('absen_masuk/tambah') ?>">
 				<input type="text" id="id" name="id" hidden>
 				<input type="text" id="lat" name="lat" hidden>
 				<input type="text" id="long" name="long" hidden>
@@ -154,7 +160,7 @@
 	</div>
 	<div class="modal fade" id="absenmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
-			<form method="POST" action="<?= site_url('absensi/tambah') ?>">
+			<form method="POST" action="<?= site_url('absen_masuk/tambah') ?>">
 				<input type="text" id="id" name="id" hidden>
 				<input type="text" id="pegawai" name="pegawai" value="<?= $getuser->iduser ?>" hidden>
 				<input type="text" id="lata" name="lat" hidden>
@@ -225,16 +231,19 @@
 		$(function() {
 			// tambah
 			$('.tombol-tambah').on('click', function() {
-				$('.modal-title').html('Absensi')
+				$('.modal-title').html('Absen Masuk')
 				$('#forminput').html(`<label for="pegawai">Pegawai</label>
 							<select name="pegawai" id="pegawai" class="form-control" required>
 								<option value="">pilih Pegawai</option>
 								<?php
 								foreach ($user as $user) {
 									if ($user->idrole == 5) {
+										if ($user->idopd == $this->session->userdata('opd')) {
+
 								?>
 										<option value="<?= $user->iduser; ?>"><?= $user->namalengkap; ?></option>
 								<?php }
+									}
 								} ?>
 							</select>`)
 				$('.modal-footer button[type= submit] span[class="icon text-white-50"]').html('	<i class="fas fa-plus-square"></i>')
@@ -254,15 +263,15 @@
 			})
 			// ubah
 			$('.tombol-ubah').on('click', function() {
-				$('.modal-title').html('Ubah Absensi')
+				$('.modal-title').html('Ubah Absen Masuk')
 				$('#forminput').html(`<label for="pegawai">Keterangan</label>
 						<textarea name="ket" id="ket" cols="30" rows="5" class="form-control"></textarea>`)
 				$('.modal-footer button[type= submit] span[class="icon text-white-50"]').html('	<i class="fas fa-check"></i>')
 				$('.modal-footer button[type= submit] span[class="text"]').html('Ubah')
-				$('.modal-dialog form').attr('action', `<?= site_url('absensi/ubah') ?>`)
+				$('.modal-dialog form').attr('action', `<?= site_url('absen_masuk/ubah') ?>`)
 				const id = $(this).data('id')
 				$.ajax({
-					url: `<?= site_url('absensi/getubah') ?>`,
+					url: `<?= site_url('absen_masuk/getubah') ?>`,
 					data: {
 						id: id
 					},
@@ -270,7 +279,7 @@
 					dataType: 'json',
 					success: function(data) {
 						// console.log(data);
-						$('#id').val(data.idabsensi)
+						$('#id').val(data.id_absen_masuk)
 						$('#ket').val(data.keterangan)
 					}
 				})
