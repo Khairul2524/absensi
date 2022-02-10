@@ -18,12 +18,7 @@
 				$email = $this->session->userdata('email');
 				$getuser = $this->db->get_where('user', ['email' => $email])->row();
 			?>
-				<a href="#" class="btn btn-success btn-icon-split mb-2 tombol-absen" data-toggle="modal" data-target="#absenmodal">
-					<span class="icon text-white-50">
-						<i class="fas fa-user"></i>
-					</span>
-					<span class="text">Absen pulang</span>
-				</a>
+
 				<a href="#" class="btn btn-warning btn-icon-split mb-2 tombol-absen" data-toggle="modal" data-target="#absenmodal">
 					<span class="icon text-white-50">
 						<i class="fas fa-user"></i>
