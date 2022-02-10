@@ -44,7 +44,8 @@ class Auth extends RestController
                         // var_dump($data);
                         // die;
                         $this->session->set_userdata($data);
-                        // redirect('dashboard/dash');
+                        // redirect('dashboard/dash');  
+                        // echo "login berhasil";
                     } else {
                         $this->response([
                             'status' => false,

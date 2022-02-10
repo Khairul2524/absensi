@@ -12,7 +12,7 @@
                     <div class="row align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Hadir</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $hadir; ?> Orang</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"> <?= $jumlah_absen ?> Orang</div>
                             <div class="mt-2 mb-0 text-muted text-xs">
                                 <span><?= date('d F y'); ?> </span>
                             </div>
@@ -32,13 +32,8 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-uppercase mb-1">Hadir Tepat Waktu</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php
-                                if ($tepatwaktu) {
-                                    echo  $tepatwaktu[0]->totalst;
-                                } else {
-                                    echo '0 ';
-                                }
-                                ?> Orang
+                                <?= $jumlah_tepat ?>
+                                Orang
                             </div>
                             <div class="mt-2 mb-0 text-muted text-xs">
                                 <span><?= date('d F y'); ?></span>
@@ -59,12 +54,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-uppercase mb-1">Hadir Tidak Tepat Waktu</div>
                             <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                <?php
-                                if ($tidaktepatwaktu) {
-                                    echo $tidaktepatwaktu[0]->totalst;
-                                } else {
-                                    echo "0";
-                                } ?>
+                                <?= $jumlah_telat ?>
                                 Orang</div>
                             <div class="mt-2 mb-0 text-muted text-xs">
 
@@ -84,15 +74,10 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-uppercase mb-1">Tidak Hadir</div>
+                            <div class="text-xs font-weight-bold text-uppercase mb-1">Tidak Hadir ( Izin )</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php
-                                if ($izin) {
-                                    $izin[0]->totalst;
-                                } else {
-                                    echo "0";
-                                }
-                                ?> Orang</div>
+                                <?= $jumlah_izin; ?>
+                                Orang</div>
                             <div class="mt-2 mb-0 text-muted text-xs">
 
                                 <span><?= date('d F y'); ?></span>
@@ -107,18 +92,18 @@
             </div>
         </div>
     </div>
-    <!-- <div class="row justify-content-center">
+    <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Jumlah Hadir</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Grafik Absensi </h6>
                 </div>
                 <div class="card-body">
-                    <canvas id="penyakitrijk"></canvas>
+                    <canvas id=""></canvas>
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
 </div>
 <!---Container Fluid-->

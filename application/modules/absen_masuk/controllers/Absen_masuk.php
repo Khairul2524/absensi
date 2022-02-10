@@ -51,11 +51,10 @@ class Absen_masuk extends MX_Controller
 			$mulai_masuk = $cek_jam_kerja->mulai_masuk;
 			$jam_masuk = $cek_jam_kerja->jam_masuk;
 			$batas_masuk = $cek_jam_kerja->batas_masuk;
-			$mulai_pulang = $cek_jam_kerja->mulai_pulang;
-			$jam_pulang = $cek_jam_kerja->jam_pulang;
-			$batas_pulang = $cek_jam_kerja->batas_pulang;
+			// $mulai_pulang = $cek_jam_kerja->mulai_pulang;
+			// $jam_pulang = $cek_jam_kerja->jam_pulang;
+			// $batas_pulang = $cek_jam_kerja->batas_pulang;
 			$keterangan = htmlspecialchars($this->input->post('ket'));
-			$statusmasuk = 3;
 			if (!$cek_absen) {
 				if ($keterangan == null) {
 					if ($jam_kerja <= $mulai_masuk) {
@@ -69,9 +68,20 @@ class Absen_masuk extends MX_Controller
 							$menit    = $selisih - $jam * (60 * 60);
 							$selisihmenit = floor($menit / 60);
 							$keterangan = "Anda Tepat Waktu Masuk Kerja " . $jam . " Jam " . $selisihmenit . " Menit";
-							$statusmasuk = 1; //tepat
+
 
 							$this->session->set_flashdata('berhasil', $keterangan);
+							$data = array(
+								'iduser' => $id,
+								'id_jam_kerja' => $cek_jam_kerja->id_jk,
+								'absen_masuk' => $jam_kerja,
+								'keterangan' => $keterangan,
+								'status_masuk' => 1, //tepat
+								'lat' => htmlspecialchars($this->input->post('lat')),
+								'long' => htmlspecialchars($this->input->post('long')),
+							);
+
+							$this->absen_masuk->insert($data);
 						} elseif ($jam_kerja > $jam_masuk) {
 							$jam1 = strtotime($jam_kerja);
 							$jam2 = strtotime($jam_masuk);
@@ -80,24 +90,47 @@ class Absen_masuk extends MX_Controller
 							$menit    = $selisih - $jam * (60 * 60);
 							$selisihmenit = floor($menit / 60);
 							$keterangan = "Anda Telat Masuk Kerja " . $jam . " Jam " . $selisihmenit . " Menit";
-							$statusmasuk = 2; //telat
+
+							$data = array(
+								'iduser' => $id,
+								'id_jam_kerja' => $cek_jam_kerja->id_jk,
+								'absen_masuk' => $jam_kerja,
+								'keterangan' => $keterangan,
+								'status_masuk' => 2, //telat
+								'lat' => htmlspecialchars($this->input->post('lat')),
+								'long' => htmlspecialchars($this->input->post('long')),
+							);
+
+							$this->absen_masuk->insert($data);
+
 							$this->session->set_flashdata('info', $keterangan);
 						}
+					} else {
+						$this->session->set_flashdata('gagal', 'Anda Telat Absen Masuk');
+					}
+				} else {
+					if ($jam_kerja >= $mulai_masuk && $batas_masuk >= $jam_kerja) {
+						$jam1 = strtotime($jam_kerja);
+						$jam2 = strtotime($jam_masuk);
+						$selisih = $jam1 - $jam2;
+						$jam = floor($selisih / (60 * 60));
+						$menit    = $selisih - $jam * (60 * 60);
+						$selisihmenit = floor($menit / 60);
+						$data = array(
+							'iduser' => $id,
+							'id_jam_kerja' => $cek_jam_kerja->id_jk,
+							'absen_masuk' => $jam_kerja,
+							'keterangan' => $keterangan,
+							'status_masuk' => 3, //izin
+							'lat' => htmlspecialchars($this->input->post('lat')),
+							'long' => htmlspecialchars($this->input->post('long')),
+						);
+						$this->session->set_flashdata('berhasil', "Anda Izin Tidak Masuk Kerja");
+						$this->absen_masuk->insert($data);
+					} else {
+						$this->session->set_flashdata('gagal', "Anda Tidak dapat Izin Masuk Kerja");
 					}
 				}
-				$data = array(
-					'iduser' => $id,
-					'id_jam_kerja' => $cek_jam_kerja->id_jk,
-					'absen_masuk' => $jam_kerja,
-					'keterangan' => $keterangan,
-					'status_masuk' => $statusmasuk,
-					'lat' => htmlspecialchars($this->input->post('lat')),
-					'long' => htmlspecialchars($this->input->post('long')),
-				);
-				// print_r($data);
-				// die;
-
-				$this->absen_masuk->insert($data);
 			} else {
 				$this->session->set_flashdata('info', "Anda Sudah Absen ");
 			}

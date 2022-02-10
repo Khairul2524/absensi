@@ -100,23 +100,41 @@ class Dashboard extends MY_Controller
 
 	public function dash()
 	{
-		$data = array(
-			// 'tepatwaktu' => $this->all->tepatwaktu(),
-			// 'tidaktepatwaktu' => $this->all->tidaktepatwaktu(),
-			// 'izin' => $this->all->izin(),
-		);
-		if ($data['tepatwaktu']) {
-			$ya = $data['tepatwaktu'][0]->totalst;
-		} else {
-			$ya = 0;
-		}
-		if ($data['tidaktepatwaktu']) {
-			$tidak = $data['tidaktepatwaktu'][0]->totalst;
-		} else {
-			$tidak = 0;
+
+		$absen_masuk = $this->all->get_all_absen_masuk();
+		// var_dump($absen_masuk);
+		// die;
+		$time = time();
+		$tanggal = date('Y-m-d', $time);
+		// echo $tanggal;
+		// die;
+		$tepat = [];
+		$telat = [];
+		$izin = [];
+		foreach ($absen_masuk as $am) {
+			if ($tanggal == $am->tanggal) {
+				$absen[] = $am->absen_masuk;
+				if ($am->status_masuk == 1) {
+					$tepat[] = $am->absen_masuk;
+				} elseif ($am->status_masuk == 2) {
+					$telat[] = $am->absen_masuk;
+				} else {
+					$izin[] = $am->absen_masuk;
+				}
+			}
 		}
 
-		$data['hadir'] = $ya + $tidak;
+		// var_dump($tepat);
+		// var_dump($telat);
+
+		// die;
+		$data = array(
+			'jumlah_absen' => count($absen),
+			'jumlah_tepat' => count($tepat),
+			'jumlah_telat' => count($telat),
+			'jumlah_izin' => count($izin),
+		);
+
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
 		$this->load->view('template/topbar');

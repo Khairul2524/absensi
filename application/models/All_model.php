@@ -100,42 +100,10 @@ class All_model extends CI_Model
         $this->db->delete('user', ['iduser' => $id]);
         return $this->db->affected_rows();
     }
-    // Awal Query User
+    // Akhir Query User
 
-    // public function tepatwaktu()
-    // {
-    //     $opd = $this->session->userdata('opd');
-    //     $this->db->select('statusmasuk,  idopd, COUNT(statusmasuk) as totalst');
-    //     $this->db->join('user', 'user.iduser=absensi.iduser');
-    //     $this->db->group_by('statusmasuk');
-    //     $this->db->order_by('totalst');
-    //     $this->db->where(['statusmasuk' => 1]);
-    //     $this->db->where(['idopd' => $opd]);
-    //     $hasil = $this->db->get('absensi')->result();
-    //     return $hasil;
-    // }
-    // public function tidaktepatwaktu()
-    // {
-    //     $opd = $this->session->userdata('opd');
-    //     $this->db->select('statusmasuk,  idopd, COUNT(statusmasuk) as totalst');
-    //     $this->db->join('user', 'user.iduser=absensi.iduser');
-    //     $this->db->group_by('statusmasuk');
-    //     $this->db->order_by('totalst');
-    //     $this->db->where(['statusmasuk' => 2]);
-    //     $this->db->where(['idopd' => $opd]);
-    //     $hasil = $this->db->get('absensi')->result();
-    //     return $hasil;
-    // }
-    // public function izin()
-    // {
-    //     $opd = $this->session->userdata('opd');
-    //     $this->db->select('statusmasuk,  idopd, COUNT(statusmasuk) as totalst');
-    //     $this->db->join('user', 'user.iduser=absensi.iduser');
-    //     $this->db->group_by('statusmasuk');
-    //     $this->db->order_by('totalst');
-    //     $this->db->where(['statusmasuk' => 3]);
-    //     $this->db->where(['idopd' => $opd]);
-    //     $hasil = $this->db->get('absensi')->result();
-    //     return $hasil;
-    // }
+    public function get_all_absen_masuk()
+    {
+        return $this->db->from('absen_masuk')->join('user', 'user.iduser=absen_masuk.iduser')->join('jam_kerja', 'jam_kerja.id_jk=absen_masuk.id_jam_kerja')->get()->result();
+    }
 }
