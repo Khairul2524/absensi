@@ -1,66 +1,66 @@
-    <!-- Container Fluid-->
-    <div class="container-fluid" id="container-wrapper">
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Laporan Bulanan</h1>
-        </div>
-        <div class="row mb-3">
+<!DOCTYPE html>
+<html lang="en">
 
-            <div class="col-lg-12">
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <a href="<?= site_url('absensi/print') ?>" class="btn btn-success btn-icon-split mb-2 ">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-print"></i>
-                            </span>
-                            <span class="text">Print</span>
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Absen Masuk</title>
+    <style>
+        .text-header {
+            text-align: center;
+        }
+    </style>
+</head>
 
-                                <tr>
-                                    <td rowspan="2">NO</td>
-                                    <td rowspan="2">Nama</td>
-                                    <td rowspan="2">Bulan</td>
-                                    <td colspan="2">Jumlah Hadir</td>
-                                    <td colspan="2">Jumlah Tidak Hadir</td>
-                                </tr>
-                                <tr>
-                                    <td>Tepat Waktu</td>
-                                    <td>Tidak Tepat Waktu</td>
-                                    <td>Izin</td>
-                                    <td>Tidak Izin</td>
-                                </tr>
-                                <?php
-                                $no = 1;
-                                foreach ($data as $d) {
-                                    echo '<tr>';
-                                    if ($d->idopd == $this->session->userdata('opd')) {
-                                        if ($d->idrole == 5) {
-                                            echo "<td>"     . $no++ . "</td>";
-                                            echo "<td>"     . $d->namalengkap . "</td>";
-                                            echo "<td>"     . date('F') . "</td>";
-                                            $absenya = $this->db->select('statusmasuk, COUNT(statusmasuk) as totalst')->from('absensi')->where(['statusmasuk' => 1, 'iduser' => $d->iduser])->get()->result();
-                                            // var_dump($absen[0]->totalst);
-                                            echo '<td>' . $absenya[0]->totalst . '</td>';
-                                            $absentidak = $this->db->select('statusmasuk, COUNT(statusmasuk) as totalst')->from('absensi')->where(['statusmasuk' => 2, 'iduser' => $d->iduser])->get()->result();
-                                            echo '<td>' . $absentidak[0]->totalst . '</td>';
-                                            $izin = $this->db->select('statusmasuk, COUNT(statusmasuk) as totalst')->from('absensi')->where(['statusmasuk' => 3, 'iduser' => $d->iduser])->get()->result();
-                                            echo '<td>' . $izin[0]->totalst . '</td>';
-                                            $izin = $this->db->select('statusmasuk, COUNT(statusmasuk) as totalst')->from('absensi')->where(['statusmasuk' => 4, 'iduser' => $d->iduser])->get()->result();
-                                            echo '<td>' . $absentidak[0]->totalst . '</td>';
-                                        }
-                                    }
-                                    echo '</tr>';
-                                }
-                                ?>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<body>
+    <p class="text-header">REKAPITULASI ABSENSI KEHADIRAN NON APARTUR SIPIL NEGARA (NON ASN) <br>
+        DINAS KOMUNIKASI DAN INFORMATIKA <br>
+        BULAN JANUARI TAHUN ANGGARAN TAHUN 2022</p>
 
-        </div>
-    </div>
-    <!---Container Fluid-->
+    <table rules="all" border="1" class="tabel">
+        <tr>
+            <td>NO</td>
+            <td>Nama</td>
+            <td>NIP</td>
+            <td>Hari Kerja</td>
+            <td>Hadir</td>
+            <td>Jam Masuk</td>
+            <td>Jam Pulang</td>
+            <td>Tidak Hadir</td>
+            <td>TK</td>
+            <td>Izin</td>
+            <td>Keterangan</td>
+        </tr>
+        <?php
+        $no = 1;
+        $nama = [];
+        $jam_masuk = [];
+        $jam_pulang = [];
+        foreach ($data as $d) {
+            if ($d->idrole == 5) {
+                if ($d->idopd == $this->session->userdata('opd')) {
+                    $jam_masuk[] = $d->absen_masuk;
+        ?>
+                    <tr>
+                        <td><?= $no++; ?></td>
+                        <td><?= $d->namalengkap; ?></td>
+                        <td><?= $d->nip; ?></td>
+                        <td>Hari Kerja</td>
+                        <td>Hari Kerja</td>
+                        <td>Hari Kerja</td>
+                        <td>Hadir</td>
+                        <td>Tidak Hadir</td>
+                        <td>TK</td>
+                        <td>Izin</td>
+                        <td>Keterangan</td>
+                    </tr>
+        <?php }
+            }
+        }
+        var_dump($jam_masuk);
+        ?>
+    </table>
+</body>
+
+</html>

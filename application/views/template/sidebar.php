@@ -62,12 +62,12 @@ if ($this->session->userdata('role') == 5) {
                     </a>
                 </li>
             <?php } ?>
-            <!-- <li class="nav-item" <?= $hide; ?>>
-                <a class="nav-link" href="<?= base_url('absensi/laporan') ?>">
+            <li class="nav-item" <?= $hide; ?>>
+                <a class="nav-link" href="<?= base_url('absen_pulang/laporan') ?>">
                     <i class="fas fa-fw fa-mail-bulk"></i>
                     <span>Laporan</span>
                 </a>
-            </li> -->
+            </li>
             <hr class="sidebar-divider" <?= $hide; ?>>
             <div class="sidebar-heading" <?= $hide; ?>>
                 Setting

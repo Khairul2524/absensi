@@ -145,13 +145,24 @@ class Absen_pulang extends MX_Controller
 	public function laporan()
 	{
 		$data = array(
-			'data' => $this->all->getuser(),
+			'data' => $this->all->get_all_absen(),
 		);
-		$this->load->view('template/header');
-		$this->load->view('template/sidebar');
-		$this->load->view('template/topbar');
-		$this->load->view('laporan', $data);
-		$this->load->view('template/footer');
+		// var_dump($data);
+		// die;
+
+		$this->load->library('Pdf');
+		$this->pdf->setPaper('A4', 'landscape');
+		$this->pdf->filename = "laporan-petanikode.pdf";
+		$this->pdf->load_view('laporan', $data);
+
+		// $data = array(
+		// 	'data' => $this->all->getuser(),
+		// );
+		// $this->load->view('template/header');
+		// $this->load->view('template/sidebar');
+		// $this->load->view('template/topbar');
+		// $this->load->view('laporan', $data);
+		// $this->load->view('template/footer');
 	}
 	public function print()
 	{
