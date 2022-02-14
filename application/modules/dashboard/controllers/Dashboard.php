@@ -102,12 +102,15 @@ class Dashboard extends MY_Controller
 	{
 
 		$absen_masuk = $this->all->get_all_absen_masuk();
+
+
 		// var_dump($absen_masuk);
 		// die;
 		$time = time();
 		$tanggal = date('Y-m-d', $time);
 		// echo $tanggal;
 		// die;
+		$absen = [];
 		$tepat = [];
 		$telat = [];
 		$izin = [];
@@ -128,6 +131,7 @@ class Dashboard extends MY_Controller
 		// var_dump($telat);
 
 		// die;
+
 		$data = array(
 			'jumlah_absen' => count($absen),
 			'jumlah_tepat' => count($tepat),

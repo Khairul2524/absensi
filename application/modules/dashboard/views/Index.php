@@ -92,7 +92,7 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <!-- <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -103,7 +103,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </div>
 <!---Container Fluid-->
