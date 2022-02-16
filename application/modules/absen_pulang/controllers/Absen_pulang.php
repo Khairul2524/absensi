@@ -142,27 +142,37 @@ class Absen_pulang extends MX_Controller
 		$this->session->set_flashdata('berhasil', 'Absen pulang Berhasil Diubah!');
 		redirect('absen_pulang');
 	}
+	public function laporan_individu()
+	{
+		$data = array(
+			'judul' => 'Laporan Absensi Individu',
+			'data' => $this->all->getuser(),
+		);
+		// var_dump($data['data']);
+		// die();
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('template/topbar');
+		$this->load->view('laporan_individu', $data);
+		$this->load->view('template/footer');
+	}
 	public function laporan()
 	{
 		$data = array(
 			'data' => $this->all->get_all_absen(),
 		);
-		// var_dump($data);
-		// die;
-
 		$this->load->library('Pdf');
 		$this->pdf->setPaper('A4', 'landscape');
 		$this->pdf->filename = "laporan-petanikode.pdf";
 		$this->pdf->load_view('laporan', $data);
+	}
+	public function laporan_individu_pdf($id)
+	{
+		$data = array(
+			'data' => $this->all->get_all_absen_id_user($id)
+		);
 
-		// $data = array(
-		// 	'data' => $this->all->getuser(),
-		// );
-		// $this->load->view('template/header');
-		// $this->load->view('template/sidebar');
-		// $this->load->view('template/topbar');
-		// $this->load->view('laporan', $data);
-		// $this->load->view('template/footer');
+		var_dump($data['data']);
 	}
 	public function print()
 	{

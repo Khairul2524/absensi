@@ -46,8 +46,7 @@ class Absen_masuk extends MX_Controller
 
 		if ($cek_jam_kerja) {
 			$cek_absen = $this->db->get_where('absen_masuk', ['id_jam_kerja' => $cek_jam_kerja->id_jk, 'iduser' => $id])->row();
-			// var_dump($cek_absen);
-			// die;
+
 			$mulai_masuk = $cek_jam_kerja->mulai_masuk;
 			$jam_masuk = $cek_jam_kerja->jam_masuk;
 			$batas_masuk = $cek_jam_kerja->batas_masuk;
@@ -134,6 +133,8 @@ class Absen_masuk extends MX_Controller
 			} else {
 				$this->session->set_flashdata('info', "Anda Sudah Absen ");
 			}
+		} else {
+			$this->session->set_flashdata('info', "Hari Ini Libur ");
 		}
 		redirect('absen_masuk');
 	}

@@ -108,6 +108,11 @@ class All_model extends CI_Model
     }
     public function get_all_absen()
     {
-        return $this->db->from('user')->join('absen_masuk', 'absen_masuk.iduser=user.iduser')->join('absen_pulang', 'absen_pulang.id_user=user.iduser')->get()->result();
+        return $this->db->from('user')->join('absen_masuk', 'absen_masuk.iduser=user.iduser')->join('absen_pulang', 'absen_pulang.id_user=user.iduser')->group_by('namalengkap')->get()->result();
+    }
+    // Query Absensi 
+    public function get_all_absen_id_user($id)
+    {
+        return $this->db->from('absen_pulang')->join('user', 'user.iduser=absen_pulang.id_user')->where(['id_user' => $id])->get()->result();
     }
 }

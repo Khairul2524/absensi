@@ -35,30 +35,40 @@
         <?php
         $no = 1;
         $nama = [];
+        $nip = [];
         $jam_masuk = [];
         $jam_pulang = [];
         foreach ($data as $d) {
             if ($d->idrole == 5) {
                 if ($d->idopd == $this->session->userdata('opd')) {
-                    $jam_masuk[] = $d->absen_masuk;
-        ?>
-                    <tr>
-                        <td><?= $no++; ?></td>
-                        <td><?= $d->namalengkap; ?></td>
-                        <td><?= $d->nip; ?></td>
-                        <td>Hari Kerja</td>
-                        <td>Hari Kerja</td>
-                        <td>Hari Kerja</td>
-                        <td>Hadir</td>
-                        <td>Tidak Hadir</td>
-                        <td>TK</td>
-                        <td>Izin</td>
-                        <td>Keterangan</td>
-                    </tr>
-        <?php }
+                    $nama[] = $d->namalengkap;
+                    $nip[] = $d->nip;
+                    $jam_masuk[$d->namalengkap][] = $d->absen_masuk;
+                    $jam_pulang[$d->namalengkap][] = $d->absen_pulang;
+                }
             }
         }
-        var_dump($jam_masuk);
+        $kelompok_nama = array_unique($nama);
+        foreach ($kelompok_nama as $jm) {
+
+        ?>
+            <tr>
+                <td><?= $no++; ?></td>
+                <td><?= $jm; ?></td>
+                <td><?= $d->nip; ?></td>
+                <td><?= var_dump($jam_masuk); ?></td>
+                <td>Hari Kerja</td>
+                <td>Hari Kerja</td>
+                <td>Hadir</td>
+                <td>Tidak Hadir</td>
+                <td>TK</td>
+                <td>Izin</td>
+                <td>Keterangan</td>
+            </tr>
+
+        <?php
+        }
+        // var_dump(array_unique($nama));
         ?>
     </table>
 </body>
