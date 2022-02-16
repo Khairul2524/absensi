@@ -38,20 +38,21 @@
 			}
 			?>
 			<div class="table-responsive">
-				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<table class="display nowrap table-striped table-bordered table" id="example" width="100%" cellspacing="0">
 					<thead>
 						<tr>
 							<th>NO</th>
-							<th>Tanggal</th>
-							<th>Nama Lengkap</th>
-							<th>NIK</th>
-							<th>Keterangan</th>
-							<th>Jam Masuk</th>
 							<?php
 							if ($this->session->userdata('role') != 5) {
 							?>
 								<th>Aksi</th>
 							<?php } ?>
+							<th>Tanggal</th>
+							<th>Nama Lengkap</th>
+							<th>NIK</th>
+							<th>Keterangan</th>
+							<th>Jam Masuk</th>
+
 						</tr>
 					</thead>
 					<tbody>
@@ -69,6 +70,16 @@
 						?>
 										<tr>
 											<td scope="row"><?= $no++; ?></td>
+											<?php
+											if ($this->session->userdata('role') != 5) {
+											?>
+												<td>
+													<a href="#" class="btn btn-warning btn-circle tombol-ubah" data-toggle="modal" data-target="#menumodal" data-id="<?= $d->id_absen_masuk; ?>">
+														<i class="fas fa-edit"></i>
+													</a>
+
+												</td>
+											<?php } ?>
 											<td><?= $d->tanggal; ?></td>
 											<td><?= $d->namalengkap; ?></td>
 											<td><?= $d->nik; ?></td>
@@ -90,16 +101,17 @@
 									?>
 									<tr>
 										<td scope="row"><?= $no++; ?></td>
-										<td><?= $d->tanggal; ?></td>
-										<td><?= $d->namalengkap; ?></td>
-										<td><?= $d->nik; ?></td>
-										<td><?= $d->keterangan; ?></td>
-										<td><?= $d->absen_masuk; ?></td>
 										<td>
 											<a href="#" class="btn btn-warning btn-circle tombol-ubah" data-toggle="modal" data-target="#menumodal" data-id="<?= $d->id_absen_masuk; ?>">
 												<i class="fas fa-edit"></i>
 											</a>
 										</td>
+										<td><?= $d->tanggal; ?></td>
+										<td><?= $d->namalengkap; ?></td>
+										<td><?= $d->nik; ?></td>
+										<td><?= $d->keterangan; ?></td>
+										<td><?= $d->absen_masuk; ?></td>
+
 									</tr>
 						<?php
 								}

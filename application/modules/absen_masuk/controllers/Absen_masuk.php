@@ -154,22 +154,4 @@ class Absen_masuk extends MX_Controller
 		$this->session->set_flashdata('berhasil', 'Absen Masuk Berhasil Diubah!');
 		redirect('absen_masuk');
 	}
-	public function laporan()
-	{
-		$data = array(
-			'data' => $this->all->getuser(),
-		);
-		$this->load->view('template/header');
-		$this->load->view('template/sidebar');
-		$this->load->view('template/topbar');
-		$this->load->view('laporan', $data);
-		$this->load->view('template/footer');
-	}
-	public function print()
-	{
-		$data = array(
-			'data' => $this->all->getuser(),
-		);
-		$this->load->view('print', $data);
-	}
 }

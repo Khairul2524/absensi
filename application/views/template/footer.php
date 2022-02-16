@@ -45,11 +45,13 @@
 <script src="<?= base_url('assets/backand/') ?>vendor/jquery/jquery.min.js"></script>
 <script src="<?= base_url('assets/backand/') ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?= base_url('assets/backand/') ?>vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="<?= base_url('assets/backand/') ?>js/ruang-admin.min.js"></script>
+<script src="<?= base_url('assets/backand/') ?>js/ruang-admin.js"></script>
 <script src="<?= base_url('assets/backand/') ?>js/sweetalert2.all.min.js"></script>
 <script src="<?= base_url('assets/backand/') ?>vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url('assets/backand/') ?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
+<script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
 <!-- Page level custom scripts -->
 
 <script>
@@ -81,6 +83,23 @@
             'info'
         )
     }
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var table = $('#example').DataTable({
+            responsive: true
+        });
+
+        new $.fn.dataTable.FixedHeader(table);
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable(); // ID From dataTable 
+        $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+    });
 </script>
 
 </body>

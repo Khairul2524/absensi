@@ -62,12 +62,28 @@ if ($this->session->userdata('role') == 5) {
                     </a>
                 </li>
             <?php } ?>
-            <!-- <li class="nav-item" <?= $hide; ?>>
-                <a class="nav-link" href="<?= base_url('absensi/laporan') ?>">
-                    <i class="fas fa-fw fa-mail-bulk"></i>
-                    <span>Laporan</span>
+            <hr class="sidebar-divider" <?= $hide; ?>>
+            <div class="sidebar-heading" <?= $hide; ?>>
+                Laporan
+            </div>
+            <li class="nav-item" <?= $hide; ?>>
+                <a class="nav-link" href="<?= base_url('laporan') ?>">
+                    <i class="fas fa-fw fa-user-clock"></i>
+                    <span>Laporan Mingguan</span>
                 </a>
-            </li> -->
+            </li>
+            <li class="nav-item" <?= $hide; ?>>
+                <a class="nav-link" href="<?= base_url('jam_kerja') ?>">
+                    <i class="fas fa-fw fa-user-clock"></i>
+                    <span>Laporan Bulanan</span>
+                </a>
+            </li>
+            <li class="nav-item" <?= $hide; ?>>
+                <a class="nav-link" href="<?= base_url('jam_kerja') ?>">
+                    <i class="fas fa-fw fa-user-clock"></i>
+                    <span>Laporan Tahunan</span>
+                </a>
+            </li>
             <hr class="sidebar-divider" <?= $hide; ?>>
             <div class="sidebar-heading" <?= $hide; ?>>
                 Setting

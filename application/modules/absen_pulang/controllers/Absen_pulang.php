@@ -142,22 +142,4 @@ class Absen_pulang extends MX_Controller
 		$this->session->set_flashdata('berhasil', 'Absen pulang Berhasil Diubah!');
 		redirect('absen_pulang');
 	}
-	public function laporan()
-	{
-		$data = array(
-			'data' => $this->all->getuser(),
-		);
-		$this->load->view('template/header');
-		$this->load->view('template/sidebar');
-		$this->load->view('template/topbar');
-		$this->load->view('laporan', $data);
-		$this->load->view('template/footer');
-	}
-	public function print()
-	{
-		$data = array(
-			'data' => $this->all->getuser(),
-		);
-		$this->load->view('print', $data);
-	}
 }

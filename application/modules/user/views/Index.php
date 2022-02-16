@@ -22,7 +22,7 @@
                 <span class="text">Tambah</span>
             </a>
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="display nowrap table-striped table-bordered table" id="example" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>NO</th>
