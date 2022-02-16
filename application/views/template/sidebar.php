@@ -64,10 +64,10 @@ if ($this->session->userdata('role') == 5) {
             <?php } ?>
             <hr class="sidebar-divider" <?= $hide; ?>>
             <div class="sidebar-heading" <?= $hide; ?>>
-                Laporan
+                Rekapan
             </div>
             <li class="nav-item" <?= $hide; ?>>
-                <a class="nav-link" href="<?= base_url('laporan') ?>">
+                <a class="nav-link" href="<?= base_url('rekapan') ?>">
                     <i class="fas fa-fw fa-user-clock"></i>
                     <span>Laporan Mingguan</span>
                 </a>
