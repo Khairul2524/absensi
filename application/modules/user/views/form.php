@@ -43,7 +43,7 @@
                                                     ?>>
                             <label for="nama" class="col-sm-3 col-form-label">Password</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="password" name="password" placeholder="Password" required autocomplete="off">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required autocomplete="off">
                             </div>
                         </div>
 

@@ -12,7 +12,7 @@
 
             </div>
         </div>
-        <?php echo $this->session->userdata('opd') ?>
+
 
         <!-- Earnings (Annual) Card Example -->
         <div class="col-xl-8 col-md-6 mb-4">

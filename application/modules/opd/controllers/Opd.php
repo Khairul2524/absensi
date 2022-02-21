@@ -40,6 +40,14 @@ class Opd extends MX_Controller
 		$cek = $this->db->get_where('opd', ['opd' => htmlspecialchars($this->input->post('opd'))])->row();
 		// var_dump($cek);
 		if (!$cek) {
+			$data = array(
+				'opd' => $opd,
+				'qr_code' => $opd . '.png'
+			);
+			$this->db->insert('opd', $data);
+			$id = $this->db->insert_id();
+			// var_dump($id);
+			// die;
 			$this->load->library('ciqrcode');
 			$config['cacheable']    = true;
 			$config['cachedir']     = './assets/';
@@ -53,16 +61,11 @@ class Opd extends MX_Controller
 
 			$image_name = $opd . '.png';
 
-			$params['data'] = $opd;
+			$params['data'] = $id;
 			$params['level'] = 'H';
 			$params['size'] = 10;
 			$params['savename'] = FCPATH . $config['imagedir'] . $image_name;
 			$this->ciqrcode->generate($params);
-			$data = array(
-				'opd' => $opd,
-				'qr_code' => $image_name
-			);
-			$this->opd->insert($data);
 			$this->session->set_flashdata('berhasil', 'opd Berhasil Ditambah!');
 			redirect('opd');
 		} else {
@@ -94,9 +97,9 @@ class Opd extends MX_Controller
 		$config['white']        = array(70, 130, 180);
 		$this->ciqrcode->initialize($config);
 
-		$image_name = $opd . '.png';
+		$image_name = htmlspecialchars($this->input->post('id')) . '.png';
 
-		$params['data'] = $opd;
+		$params['data'] = htmlspecialchars($this->input->post('id'));
 		$params['level'] = 'H';
 		$params['size'] = 10;
 		$params['savename'] = FCPATH . $config['imagedir'] . $image_name;
