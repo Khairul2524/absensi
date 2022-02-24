@@ -38,6 +38,7 @@
 			}
 			?>
 			<div class="table-responsive">
+
 				<table class="display nowrap table-striped table-bordered table" id="example" width="100%" cellspacing="0">
 					<thead>
 						<tr>

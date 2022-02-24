@@ -51,9 +51,6 @@ class Absen_masuk extends MX_Controller
 			$mulai_masuk = $cek_jam_kerja->mulai_masuk;
 			$jam_masuk = $cek_jam_kerja->jam_masuk;
 			$batas_masuk = $cek_jam_kerja->batas_masuk;
-			// $mulai_pulang = $cek_jam_kerja->mulai_pulang;
-			// $jam_pulang = $cek_jam_kerja->jam_pulang;
-			// $batas_pulang = $cek_jam_kerja->batas_pulang;
 			$keterangan = htmlspecialchars($this->input->post('ket'));
 			if (!$cek_absen) {
 				if ($keterangan == null) {
@@ -68,8 +65,6 @@ class Absen_masuk extends MX_Controller
 							$menit    = $selisih - $jam * (60 * 60);
 							$selisihmenit = floor($menit / 60);
 							$keterangan = "Anda Tepat Waktu Masuk Kerja " . $jam . " Jam " . $selisihmenit . " Menit";
-
-
 							$this->session->set_flashdata('berhasil', $keterangan);
 							$data = array(
 								'iduser' => $id,
@@ -153,5 +148,63 @@ class Absen_masuk extends MX_Controller
 		$this->absen_masuk->update(htmlspecialchars($this->input->post('id')), $data);
 		$this->session->set_flashdata('berhasil', 'Absen Masuk Berhasil Diubah!');
 		redirect('absen_masuk');
+	}
+
+	function hitungJam($start, $end, $hariLibur = null)
+	{
+
+		$startDate = new DateTime($start);
+		$endDate = new DateTime($end);
+		$periodInterval = new DateInterval("P1D");
+
+		$period = new DatePeriod($startDate, $periodInterval, $endDate);
+		$count = 0;
+
+		foreach ($period as $date) {
+			$startofday = clone $date;
+			$startofday->setTime(8, 00);
+			$endofday = clone $date;
+			$endofday->setTime(17, 00);
+			$tidakLibur = true;
+
+			if ($hariLibur != null && is_array($hariLibur) && in_array($date->format('Y-m-d'), $hariLibur)) {
+				$tidakLibur = false;
+			}
+
+			if ($date > $startofday && $date <= $endofday && !in_array($date->format('l'), array('Sunday', 'Saturday')) && ($date->format('H') <= 12 || $date->format('H') > 13) && $tidakLibur) {
+				$count++;
+			}
+		}
+		echo $count;
+	}
+	public function hitung()
+	{
+		// $begin = new DateTime('2022-02-01');
+		// $end = new DateTime('2022-02-28');
+		// $daterange     = new DatePeriod($begin, new DateInterval('P1D'), $end);
+		// foreach ($daterange as $date) {
+		// 	$daterange     = $date->format("Y-m-d");
+		// 	// $datetime     = date('now');
+		// 	$day         = date('D');
+		// 	if ($day != "Sun" && $day != "Sat") {
+		// 		echo "Hari Ini masuk";
+		// 	} else {
+		// 		echo "Hari Libur";
+		// 	}
+		// }
+		$cobahari = "2022/02/25";
+		$sort = strtotime($cobahari);
+		// echo $sort;
+		// echo date('d - F- Y', $sort);
+		// die;
+		$hari = date('D', $sort);
+		$harilibur = 'Thu';
+		// echo $hari;
+		// die;
+		if ($hari == 'Sun' || $hari == 'Sat' || $hari == $harilibur) {
+			echo "Hari Libur";
+		} else {
+			echo "Hari Ini Masuk";
+		}
 	}
 }

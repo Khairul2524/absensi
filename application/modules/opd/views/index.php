@@ -25,7 +25,7 @@
 							<th>NO</th>
 							<th>Organisasi Perangkat Daerah</th>
 							<th>Qr Code</th>
-							<th>Aksi</th>
+							<th style="width: 100px;">Aksi</th>
 						</tr>
 					</thead>
 					<tbody>
