@@ -34,13 +34,13 @@ if ($this->session->userdata('role') == 5) {
             <li class="nav-item" <?= $hide ?>>
                 <a class="nav-link" href="<?= base_url('opd') ?>">
                     <i class="fas fa-fw fa-building"></i>
-                    <span>Gedung OPD</span>
+                    <span>OPD</span>
                 </a>
             </li>
             <li class="nav-item" <?= $hide ?>>
-                <a class="nav-link" href="<?= base_url('user') ?>">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Pegawai</span>
+                <a class="nav-link" href="<?= base_url('bagian') ?>">
+                    <i class="fas fa-fw fa-landmark"></i>
+                    <span>Bagian</span>
                 </a>
             </li>
             <hr class="sidebar-divider" <?= $hide ?>>
