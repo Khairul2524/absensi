@@ -27,12 +27,7 @@
 						<tr>
 							<th>NO</th>
 							<th>Tanggal</th>
-							<th>Mulai Masuk</th>
-							<th>Jam Masuk</th>
-							<th>Batas Masuk</th>
-							<th>Mulai Pulang</th>
-							<th>Jam Pulang</th>
-							<th>Batas Pulang</th>
+							<th>Keterangan</th>
 							<th style="width: 150px;">Aksi</th>
 						</tr>
 					</thead>
@@ -44,17 +39,12 @@
 							<tr>
 								<td scope="row"><?= $no++; ?></td>
 								<td><?= $d->tanggal ?></td>
-								<td><?= $d->mulai_masuk ?></td>
-								<td><?= $d->jam_masuk ?></td>
-								<td><?= $d->batas_masuk ?></td>
-								<td><?= $d->mulai_pulang ?></td>
-								<td><?= $d->jam_pulang ?></td>
-								<td><?= $d->batas_pulang ?></td>
+								<td><?= $d->keterangan ?></td>
 								<td>
-									<a href="#" class="btn btn-warning btn-circle tombol-ubah" data-toggle="modal" data-target="#menumodal" data-id="<?= $d->id_jk; ?>">
+									<a href="#" class="btn btn-warning btn-circle tombol-ubah" data-toggle="modal" data-target="#menumodal" data-id="<?= $d->id_hari_libur; ?>">
 										<i class="fas fa-edit"></i>
 									</a>
-									<a href="<?= site_url('jam_kerja/hapus/') . $d->id_jk ?>" class="btn btn-danger btn-circle" onclick="return confirm('Yakin Hapus?')">
+									<a href="<?= site_url('hari_libur/hapus/') . $d->id_hari_libur ?>" class="btn btn-danger btn-circle" onclick="return confirm('Yakin Hapus?')">
 										<i class="fas fa-trash"></i>
 									</a>
 								</td>
@@ -73,7 +63,7 @@
 <!-- End of Main Content -->
 <div class="modal fade" id="menumodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<form method="POST" action="<?= site_url('jam_kerja/tambah') ?>">
+		<form method="POST" action="<?= site_url('hari_libur/tambah') ?>">
 			<input type="text" id="id" name="id" hidden>
 			<div class="modal-content">
 				<div class="modal-header">
@@ -88,28 +78,8 @@
 						<input type="date" class="form-control" id="tgl" name="tgl" placeholder="tgl" autocomplete="off" required>
 					</div>
 					<div class="form-group">
-						<label for="mulai_masuk">Jam Mulai Absen Masuk</label>
-						<input type="time" class="form-control" id="mulai_masuk" name="mulai_masuk" placeholder="mulai_masuk" autocomplete="off" required>
-					</div>
-					<div class="form-group">
-						<label for="jam_masuk">Jam Masuk</label>
-						<input type="time" class="form-control" id="jam_masuk" name="jam_masuk" placeholder="jam_masuk" autocomplete="off" required>
-					</div>
-					<div class="form-group">
-						<label for="batas_masuk">Jam Batas Absen Masuk</label>
-						<input type="time" class="form-control" id="batas_masuk" name="batas_masuk" placeholder="batas_masuk" autocomplete="off" required>
-					</div>
-					<div class="form-group">
-						<label for="mulai_pulang">Jam Mulai Absen Pulang</label>
-						<input type="time" class="form-control" id="mulai_pulang" name="mulai_pulang" placeholder="mulai_pulang" autocomplete="off" required>
-					</div>
-					<div class="form-group">
-						<label for="jam_pulang">Jam Pulang</label>
-						<input type="time" class="form-control" id="jam_pulang" name="jam_pulang" placeholder="jam_pulang" autocomplete="off" required>
-					</div>
-					<div class="form-group">
-						<label for="batas_pulang">Jam Batas Absen Pulang</label>
-						<input type="time" class="form-control" id="batas_pulang" name="batas_pulang" placeholder="batas_pulang" autocomplete="off" required>
+						<label for="ket">Keterangan</label>
+						<input type="text" class="form-control" id="ket" name="ket" placeholder="Keterangan" autocomplete="off" required>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -134,28 +104,24 @@
 	$(function() {
 		// tambah
 		$('.tombol-tambah').on('click', function() {
-			$('.modal-title').html('Tambah Jam Kerja')
+			$('.modal-title').html('Tambah Hari Libur')
 			$('.modal-footer button[type= submit] span[class="icon text-white-50"]').html('	<i class="fas fa-plus-square"></i>')
 			$('.modal-footer button[type= submit] span[class="text"]').html('Simpan')
 			$('#id').val('')
 			$('#tgl').val('')
-			$('#mulai_masuk').val('')
-			$('#jam_masuk').val('')
-			$('#batas_masuk').val('')
-			$('#mulai_pulang').val('')
-			$('#jam_pulang').val('')
-			$('#batas_pulang').val('')
+			$('#ket').val('')
+
 		})
 		// ubah
 		$('.tombol-ubah').on('click', function() {
-			$('.modal-title').html('Ubah Jam Kerja')
+			$('.modal-title').html('Ubah Hari Libur')
 			$('.modal-footer button[type= submit] span[class="icon text-white-50"]').html('	<i class="fas fa-check"></i>')
 			$('.modal-footer button[type= submit] span[class="text"]').html('Ubah')
-			$('.modal-dialog form').attr('action', `<?= site_url('jam_kerja/ubah') ?>`)
+			$('.modal-dialog form').attr('action', `<?= site_url('hari_libur/ubah') ?>`)
 			const id = $(this).data('id')
 			// console.log(id)
 			$.ajax({
-				url: `<?= site_url('jam_kerja/getubah') ?>`,
+				url: `<?= site_url('hari_libur/getubah') ?>`,
 				data: {
 					id: id
 				},
@@ -163,14 +129,10 @@
 				dataType: 'json',
 				success: function(data) {
 					// console.log(data);
-					$('#id').val(data.id_jk)
+					$('#id').val(data.id_hari_libur)
 					$('#tgl').val(data.tanggal)
-					$('#mulai_masuk').val(data.mulai_masuk)
-					$('#jam_masuk').val(data.jam_masuk)
-					$('#batas_masuk').val(data.batas_masuk)
-					$('#mulai_pulang').val(data.mulai_pulang)
-					$('#jam_pulang').val(data.jam_pulang)
-					$('#batas_pulang').val(data.batas_pulang)
+					$('#ket').val(data.keterangan)
+
 				}
 			})
 		})

@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Jam_kerja_model extends CI_Model
+class Hari_libur_model extends CI_Model
 {
-    public $tabel = 'jam_kerja';
-    public $id  = 'id_jk';
+    public $tabel = 'hari_libur';
+    public $id  = 'id_hari_libur';
     public function get()
     {
         return  $this->db->get($this->tabel)->result();

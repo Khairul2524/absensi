@@ -179,28 +179,11 @@ class Absen_masuk extends MX_Controller
 	}
 	public function hitung()
 	{
-		// $begin = new DateTime('2022-02-01');
-		// $end = new DateTime('2022-02-28');
-		// $daterange     = new DatePeriod($begin, new DateInterval('P1D'), $end);
-		// foreach ($daterange as $date) {
-		// 	$daterange     = $date->format("Y-m-d");
-		// 	// $datetime     = date('now');
-		// 	$day         = date('D');
-		// 	if ($day != "Sun" && $day != "Sat") {
-		// 		echo "Hari Ini masuk";
-		// 	} else {
-		// 		echo "Hari Libur";
-		// 	}
-		// }
 		$cobahari = "2022/02/25";
 		$sort = strtotime($cobahari);
-		// echo $sort;
-		// echo date('d - F- Y', $sort);
-		// die;
 		$hari = date('D', $sort);
 		$harilibur = 'Thu';
-		// echo $hari;
-		// die;
+
 		if ($hari == 'Sun' || $hari == 'Sat' || $hari == $harilibur) {
 			echo "Hari Libur";
 		} else {

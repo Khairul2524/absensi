@@ -89,9 +89,9 @@ if ($this->session->userdata('role') == 5) {
                 Setting
             </div>
             <li class="nav-item" <?= $hide; ?>>
-                <a class="nav-link" href="<?= base_url('jam_kerja') ?>">
+                <a class="nav-link" href="<?= base_url('hari_libur') ?>">
                     <i class="fas fa-fw fa-user-clock"></i>
-                    <span>Jam Kerja</span>
+                    <span>Hari Libur</span>
                 </a>
             </li>
             <hr class="sidebar-divider" <?= $hide; ?>>
