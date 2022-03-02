@@ -1,3 +1,5 @@
+<script src="<?= site_url('assets/backand/js/jquery-3.6.0.min.js') ?>"></script>
+
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -86,13 +88,22 @@
                             <label for="opd" class="col-sm-3 col-form-label">OPD</label>
                             <div class="col-sm-9">
                                 <select name="opd" id="opd" class="form-control" required>
+                                    <option value="">Piih OPD</option>
                                     <?php
                                     foreach ($opd as $opd) {
                                         if ($idopd != $opd->idopd) {
                                     ?>
-                                            <option value="<?= $opd->idopd; ?>"><?= $opd->opd; ?></option>
+                                            <option class="pilihan" value="<?= $opd->idopd; ?>"><?= $opd->opd; ?></option>
                                     <?php }
                                     } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="bagian" class="col-sm-3 col-form-label">Bidang</label>
+                            <div class="col-sm-9">
+                                <select name="bagian" id="bagian" class="form-control" required>
+                                    <option value="">Pilih Bagian</option>
                                 </select>
                             </div>
                         </div>
@@ -102,7 +113,7 @@
                                 <select name="role" id="role" class="form-control" required>
                                     <?php
                                     foreach ($role as $role) {
-                                        if ($role->idrole != 1) {
+                                        if ($role->idrole != 1 && $role->idrole != 5) {
                                     ?>
                                             <option value="<?= $role->idrole; ?>"><?= $role->role; ?></option>
                                     <?php }
@@ -131,3 +142,31 @@
 
 </div>
 <!---Container Fluid-->
+<script>
+    $(document).ready(function() {
+        $("#opd").change(function() {
+            var id_opd = $(this).val();
+            $.ajax({
+                url: `<?= base_url('user/get_bagian') ?>`,
+                type: 'post',
+                data: {
+                    opd_id: id_opd
+                },
+                dataType: 'json',
+                success: function(response) {
+                    // console.log(response)
+                    var len = response.length;
+
+                    $("#bagian").empty();
+                    for (var i = 0; i < len; i++) {
+                        var id = response[i]['id_bagian'];
+                        var name = response[i]['nama_bagian'];
+
+                        $("#bagian").append("<option value='" + id + "'>" + name + "</option>");
+
+                    }
+                }
+            });
+        })
+    })
+</script>

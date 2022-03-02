@@ -47,6 +47,11 @@ class User extends MY_Controller
 		$this->load->view('form', $data);
 		$this->load->view('template/footer');
 	}
+	public function get_bagian()
+	{
+		$id = $_POST['opd_id'];
+		echo json_encode($this->all->getidbagian($id));
+	}
 	public function simpan()
 	{
 		$data = array(
