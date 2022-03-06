@@ -29,6 +29,7 @@
                             <th>Nama Lengkap</th>
                             <th>Email</th>
                             <th>OPD</th>
+                            <th>Bagian</th>
                             <th style="width: 150px;">Aksi</th>
                         </tr>
                     </thead>
@@ -43,6 +44,7 @@
                                     <td><?= $d->namalengkap; ?></td>
                                     <td><?= $d->email; ?></td>
                                     <td><?= $d->opd; ?></td>
+                                    <td><?= $d->nama_bagian; ?></td>
                                     <td>
                                         <a href="<?= base_url('user/edit/') . $d->iduser ?>" class="btn btn-warning btn-circle ">
                                             <i class="fas fa-edit"></i>

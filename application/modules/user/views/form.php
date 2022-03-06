@@ -5,7 +5,9 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Admin</h1>
     </div>
-
+    <div class="flash-gagal" data-flashgagal="<?= $this->session->flashdata('gagal') ?>"></div>
+    <div class="flash-info" data-flashinfo="<?= $this->session->flashdata('info') ?>"></div>
+    <div class="flash-berhasil" data-flashberhasil="<?= $this->session->flashdata('berhasil') ?>"></div>
     <div class="row ">
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-4 col-md-6 mb-4">
@@ -23,7 +25,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Identitas Admin</h6>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="<?= $action ?>">
+                    <form method="POST" action="<?= $action ?>" enctype="multipart/form-data">
                         <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-3 col-form-label">Email</label>
@@ -38,11 +40,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row" <?php
-                                                    if ($kode == 0) {
-                                                        echo 'hidden';
-                                                    }
-                                                    ?>>
+                        <div class="form-group row">
                             <label for="nama" class="col-sm-3 col-form-label">Password</label>
                             <div class="col-sm-9">
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Password" required autocomplete="off">
@@ -52,19 +50,19 @@
                         <div class="form-group row">
                             <label for="nik" class="col-sm-3 col-form-label">NIK</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK" required autocomplete="off" value="<?= $nik ?>">
+                                <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK" required autocomplete="off" value="<?= $nik ?>" maxlength="16" onkeypress="return Angka(event)">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="nip" class="col-sm-3 col-form-label">NIP</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="nip" name="nip" placeholder="NIP" required autocomplete="off" value="<?= $nip ?>">
+                                <input type="text" class="form-control" id="nip" name="nip" placeholder="NIP" required autocomplete="off" value="<?= $nip ?>" maxlength="18" onkeypress="return Angka(event)">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="no" class="col-sm-3 col-form-label">NO HP</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="no" name="no" placeholder="NO HP" required autocomplete="off" value="<?= $no ?>">
+                                <input type="text" class="form-control" id="no" name="no" placeholder="NO HP" required autocomplete="off" value="<?= $no ?>" maxlength="12" onkeypress="return Angka(event)">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -122,6 +120,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="nip" class="col-sm-3 col-form-label">Foto</label>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control" id="foto" name="foto" placeholder="Foto" required autocomplete="off" value="<?= $foto ?>" accept="png,jpeg,jpg,gif">
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <div class="col-sm-10">
                                 <button type="submit" class="btn btn-success btn-icon-split">
                                     <span class="icon text-white-50">
@@ -132,12 +136,17 @@
                             </div>
                         </div>
                     </form>
+                    <script>
+                        function Angka(event) {
+                            var angka = (event.which) ? event.which : event.keyCode
+                            if (angka != 46 && angka > 31 && (angka < 48 || angka > 57))
+                                return false;
+                            return true;
+                        }
+                    </script>
                 </div>
             </div>
         </div>
-
-
-
     </div>
 
 </div>

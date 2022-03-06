@@ -8,8 +8,14 @@
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-4 col-md-6 mb-4">
             <div class="card  " style="width: 22rem;">
-                <img src="<?= base_url('assets/backand/img/default.png') ?>" class="card-img-top" alt="..." </div>
-
+                <?php
+                if ($user->foto) {
+                    $foto = $user->foto;
+                } else {
+                    $foto = 'default.png';
+                }
+                ?>
+                <img src="<?= base_url('assets/backand/img/profile/') . $foto ?>" class="card-img-top" alt="..." </div>
             </div>
         </div>
 

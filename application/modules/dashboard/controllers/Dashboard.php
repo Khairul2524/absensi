@@ -39,8 +39,9 @@ class Dashboard extends MY_Controller
 	public function cek()
 	{
 		$email = $this->session->userdata('email');
-		$cek = $this->db->get_where('user', ['email' => $email])->row();
+		$cek = $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->join('bagian', 'bagian.id_bagian=user.id_bagian')->where(['email' => $email])->get()->row();
 		// var_dump($cek);
+		// die;
 		if (!$cek) {
 
 			$data = array(
@@ -61,13 +62,7 @@ class Dashboard extends MY_Controller
 			);
 			$this->session->set_userdata($datas);
 			$data = array(
-				'email' => $email,
-				'nama'	=> $cek->namalengkap,
-				'nik'	=> $cek->nik,
-				'nip'	=> $cek->nip,
-				'no'	=> $cek->no,
-				'opd'	=> $cek->idopd,
-				'statustenaga'	=> $cek->statustenaga,
+				'user' => $cek
 			);
 			$this->load->view('template/header');
 			$this->load->view('template/sidebar');

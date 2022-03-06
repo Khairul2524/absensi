@@ -37,7 +37,9 @@ class User extends MY_Controller
 			'nip'           => set_value('nip'),
 			'no'            => set_value('no'),
 			'idopd'         => set_value('idopd'),
+			'id_bagian'     => set_value('bagian'),
 			'statustenaga'  => set_value('statustenaga'),
+			'foto'  => set_value('foto'),
 		);
 		// var_dump($data['role']);
 		// die;
@@ -52,8 +54,25 @@ class User extends MY_Controller
 		$id = $_POST['opd_id'];
 		echo json_encode($this->all->getidbagian($id));
 	}
+
 	public function simpan()
 	{
+		$foto = $_FILES['foto'];
+		// var_dump($foto);
+		// die;
+		if ($foto) {
+			$config['upload_path']      = './assets/backand/img/profile/';
+			$config['allowed_types']    = 'jpg|png|jpeg|gif';
+			$config['overwrite']        = 'true';
+			$this->load->library('upload', $config);
+			if (!$this->upload->do_upload('foto')) {
+				$this->session->set_flashdata('gagal', 'Foto Gagal Diupload');
+				redirect('user/tambah');
+			} else {
+				$foto = $this->upload->data('file_name');
+			}
+		}
+
 		$data = array(
 			'email' => $this->input->post('email'),
 			'password' => password_hash(htmlspecialchars($this->input->post('password')), PASSWORD_DEFAULT),
@@ -62,14 +81,19 @@ class User extends MY_Controller
 			'nip'	=> htmlspecialchars($this->input->post('nip')),
 			'no'	=> htmlspecialchars($this->input->post('no')),
 			'idopd'	=> htmlspecialchars($this->input->post('opd')),
+			'id_bagian'	=> htmlspecialchars($this->input->post('bagian')),
 			'statustenaga'	=> htmlspecialchars($this->input->post('st')),
 			'aktif'	=> 1,
 			'idrole' => 2,
+			'foto' => $foto,
 			'created_at' => time()
 		);
+		// print_r($data);
+		// die;
 		$cek = $this->db->get_where('user', ['email' => $this->input->post('email')])->row();
 		if (!$cek) {
 			$this->user->insert($data);
+			$this->session->set_flashdata('berhasil', 'User Berhasil Ditambah');
 			redirect('user');
 		}
 	}
@@ -90,6 +114,7 @@ class User extends MY_Controller
 			'nip'           => set_value('nip', $user->nip),
 			'no'  			=> set_value('no', $user->no),
 			'idopd'			=> set_value('idopd', $user->idopd),
+			'bagian'		=> set_value('idopd', $user->id_bagian),
 			'statustenaga'	=> set_value('statustenaga', $user->statustenaga),
 		);
 		$this->load->view('template/header');
@@ -119,7 +144,8 @@ class User extends MY_Controller
 			'idrole' => 5,
 			'created_at' => time()
 		);
-
+		print_r($data);
+		die;
 		$this->user->update($id, $data);
 		redirect('user');
 	}
