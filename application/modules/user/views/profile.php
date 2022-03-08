@@ -60,6 +60,16 @@
                                 <td><?= $user->opd ?></td>
                             </tr>
                             <tr>
+                                <td>Bidang</td>
+                                <td>:</td>
+                                <td><?= $user->nama_bagian ?></td>
+                            </tr>
+                            <tr>
+                                <td>Role</td>
+                                <td>:</td>
+                                <td><?= $user->role ?></td>
+                            </tr>
+                            <tr>
                                 <td>Status Tenaga</td>
                                 <td>:</td>
                                 <td><?php

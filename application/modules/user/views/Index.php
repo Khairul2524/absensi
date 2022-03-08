@@ -22,7 +22,8 @@
                 <span class="text">Tambah</span>
             </a>
             <div class="table-responsive">
-                <table class="display nowrap table-striped table-bordered table" id="example" width="100%" cellspacing="0">
+                <!-- nowrap -->
+                <table class="display  table-striped table-bordered table" id="example" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>NO</th>
@@ -30,13 +31,14 @@
                             <th>Email</th>
                             <th>OPD</th>
                             <th>Bagian</th>
-                            <th style="width: 150px;">Aksi</th>
+                            <th style="width: 200px;">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $no = 1;
                         foreach ($user as $d) {
+                            // superadmin
                             if ($this->session->userdata('role') == 1) {
                         ?>
                                 <tr>
@@ -49,61 +51,73 @@
                                         <a href="<?= base_url('user/edit/') . $d->iduser ?>" class="btn btn-warning btn-circle ">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="<?= base_url('user/edit/') . $d->iduser ?>" class="btn btn-warning btn-circle ">
+                                        <button class="btn btn-info oke" data-toggle="modal" data-target="#menumodal" data-id="<?= $d->iduser; ?>">
                                             <i class="fas fa-key"></i>
-                                        </a>
+                                        </button>
                                         <a href="<?= base_url('user/profile/') . $d->iduser ?>" class="btn btn-primary btn-circle ">
                                             <i class="fas fa-user"></i>
+                                        </a>
+                                        <a href="<?= base_url('user/hapus/') . $d->iduser ?>" class="btn btn-danger btn-circle ">
+                                            <i class="fas fa-trash"></i>
                                         </a>
                                     </td>
                                 </tr>
                                 <?php
                             }
+                            // admin OPD
                             if ($this->session->userdata('opd') == $d->idopd) {
                                 if ($this->session->userdata('role') == 2) {
-                                    if ($d->idrole == 3 || $d->idrole == 4 || $d->idrole == 5) {
+                                    if ($d->idrole == 3 || $d->idrole == 4) {
                                 ?>
                                         <tr>
                                             <td scope="row"><?= $no++; ?></td>
                                             <td><?= $d->namalengkap; ?></td>
                                             <td><?= $d->email; ?></td>
                                             <td><?= $d->opd; ?></td>
+                                            <td><?= $d->nama_bagian; ?></td>
                                             <td style="width: 200px;">
                                                 <a href="<?= base_url('user/edit/') . $d->iduser ?>" class="btn btn-warning btn-circle ">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <button class="btn btn-info tombol-ubah" data-toggle="modal" data-target="#menumodal" data-id="<?= $d->iduser; ?>">
+                                                <button class="btn btn-info oke" data-toggle="modal" data-target="#menumodal" data-id="<?= $d->iduser; ?>">
                                                     <i class="fas fa-key"></i>
                                                 </button>
                                                 <a href="<?= base_url('user/profile/') . $d->iduser ?>" class="btn btn-primary btn-circle ">
                                                     <i class="fas fa-user"></i>
                                                 </a>
+                                                <a href="<?= base_url('user/hapus/') . $d->iduser ?>" class="btn btn-danger btn-circle ">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
                                             </td>
                                         </tr>
-                                    <?php
+                                        <?php
+
                                     }
                                 } elseif ($this->session->userdata('role') == 3) {
-                                    if ($d->idrole == 4 || $d->idrole == 5) {
-                                    ?>
-                                        <tr>
-                                            <td scope="row"><?= $no++; ?></td>
-                                            <td><?= $d->namalengkap; ?></td>
-                                            <td><?= $d->email; ?></td>
-                                            <td><?= $d->opd; ?></td>
-                                            <td>
-                                                <a href="<?= base_url('user/edit/') . $d->iduser ?>" class="btn btn-warning btn-circle ">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="<?= base_url('user/profile/') . $d->iduser ?>" class="btn btn-primary btn-circle ">
-                                                    <i class="fas fa-user"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    <?php
+                                    if ($this->session->userdata('bagian') == $d->id_bagian) {
+                                        if ($d->idrole == 4) {
+                                        ?>
+                                            <tr>
+                                                <td scope="row"><?= $no++; ?></td>
+                                                <td><?= $d->namalengkap; ?></td>
+                                                <td><?= $d->email; ?></td>
+                                                <td><?= $d->opd; ?></td>
+                                                <td><?= $d->nama_bagian; ?></td>
+                                                <td>
+                                                    <a href="<?= base_url('user/edit/') . $d->iduser ?>" class="btn btn-warning btn-circle ">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <a href="<?= base_url('user/profile/') . $d->iduser ?>" class="btn btn-primary btn-circle ">
+                                                        <i class="fas fa-user"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        }
                                     }
                                 } elseif ($this->session->userdata('role') == 4) {
                                     if ($d->idrole == 5) {
-                                    ?>
+                                        ?>
                                         <tr>
                                             <td scope="row"><?= $no++; ?></td>
                                             <td><?= $d->namalengkap; ?></td>
@@ -171,9 +185,9 @@
 </div>
 <script>
     $(function() {
-        $('.tombol-ubah').on('click', function() {
+        $('.oke').on('click', function() {
             const id = $(this).data('id')
-            // console.log(id)
+            console.log(id)
             $.ajax({
                 url: `<?= site_url('user/getubah') ?>`,
                 data: {

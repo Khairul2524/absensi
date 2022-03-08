@@ -1,10 +1,12 @@
 <?php
+// admin atasan
 
-if ($this->session->userdata('role') == 5) {
+if ($this->session->userdata('role') == 4) {
     $hide = "hidden";
 } else {
     $hide = "";
-} ?>
+}
+?>
 
 <body id="page-top">
     <div id="wrapper">
@@ -27,41 +29,43 @@ if ($this->session->userdata('role') == 5) {
                     <i class="fas fa-fw fa-user-tie"></i>
                     <span>Profile</span></a>
             </li>
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading" <?= $hide ?>>
-                Admin
-            </div>
-            <li class="nav-item" <?= $hide ?>>
-                <a class="nav-link" href="<?= base_url('opd') ?>">
-                    <i class="fas fa-fw fa-building"></i>
-                    <span>OPD</span>
-                </a>
-            </li>
-            <li class="nav-item" <?= $hide ?>>
-                <a class="nav-link" href="<?= base_url('bagian') ?>">
-                    <i class="fas fa-fw fa-landmark"></i>
-                    <span>Bagian</span>
-                </a>
-            </li>
-            <hr class="sidebar-divider" <?= $hide ?>>
             <?php
-            if ($this->session->userdata('opd')) {  ?>
+            if ($this->session->userdata('role') == 1) {
+            ?>
+                <hr class="sidebar-divider">
                 <div class="sidebar-heading">
-                    Absensi
+                    Admin
                 </div>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('absen_masuk') ?>">
-                        <i class="fas fa-fw fa-user"></i>
-                        <span>Absen Masuk</span>
+                    <a class="nav-link" href="<?= base_url('opd') ?>">
+                        <i class="fas fa-fw fa-building"></i>
+                        <span>OPD</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('absen_pulang') ?>">
-                        <i class="fas fa-fw fa-user"></i>
-                        <span>Absen Pulang</span>
+                    <a class="nav-link" href="<?= base_url('bagian') ?>">
+                        <i class="fas fa-fw fa-landmark"></i>
+                        <span>Bagian</span>
                     </a>
                 </li>
             <?php } ?>
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Absensi
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('absen_masuk') ?>">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Absen Masuk</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('absen_pulang') ?>">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Absen Pulang</span>
+                </a>
+            </li>
+
             <hr class="sidebar-divider" <?= $hide; ?>>
             <div class="sidebar-heading" <?= $hide; ?>>
                 Rekapan
@@ -84,16 +88,20 @@ if ($this->session->userdata('role') == 5) {
                     <span>Laporan Tahunan</span>
                 </a>
             </li>
-            <hr class="sidebar-divider" <?= $hide; ?>>
-            <div class="sidebar-heading" <?= $hide; ?>>
-                Setting
-            </div>
-            <li class="nav-item" <?= $hide; ?>>
-                <a class="nav-link" href="<?= base_url('hari_libur') ?>">
-                    <i class="fas fa-fw fa-user-clock"></i>
-                    <span>Hari Libur</span>
-                </a>
-            </li>
+            <?php
+            if ($this->session->userdata('role') == 1 || $this->session->userdata('role') == 2) {
+            ?>
+                <hr class="sidebar-divider" <?= $hide; ?>>
+                <div class="sidebar-heading" <?= $hide; ?>>
+                    Setting
+                </div>
+                <li class="nav-item" <?= $hide; ?>>
+                    <a class="nav-link" href="<?= base_url('hari_libur') ?>">
+                        <i class="fas fa-fw fa-user-clock"></i>
+                        <span>Hari Libur</span>
+                    </a>
+                </li>
+            <?php } ?>
             <hr class="sidebar-divider" <?= $hide; ?>>
             <div class="sidebar-heading" <?= $hide; ?>>
                 Manajemen User
@@ -104,13 +112,16 @@ if ($this->session->userdata('role') == 5) {
                     <span>Users</span>
                 </a>
             </li>
-
-            <li class="nav-item" <?= $hide; ?>>
-                <a class="nav-link" href="<?= base_url('role') ?>">
-                    <i class="fas fa-fw fa-users-cog"></i>
-                    <span>Role</span>
-                </a>
-            </li>
+            <?php
+            if ($this->session->userdata('role') == 1) {
+            ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url('role') ?>">
+                        <i class="fas fa-fw fa-users-cog"></i>
+                        <span>Role</span>
+                    </a>
+                </li>
+            <?php } ?>
 
             <hr class="sidebar-divider" <?= $hide; ?>>
             <li class="nav-item">

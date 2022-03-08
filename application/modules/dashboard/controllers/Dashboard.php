@@ -30,7 +30,7 @@ class Dashboard extends MY_Controller
 			$data = array(
 				'namalengkap' => $nama,
 				'email' => $email,
-				'role' => 5
+				'role' => 4
 			);
 			$this->session->set_userdata($data);
 			redirect('dashboard/cek');
@@ -39,7 +39,7 @@ class Dashboard extends MY_Controller
 	public function cek()
 	{
 		$email = $this->session->userdata('email');
-		$cek = $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->join('bagian', 'bagian.id_bagian=user.id_bagian')->where(['email' => $email])->get()->row();
+		$cek = $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->join('role', 'role.idrole=user.idrole')->join('bagian', 'bagian.id_bagian=user.id_bagian')->where(['email' => $email])->get()->row();
 		// var_dump($cek);
 		// die;
 		if (!$cek) {
@@ -59,6 +59,7 @@ class Dashboard extends MY_Controller
 			$datas = array(
 				'role' =>  $cek->idrole,
 				'opd' => $cek->idopd,
+				'foto' => $cek->foto,
 			);
 			$this->session->set_userdata($datas);
 			$data = array(
@@ -73,6 +74,21 @@ class Dashboard extends MY_Controller
 	}
 	public function simpan()
 	{
+		$foto = $_FILES['foto'];
+		// var_dump($foto);
+		// die;
+		if ($foto) {
+			$config['upload_path']      = './assets/backand/img/profile/';
+			$config['allowed_types']    = 'jpg|png|jpeg|gif';
+			$config['overwrite']        = 'true';
+			$this->load->library('upload', $config);
+			if (!$this->upload->do_upload('foto')) {
+				$this->session->set_flashdata('gagal', 'Foto Gagal Diupload');
+				redirect('user/tambah');
+			} else {
+				$foto = $this->upload->data('file_name');
+			}
+		}
 		$data = array(
 			'email' => $this->input->post('email'),
 			'password' => password_hash(htmlspecialchars('-'), PASSWORD_DEFAULT),
@@ -82,13 +98,18 @@ class Dashboard extends MY_Controller
 			'no'	=> htmlspecialchars($this->input->post('no')),
 			'idopd'	=> htmlspecialchars($this->input->post('opd')),
 			'statustenaga'	=> htmlspecialchars($this->input->post('st')),
+			'id_bagian' => htmlspecialchars($this->input->post('bagian')),
+			'foto' =>  $foto,
 			'aktif'	=> 1,
-			'idrole' => 5,
+			'idrole' => 4,
 			'created_at' => time()
 		);
+		// print_r($data);
+		// die;
 		$cek = $this->db->get_where('user', ['email' => $this->input->post('email')])->row();
 		if (!$cek) {
 			$this->db->insert('user', $data);
+			$this->session->set_flashdata('berhasil', 'User Berhasil Ditambah');
 			redirect('dashboard/cek');
 		}
 	}

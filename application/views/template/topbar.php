@@ -27,7 +27,15 @@
                 <div class="topbar-divider d-none d-sm-block"></div>
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="img-profile rounded-circle" src="<?= base_url('assets/backand/img/') ?>kahfi.jpg" style="max-width: 60px">
+                        <?php
+                        if ($this->session->userdata('foto')) {
+                        ?>
+                            <img class="img-profile rounded-circle" src="<?= base_url('assets/backand/img/profile/') ?><?= $this->session->userdata('foto') ?>" style="max-width: 60px">
+                        <?php } else {
+                        ?>
+                            <img class="img-profile rounded-circle" src="<?= base_url('assets/backand/img/default.png') ?>" style="max-width: 60px">
+                        <?php
+                        } ?>
                         <span class="ml-2 d-none d-lg-inline text-white small"><?= $this->session->userdata('namalengkap') ?></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
