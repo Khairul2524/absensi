@@ -86,11 +86,11 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
-        var table = $('#example').DataTable({
+        var table = $('#dataTable').DataTable({
             responsive: true
         });
 
-        new $.fn.dataTable.FixedHeader(table);
+        new $.fn.DataTable.FixedHeader(table);
     });
 </script>
 

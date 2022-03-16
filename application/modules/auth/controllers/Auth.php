@@ -66,8 +66,9 @@ class Auth extends MY_Controller
 				$data = array(
 					'namalengkap' => $cekuser['namalengkap'],
 					'email' => $cekuser['email'],
-					'role'		=> $cekuser['idrole'],
-					'opd'		=> $cekuser['idopd']
+					'role'	=> $cekuser['idrole'],
+					'opd'	=> $cekuser['idopd'],
+					'iduser' => $cekuser['iduser']
 				);
 				// var_dump($data);
 				// die;
@@ -89,6 +90,7 @@ class Auth extends MY_Controller
 		$this->session->unset_userdata('namalengkap');
 		$this->session->unset_userdata('role');
 		$this->session->unset_userdata('opd');
+		$this->session->unset_userdata('iduser');
 
 		redirect('auth');
 	}

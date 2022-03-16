@@ -59,7 +59,10 @@ class Dashboard extends MY_Controller
 			$datas = array(
 				'role' =>  $cek->idrole,
 				'opd' => $cek->idopd,
+				'iduser' => $cek->iduser,
 			);
+			// var_dump($datas);
+			// die;
 			$this->session->set_userdata($datas);
 			$data = array(
 				'user' => $cek

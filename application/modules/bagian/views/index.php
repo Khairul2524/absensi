@@ -21,7 +21,7 @@
 				<span class="text">Tambah</span>
 			</a>
 			<div class="table-responsive">
-				<table class="display table-striped table-bordered table" id="dataTableHover" width="100%" cellspacing="0">
+				<table class="display table-striped table-bordered table" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
 							<th>NO</th>

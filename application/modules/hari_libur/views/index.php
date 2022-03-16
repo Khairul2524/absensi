@@ -22,7 +22,7 @@
 				<span class="text">Tambah</span>
 			</a>
 			<div class="table-responsive">
-				<table class="table align-items-center table-flush table-hover">
+				<table class="table align-items-center table-flush table-hover" id="dataTable">
 					<thead>
 						<tr>
 							<th>NO</th>
