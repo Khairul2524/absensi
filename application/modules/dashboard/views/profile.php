@@ -8,7 +8,7 @@
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-4 col-md-6 mb-4">
             <div class="card  " style="width: 22rem;">
-                <img src="<?= base_url('assets/backand/img/') . $user->foto ?>" class="card-img-top" alt="...">
+                <img src="<?= base_url('assets/backand/img/profile/') . $user->foto ?>" class="card-img-top" alt="...">
             </div>
         </div>
 

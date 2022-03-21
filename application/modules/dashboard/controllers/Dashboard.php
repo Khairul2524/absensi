@@ -60,6 +60,8 @@ class Dashboard extends MY_Controller
 				'role' =>  $cek->idrole,
 				'opd' => $cek->idopd,
 				'iduser' => $cek->iduser,
+				'idbagian' => $cek->id_bagian,
+				'foto' => $cek->foto,
 			);
 			// var_dump($datas);
 			// die;

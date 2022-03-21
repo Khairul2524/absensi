@@ -12,6 +12,7 @@ class Absensi extends MX_Controller
 			redirect('auth');
 		}
 		$this->load->model('Absensi_model', 'absensi');
+		$this->load->model('All_model', 'all');
 	}
 	public function index()
 	{
@@ -56,34 +57,81 @@ class Absensi extends MX_Controller
 								'id_user' => $this->session->userdata('iduser'),
 								'tgl'	=> $tgl,
 								'jam_masuk' => $jam_masuk,
-								'jam_pulang' => 0,
+								'jam_pulang' => '00:00',
 								'lat_masuk' => $latitude_sekarang,
 								'long_masuk' => $longitude_sekarang,
 								'lat_pulang' => 0,
 								'long_pulang' => 0
 							);
 							$this->absensi->insert($datak);
-							$this->session->set_flashdata('berhasil', 'Absen');
+							echo json_encode('Anda Masuk Jam ' . $jam_masuk);
 						}
 					}
 				}
 			}
 			// die;
 		}
-		// $harilibur = 'Thu';
+	}
+	public function absen_pulang()
+	{
+		$tgl = date('Y-m-d');
+		$cek_absen = $this->db->get_where('absensi', ['id_user' => $this->session->userdata('iduser'), 'tgl' => $tgl])->row();
 
-		// if ($hari == 'Sun' || $hari == 'Sat' || $hari == $harilibur) {
-		// 	echo "Hari Libur";
-		// } else {
-		// 	echo "Hari Ini Masuk";
-		// }
+		if ($cek_absen) {
+			if ($cek_absen->jam_pulang == '00:00') {
+				// titik koordinat tempat absen
+				$latitude = -8.6904758;
+				$longtitude = 116.249471;
+				// ambil titik koordinat
+				$latitude_sekarang = $this->input->post('lat');
+				$longitude_sekarang = $this->input->post('long');
+				if ($latitude_sekarang && $longitude_sekarang) {
+					// echo json_decode($latitude_sekarang);
+					// die;
+					$theta = $longtitude - $longitude_sekarang;
+					$miles = (sin(deg2rad($latitude)) * sin(deg2rad($latitude_sekarang))) + (cos(deg2rad($latitude)) * cos(deg2rad(
+						$latitude_sekarang
+					)) * cos(deg2rad($theta)));
+					$miles = acos($miles);
+					$miles = rad2deg($miles);
+					$meter = $miles * 1609.34;
+					$jam_pulang = date('H:i', time());
+					if ($meter <= 10) {
+						$dataks = array(
+							'id_absensi' => $cek_absen->id_absensi,
+							'id_user' => $this->session->userdata('iduser'),
+							'tgl'	=> $tgl,
+							'jam_pulang' => $jam_pulang,
+							'lat_pulang' => $latitude_sekarang,
+							'long_pulang' => $longitude_sekarang
+						);
+						$this->absensi->update($cek_absen->id_absensi, $dataks);
+						echo json_encode('Anda Pulang Jam ' . $jam_pulang);
+					}
+				}
+			}
+		}
 	}
 	public function getdata()
 	{
-		foreach ($this->absensi->get() as $data) {
+		foreach ($this->absensi->getall() as $data) {
 			$datas[] = $data;
 		}
 		echo json_encode(array("result" => $datas));
+	}
+	public function detail($id)
+	{
+		$data = array(
+			'user' => $this->all->getiduser($id),
+			'absen' => $this->all->getabsenuser($id)
+		);
+		// var_dump($data['absen']);
+		// die;
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('template/topbar');
+		$this->load->view('detail', $data);
+		$this->load->view('template/footer');
 	}
 	public function rest()
 	{
@@ -92,10 +140,8 @@ class Absensi extends MX_Controller
 		$hari = date('D', $hari_ini);
 		$tgl = date('Y-m-d');
 		echo $this->session->userdata('iduser');
-		die;
 		$cek_absen = $this->db->get_where('absensi', ['id_user' => $this->session->userdata('iduser'), 'tgl' => $tgl])->row();
 		var_dump($cek_absen);
-		die;
 	}
 	public function lokasi()
 	{

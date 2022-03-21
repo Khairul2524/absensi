@@ -28,7 +28,6 @@
 							<th style="width: 150px;">Aksi</th>
 							<th>Organisasi Perangkat Daerah</th>
 							<th>Bagian Organisasi Perangkat Daerah</th>
-
 						</tr>
 					</thead>
 					<tbody>
@@ -130,7 +129,7 @@
 			$('.modal-footer button[type= submit] span[class="text"]').html('Ubah')
 			$('.modal-dialog form').attr('action', `<?= site_url('bagian/ubah') ?>`)
 			const id = $(this).data('id')
-			console.log(id)
+			// console.log(id)
 			$.ajax({
 				url: `<?= site_url('bagian/getubah') ?>`,
 				data: {

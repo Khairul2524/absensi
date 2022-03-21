@@ -111,4 +111,9 @@ class All_model extends CI_Model
     {
         return $this->db->get_where('bagian', ['id_opd' => $id])->result();
     }
+    // query absen
+    public function getabsenuser($id)
+    {
+        return $this->db->get_where('absensi', ['id_user' => $id])->result();
+    }
 }

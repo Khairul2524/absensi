@@ -8,6 +8,10 @@ class Absensi_model extends CI_Model
     {
         return  $this->db->from($this->tabel)->order_by($this->id, 'DESC')->get()->result();
     }
+    public function getall()
+    {
+        return  $this->db->from($this->tabel)->join('user', 'user.iduser=absensi.id_user')->order_by($this->id, 'DESC')->get()->result();
+    }
     public function insert($data)
     {
         $this->db->insert($this->tabel, $data);
@@ -20,10 +24,5 @@ class Absensi_model extends CI_Model
     {
         $this->db->where($this->id, $id);
         $this->db->update($this->tabel, $data);
-    }
-    public function delete($id)
-    {
-        $this->db->where($this->id, $id);
-        $this->db->delete($this->tabel);
     }
 }
