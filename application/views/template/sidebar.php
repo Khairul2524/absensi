@@ -1,6 +1,6 @@
 <?php
 
-if ($this->session->userdata('role') == 5) {
+if ($this->session->userdata('role') == 4) {
     $hide = "hidden";
 } else {
     $hide = "";

@@ -30,7 +30,7 @@ class Dashboard extends MY_Controller
 			$data = array(
 				'namalengkap' => $nama,
 				'email' => $email,
-				'role' => 5
+				'role' => 4
 			);
 			$this->session->set_userdata($data);
 			redirect('dashboard/cek');
@@ -100,10 +100,7 @@ class Dashboard extends MY_Controller
 
 	public function dash()
 	{
-
 		$absen_masuk = $this->all->get_all_absen_masuk();
-
-
 		// var_dump($absen_masuk);
 		// die;
 		$time = time();
