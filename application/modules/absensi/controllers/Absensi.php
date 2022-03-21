@@ -61,22 +61,55 @@ class Absensi extends MX_Controller
 								'lat_masuk' => $latitude_sekarang,
 								'long_masuk' => $longitude_sekarang,
 								'lat_pulang' => 0,
-								'long_pulang' => 0
+								'long_pulang' => 0,
+								'status' => 1
 							);
 							$this->absensi->insert($datak);
-							echo json_encode('Anda Masuk Jam ' . $jam_masuk);
+							$data = array(
+								'status' => 1,
+								'keterangan' => 'Anda Masuk Jam ' . $jam_masuk
+							);
+							echo json_encode($data);
+						} else {
+							$data = array(
+								'status' => 0,
+								'keterangan' => 'Jarak Anda Lebih dari 10 Meter'
+							);
+							echo json_encode($data);
 						}
+					} else {
+						$data = array(
+							'status' => 0,
+							'keterangan' => 'Lokasi Anda Tidak Terdeteksi'
+						);
+						echo json_encode($data);
 					}
+				} else {
+					$data = array(
+						'status' => 0,
+						'keterangan' => 'Anda Sudah Absen'
+					);
+					echo json_encode($data);
 				}
+			} else {
+				$data = array(
+					'status' => 0,
+					'keterangan' => 'Hari Ini Libur'
+				);
+				echo json_encode($data);
 			}
-			// die;
+		} else {
+			$data = array(
+				'status' => 0,
+				'keterangan' => 'Hari Ini Libur'
+			);
+			echo json_encode($data);
 		}
 	}
 	public function absen_pulang()
 	{
 		$tgl = date('Y-m-d');
 		$cek_absen = $this->db->get_where('absensi', ['id_user' => $this->session->userdata('iduser'), 'tgl' => $tgl])->row();
-
 		if ($cek_absen) {
 			if ($cek_absen->jam_pulang == '00:00') {
 				// titik koordinat tempat absen
@@ -106,10 +139,100 @@ class Absensi extends MX_Controller
 							'long_pulang' => $longitude_sekarang
 						);
 						$this->absensi->update($cek_absen->id_absensi, $dataks);
-						echo json_encode('Anda Pulang Jam ' . $jam_pulang);
+						$data = array(
+							'status' => 1,
+							'keterangan' => 'Anda Pulang Jam ' . $jam_pulang
+						);
+						echo json_encode($data);
+					} else {
+						$data = array(
+							'status' => 0,
+							'keterangan' => 'Jarak Anda Lebih dari 10 Meter'
+						);
+						echo json_encode($data);
 					}
+				} else {
+					$data = array(
+						'status' => 0,
+						'keterangan' => 'Lokasi Anda Tidak Terdeteksi'
+					);
+					echo json_encode($data);
 				}
+			} else {
+				$data = array(
+					'status' => 0,
+					'keterangan' => 'Anda Sudah Absen Pulang'
+				);
+				echo json_encode($data);
 			}
+		} else {
+			$data = array(
+				'status' => 0,
+				'keterangan' => 'Anda Belum Absen Masuk'
+			);
+			echo json_encode($data);
+		}
+	}
+	public function absen_izin()
+	{
+		$hari_ini = time();
+		$hari = date('D', $hari_ini);
+		$tgl = date('Y-m-d');
+		$cek_hari_libur = $this->db->get_where('hari_libur', ['tanggal' => $tgl])->row();
+		if (!$cek_hari_libur) {
+			if ($hari != 'Sun' || $hari != 'Sat') {
+				$cek_absen = $this->db->get_where('absensi', ['id_user' => $this->session->userdata('iduser'), 'tgl' => $tgl])->row();
+				if (!$cek_absen) {
+					// ambil titik koordinat
+					$latitude_sekarang = $this->input->post('lat');
+					$longitude_sekarang = $this->input->post('long');
+					if ($latitude_sekarang && $longitude_sekarang) {
+						$jam_izin = date('H:i', time());
+						$datak = array(
+							'id_user' => $this->session->userdata('iduser'),
+							'tgl'	=> $tgl,
+							'jam_masuk' => $jam_izin,
+							'jam_pulang' => $jam_izin,
+							'lat_masuk' => $latitude_sekarang,
+							'long_masuk' => $longitude_sekarang,
+							'lat_pulang' => $latitude_sekarang,
+							'long_pulang' => $longitude_sekarang,
+							'status' => 0
+						);
+						$this->absensi->insert($datak);
+						$data = array(
+							'status' => 1,
+							'keterangan' => 'Anda Absen Izin'
+						);
+						echo json_encode($data);
+					} else {
+						$data = array(
+							'status' => 0,
+							'keterangan' => 'Lokasi Anda Tidak Terdeteksi'
+						);
+						echo json_encode($data);
+					}
+				} else {
+					$data = array(
+						'status' => 0,
+						'keterangan' => 'Anda Sudah Absen'
+					);
+					echo json_encode($data);
+					// echo json_encode('Anda Sudah Absen');
+				}
+			} else {
+				$data = array(
+					'status' => 0,
+					'keterangan' => 'Hari Ini Libur'
+				);
+				echo json_encode($data);
+			}
+		} else {
+			$data = array(
+				'status' => 0,
+				'keterangan' => 'Hari Ini Libur'
+			);
+			echo json_encode($data);
 		}
 	}
 	public function getdata()

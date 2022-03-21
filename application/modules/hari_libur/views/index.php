@@ -28,7 +28,7 @@
 							<th>NO</th>
 							<th>Tanggal</th>
 							<th>Keterangan</th>
-							<th style="width: 150px;">Aksi</th>
+							<th>Aksi</th>
 						</tr>
 					</thead>
 					<tbody>

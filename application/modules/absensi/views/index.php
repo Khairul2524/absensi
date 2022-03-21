@@ -12,18 +12,30 @@
 			<h6 class="m-0 font-weight-bold text-primary">Data <?= $judul; ?></h6>
 		</div>
 		<div class="card-body">
-			<button class="btn btn-success btn-icon-split mb-2 absen-masuk">
-				<span class="icon text-white-50">
-					<i class="fas fa-plus-square"></i>
-				</span>
-				<span class="text">Absen Masuk</span>
-			</button>
-			<button class="btn btn-warning btn-icon-split mb-2 absen-pulang">
-				<span class="icon text-white-50">
-					<i class="fas fa-plus-square"></i>
-				</span>
-				<span class="text">Absen Pulang</span>
-			</button>
+			<?php
+			if ($this->session->userdata('role') == 4) {
+			?>
+				<button class="btn btn-success btn-icon-split mb-2 absen-masuk">
+					<span class="icon text-white-50">
+						<i class="fas fa-plus-square"></i>
+					</span>
+					<span class="text">Absen Masuk</span>
+				</button>
+				<button class="btn btn-warning btn-icon-split mb-2 absen-pulang">
+					<span class="icon text-white-50">
+						<i class="fas fa-plus-square"></i>
+					</span>
+					<span class="text">Absen Pulang</span>
+				</button>
+				<button class="btn btn-primary btn-icon-split mb-2 absen-izin">
+					<span class="icon text-white-50">
+						<i class="fas fa-plus-square"></i>
+					</span>
+					<span class="text">Absen Izin</span>
+				</button>
+			<?php
+			}
+			?>
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
@@ -69,11 +81,20 @@
 					method: 'post',
 					dataType: 'json',
 					success: function(data) {
-						Swal.fire(
-							data,
-							'',
-							'success'
-						)
+						if (data.status == 0) {
+							// console.log('oke')
+							Swal.fire(
+								data.keterangan,
+								'',
+								'info'
+							)
+						} else {
+							Swal.fire(
+								data.keterangan,
+								'',
+								'success'
+							)
+						}
 					}
 				})
 			}
@@ -99,11 +120,58 @@
 					method: 'post',
 					dataType: 'json',
 					success: function(data) {
-						Swal.fire(
-							data,
-							'',
-							'success'
-						)
+						if (data.status == 0) {
+							// console.log('oke')
+							Swal.fire(
+								data.keterangan,
+								'',
+								'info'
+							)
+						} else {
+							Swal.fire(
+								data.keterangan,
+								'',
+								'success'
+							)
+						}
+					}
+				})
+			}
+		})
+		// Absen Izin
+		$('.absen-izin').on('click', function() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(showPosition);
+			} else {
+				$('.demo') = "Geolocation is not supported by this browser.";
+			}
+
+			function showPosition(position) {
+				const long = position.coords.longitude
+				const lat = position.coords.latitude
+				$.ajax({
+					url: `<?= site_url('absensi/absen_izin') ?>`,
+					data: {
+						long: long,
+						lat: lat
+					},
+					method: 'post',
+					dataType: 'json',
+					success: function(data) {
+						if (data.status == 0) {
+							// console.log('oke')
+							Swal.fire(
+								data.keterangan,
+								'',
+								'info'
+							)
+						} else {
+							Swal.fire(
+								data.keterangan,
+								'',
+								'success'
+							)
+						}
 					}
 				})
 			}
