@@ -67,14 +67,25 @@ class Dashboard extends MY_Controller
 			// die;
 			$this->session->set_userdata($datas);
 			$data = array(
-				'user' => $cek
+				'user' => $cek,
+				'hari_libur' => $this->db->get('hari_libur')->result()
 			);
 			$this->load->view('template/header');
 			$this->load->view('template/sidebar');
 			$this->load->view('template/topbar');
-			$this->load->view('profile', $data);
+			$this->load->view('dashboard_staf', $data);
 			$this->load->view('template/footer');
 		}
+	}
+	public function profile()
+	{
+		$email = $this->session->userdata('email');
+		$data = $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->join('bagian', 'bagian.id_bagian=user.id_bagian')->where(['email' => $email])->get()->row();
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('template/topbar');
+		$this->load->view('profile', $data);
+		$this->load->view('template/footer');
 	}
 	public function simpan()
 	{
