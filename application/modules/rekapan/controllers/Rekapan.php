@@ -12,16 +12,28 @@ class Rekapan extends MY_Controller
 	public function index()
 	{
 		$data = array(
-			'data' => $this->all->get_all_absen_masuk()
+			'data' => $this->all->getuser()
 		);
+		// var_dump($data['data']);
+		// die;
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
 		$this->load->view('template/topbar');
 		$this->load->view('index', $data);
 		$this->load->view('template/footer');
 	}
-	public function register()
+	public function detail($id)
 	{
-		$this->load->view('register');
+		$data = array(
+			'user' => $this->all->getiduser($id),
+			'absen' => $this->all->getabsenuser($id)
+		);
+		// var_dump($data['data']);
+		// die;
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('template/topbar');
+		$this->load->view('rekapan', $data);
+		$this->load->view('template/footer');
 	}
 }

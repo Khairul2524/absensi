@@ -99,7 +99,7 @@ class Dashboard extends MY_Controller
 			'idopd'	=> htmlspecialchars($this->input->post('opd')),
 			'statustenaga'	=> htmlspecialchars($this->input->post('st')),
 			'aktif'	=> 1,
-			'idrole' => 5,
+			'idrole' => 4,
 			'created_at' => time()
 		);
 		$cek = $this->db->get_where('user', ['email' => $this->input->post('email')])->row();

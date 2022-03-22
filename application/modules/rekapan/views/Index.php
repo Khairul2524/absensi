@@ -11,58 +11,31 @@
         <div class="col-lg-12">
             <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Rekapitulasi Absensi Staf Non ASN Dinas KOMINFO</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Rekap Absensi</h6>
                 </div>
                 <div class="table-responsive p-3">
                     <table class="display nowrap table-striped table-bordered table" id="example" width="100%">
                         <thead class="thead-light">
                             <tr>
                                 <th>No</th>
-                                <th>Nama</th>
-                                <th>NIP</th>
-                                <th>Jumlah Hari Kerja</th>
-                                <th>Hadir</th>
-                                <th>Tidak Hadir</th>
-                                <th>Izin</th>
-                                <th>Tepat Waktu</th>
-                                <th>Terlambat</th>
+                                <th>foto</th>
+                                <th>Nama Lengkap</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>NIP</th>
-                                <th>Jumlah Hari Kerja</th>
-                                <th>Hadir</th>
-                                <th>Tidak Hadir</th>
-                                <th>Izin</th>
-                                <th>Tepat Waktu</th>
-                                <th>Terlambat</th>
-                            </tr>
-                        </tfoot>
                         <tbody>
                             <?php
                             $no = 1;
-                            $jumlah_hadir = [];
                             foreach ($data as $d) {
-                                if ($d->idrole == 5) {
-                                    if ($this->session->userdata('opd') == $d->idopd) {
-                                        $jumlah_hadir[] = $d->jam_masuk;
+                                if ($d->idrole == 4) {
                             ?>
-                                        <tr>
-                                            <td><?= $no++; ?></td>
-                                            <td><?= $d->namalengkap; ?></td>
-                                            <td><?= $d->nip; ?></td>
-                                            <td><?= count($jumlah_hadir); ?></td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
+                                    <tr>
+                                        <td><?= $no++; ?></td>
+                                        <td><img src="<?= base_url('assets/backand/img/profile/') . $d->foto ?>" alt="" srcset="" width="70px"></td>
+                                        <td><?= $d->namalengkap; ?></td>
+                                        <td><a href="<?= base_url('rekapan/detail/') . $d->iduser ?>" class="btn btn-sm btn-primary">Detail</a></td>
+                                    </tr>
                             <?php }
-                                }
                             } ?>
                         </tbody>
                     </table>

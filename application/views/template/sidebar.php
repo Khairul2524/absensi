@@ -69,19 +69,7 @@ if ($this->session->userdata('role') == 4) {
             <li class="nav-item" <?= $hide; ?>>
                 <a class="nav-link" href="<?= base_url('rekapan') ?>">
                     <i class="fas fa-fw fa-user-clock"></i>
-                    <span>Laporan Mingguan</span>
-                </a>
-            </li>
-            <li class="nav-item" <?= $hide; ?>>
-                <a class="nav-link" href="<?= base_url('jam_kerja') ?>">
-                    <i class="fas fa-fw fa-user-clock"></i>
-                    <span>Laporan Bulanan</span>
-                </a>
-            </li>
-            <li class="nav-item" <?= $hide; ?>>
-                <a class="nav-link" href="<?= base_url('jam_kerja') ?>">
-                    <i class="fas fa-fw fa-user-clock"></i>
-                    <span>Laporan Tahunan</span>
+                    <span>Rekapitulasi</span>
                 </a>
             </li>
             <hr class="sidebar-divider" <?= $hide; ?>>

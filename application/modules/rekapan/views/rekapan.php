@@ -86,6 +86,7 @@
                     </div>
                 </div>
                 <div class="card-footer ">
+                    <a href="<?= base_url('rekapan') ?>" class="btn btn-sm btn-danger">Kembali</a>
                 </div>
             </div>
         </div>
