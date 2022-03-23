@@ -8,7 +8,7 @@ class Opd extends MX_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if (!$this->session->userdata('email')) {
+		if ($this->session->userdata('role') != 1) {
 			redirect('auth');
 		}
 		$this->load->model('opd_model', 'opd');

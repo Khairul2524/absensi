@@ -12,8 +12,13 @@
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-4 col-md-6 mb-4">
             <div class="card  " style="width: 22rem;">
-                <img src="<?= base_url('assets/backand/img/default.png') ?>" class="card-img-top" alt="..." </div>
-
+                <?php
+                if ($kode == 1) {
+                ?>
+                    <img src="<?= base_url('assets/backand/img/default.png') ?>" class="card-img-top" alt="...">
+                <?php } else { ?>
+                    <img src="<?= base_url('assets/backand/img/profile/') . $foto ?>" class="card-img-top" alt="...">
+                <?php } ?>
             </div>
         </div>
 
@@ -39,14 +44,16 @@
                                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Lengkap" required autocomplete="off" value="<?= $nama ?>">
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label for="nama" class="col-sm-3 col-form-label">Password</label>
-                            <div class="col-sm-9">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required autocomplete="off">
+                        <?php
+                        if ($kode == 1) {
+                        ?>
+                            <div class="form-group row">
+                                <label for="nama" class="col-sm-3 col-form-label">Password</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required autocomplete="off">
+                                </div>
                             </div>
-                        </div>
-
+                        <?php } ?>
                         <div class="form-group row">
                             <label for="nik" class="col-sm-3 col-form-label">NIK</label>
                             <div class="col-sm-9">
@@ -82,17 +89,21 @@
                                 </select>
                             </div>
                         </div>
+                        <!-- <?= $idopd; ?> -->
                         <div class="form-group row">
                             <label for="opd" class="col-sm-3 col-form-label">OPD</label>
                             <div class="col-sm-9">
                                 <select name="opd" id="opd" class="form-control" required>
                                     <option value="">Piih OPD</option>
                                     <?php
+
                                     foreach ($opd as $opd) {
-                                        if ($idopd != $opd->idopd) {
-                                    ?>
-                                            <option class="pilihan" value="<?= $opd->idopd; ?>"><?= $opd->opd; ?></option>
-                                    <?php }
+                                        if ($idopd == $opd->idopd) {
+                                            $select = "selected";
+                                        } else {
+                                            $select = "";
+                                        }
+                                        echo ' <option ' . $select . ' class="pilihan" value=" ' . $opd->idopd . '">' . $opd->opd . '</option>';
                                     } ?>
                                 </select>
                             </div>
@@ -119,12 +130,16 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="nip" class="col-sm-3 col-form-label">Foto</label>
-                            <div class="col-sm-9">
-                                <input type="file" class="form-control" id="foto" name="foto" placeholder="Foto" required autocomplete="off" value="<?= $foto ?>" accept="png,jpeg,jpg,gif">
+                        <?php
+                        if ($kode == 1) {
+                        ?>
+                            <div class="form-group row">
+                                <label for="nip" class="col-sm-3 col-form-label">Foto</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control" id="foto" name="foto" placeholder="Foto" required autocomplete="off" value="<?= $foto ?>" accept="png,jpeg,jpg,gif">
+                                </div>
                             </div>
-                        </div>
+                        <?php } ?>
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <button type="submit" class="btn btn-success btn-icon-split">

@@ -79,7 +79,7 @@ class All_model extends CI_Model
     }
     public function getiduser($id)
     {
-        return $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->where(['iduser' => $id])->get()->row();
+        return $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->join('bagian', 'bagian.id_bagian=user.id_bagian')->join('role', 'role.idrole=user.idrole')->where(['iduser' => $id])->get()->row();
     }
     public function getemailuser($email)
     {

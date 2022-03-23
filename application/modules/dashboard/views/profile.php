@@ -68,6 +68,11 @@
                                     }
                                     ?></td>
                             </tr>
+                            <tr>
+                                <td>Role</td>
+                                <td>:</td>
+                                <td><?= $user->role ?></td>
+                            </tr>
                         </table>
                     </div>
                 </div>

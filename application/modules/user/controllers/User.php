@@ -6,6 +6,9 @@ class User extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		if ($this->session->userdata('role') == 4 || $this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
 		$this->load->model('All_model', 'all');
 		$this->load->model('User_model', 'user');
 	}
@@ -84,7 +87,7 @@ class User extends MY_Controller
 			'id_bagian'	=> htmlspecialchars($this->input->post('bagian')),
 			'statustenaga'	=> htmlspecialchars($this->input->post('st')),
 			'aktif'	=> 1,
-			'idrole' => 2,
+			'idrole' => htmlspecialchars($this->input->post('role')),
 			'foto' => $foto,
 			'created_at' => time()
 		);
@@ -104,6 +107,7 @@ class User extends MY_Controller
 		// var_dump($user);
 		// die;
 		$data = array(
+			'id'			=> $id,
 			'kode'			=> 0,
 			'opd' 			=> $this->all->getopd(),
 			'role' 			=> $this->all->getrole(),
@@ -116,6 +120,7 @@ class User extends MY_Controller
 			'idopd'			=> set_value('idopd', $user->idopd),
 			'bagian'		=> set_value('idopd', $user->id_bagian),
 			'statustenaga'	=> set_value('statustenaga', $user->statustenaga),
+			'foto'	=> set_value('foto', $user->foto),
 		);
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
@@ -141,11 +146,11 @@ class User extends MY_Controller
 			'idopd'	=> htmlspecialchars($this->input->post('opd')),
 			'statustenaga'	=> htmlspecialchars($this->input->post('st')),
 			'aktif'	=> 1,
-			'idrole' => 5,
+			'idrole' => 4,
 			'created_at' => time()
 		);
-		print_r($data);
-		die;
+		// print_r($data);
+		// die;
 		$this->user->update($id, $data);
 		redirect('user');
 	}
@@ -167,11 +172,20 @@ class User extends MY_Controller
 		$data = array(
 			'user' => $this->all->getiduser($id),
 		);
-
+		// var_dump($data['user']);
+		// die;
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
 		$this->load->view('template/topbar');
 		$this->load->view('profile', $data);
 		$this->load->view('template/footer');
+	}
+	public function hapus($id)
+	{
+		// var_dump($id);
+		// die;
+		$this->user->delete($id);
+		$this->session->set_flashdata('berhasil', 'User Berhasil Dihapus!');
+		redirect('user');
 	}
 }
