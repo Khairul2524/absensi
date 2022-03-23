@@ -60,18 +60,11 @@ if ($this->session->userdata('role') == 4) {
                 Absensi
             </div>
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('absen_masuk') ?>">
+                <a class="nav-link" href="<?= base_url('absensi') ?>">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Absen Masuk</span>
+                    <span>Absensi</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('absen_pulang') ?>">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Absen Pulang</span>
-                </a>
-            </li>
-
             <hr class="sidebar-divider" <?= $hide; ?>>
             <div class="sidebar-heading" <?= $hide; ?>>
                 Rekapan
