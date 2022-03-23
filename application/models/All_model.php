@@ -102,10 +102,10 @@ class All_model extends CI_Model
     }
     // Akhir Query User
 
-    public function get_all_absen_masuk()
-    {
-        return $this->db->from('absen_masuk')->join('user', 'user.iduser=absen_masuk.iduser')->join('jam_kerja', 'jam_kerja.id_jk=absen_masuk.id_jam_kerja')->get()->result();
-    }
+    // public function get_all_absen_masuk()
+    // {
+    //     return $this->db->from('absen_masuk')->join('user', 'user.iduser=absen_masuk.iduser')->join('jam_kerja', 'jam_kerja.id_jk=absen_masuk.id_jam_kerja')->get()->result();
+    // }
     // query Bagian
     public function getidbagian($id)
     {

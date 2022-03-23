@@ -131,42 +131,24 @@ class Dashboard extends MY_Controller
 
 	public function dash()
 	{
-		$absen_masuk = $this->all->get_all_absen_masuk();
-		// var_dump($absen_masuk);
-		// die;
-		$time = time();
-		$tanggal = date('Y-m-d', $time);
-		// echo $tanggal;
-		// die;
-		$absen = [];
-		$tepat = [];
-		$telat = [];
-		$izin = [];
-		foreach ($absen_masuk as $am) {
-			if ($tanggal == $am->tanggal) {
-				$absen[] = $am->absen_masuk;
-				if ($am->status_masuk == 1) {
-					$tepat[] = $am->absen_masuk;
-				} elseif ($am->status_masuk == 2) {
-					$telat[] = $am->absen_masuk;
-				} else {
-					$izin[] = $am->absen_masuk;
-				}
+		$user = $this->all->getuser();
+		var_dump($user);
+		die;
+		$tgl = date('Y-m-d');
+		// echo $tgl;
+		$absensi = $this->all->getabsensi();
+		foreach ($absensi as $absen) {
+			if ($absen->tgl == $tgl) {
+				$coba[] = $absen->id_absensi;
 			}
 		}
-
-		// var_dump($tepat);
-		// var_dump($telat);
-
+		// echo count($coba);
 		// die;
-
 		$data = array(
-			'jumlah_absen' => count($absen),
-			'jumlah_tepat' => count($tepat),
-			'jumlah_telat' => count($telat),
-			'jumlah_izin' => count($izin),
+			'masuk' => count($coba)
 		);
-
+		// var_dump($data['absensi']);
+		// die;
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
 		$this->load->view('template/topbar');

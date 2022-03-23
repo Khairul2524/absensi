@@ -37,15 +37,10 @@ if ($this->session->userdata('role') == 4) {
                     Admin
                 </div>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('absensi') ?>">
-                        <i class="fas fa-fw fa-user"></i>
-                        <span>Absen</span>
+                    <a class="nav-link" href="<?= base_url('opd') ?>">
+                        <i class="fas fa-fw fa-building"></i>
+                        <span>OPD</span>
                     </a>
-                </li>
-                <a class="nav-link" href="<?= base_url('opd') ?>">
-                    <i class="fas fa-fw fa-building"></i>
-                    <span>OPD</span>
-                </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('bagian') ?>">
@@ -53,11 +48,11 @@ if ($this->session->userdata('role') == 4) {
                         <span>Bagian</span>
 
                     </a>
-                </li> -->
+                </li>
             <?php } ?>
             <hr class="sidebar-divider">
             <div class="sidebar-heading">
-                Absensi
+                Absen
             </div>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('absensi') ?>">
