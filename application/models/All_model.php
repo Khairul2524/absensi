@@ -75,7 +75,7 @@ class All_model extends CI_Model
     // Awal Query User
     public function getuser()
     {
-        return $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->join('bagian', 'bagian.id_bagian=user.id_bagian')->get()->result();
+        return $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->join('bagian', 'bagian.id_bagian=user.id_bagian')->join('role', 'role.idrole=user.idrole')->get()->result();
     }
     public function getiduser($id)
     {

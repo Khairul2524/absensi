@@ -1,99 +1,111 @@
-<!-- Container Fluid-->
-<div class="container-fluid" id="container-wrapper">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Profile</h1>
-    </div>
-
-    <div class="row ">
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-4 col-md-6 mb-4">
-            <div class="card  " style="width: 22rem;">
-                <?php
-                if ($user->foto) {
-                    $foto = $user->foto;
-                } else {
-                    $foto = 'default.png';
-                }
-                ?>
-                <img src="<?= base_url('assets/backand/img/profile/') . $foto ?>" class="card-img-top" alt="..." </div>
-            </div>
-        </div>
-
-
-        <!-- Earnings (Annual) Card Example -->
-        <div class="col-xl-8 col-md-6 mb-4">
-            <div class="card h-100">
-                <div class="card-header ">
-                    <h6 class="m-0 font-weight-bold text-primary">Identitas User</h6>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive ">
-                        <table class="table align-items-center table-flush" id="dataTable">
-                            <tr>
-                                <td>Nama Lengkap</td>
-                                <td>:</td>
-                                <td><?= $user->namalengkap; ?></td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td>:</td>
-                                <td><?= $user->email; ?></td>
-                            </tr>
-                            <tr>
-                                <td>Nik</td>
-                                <td>:</td>
-                                <td><?= $user->nik; ?></td>
-                            </tr>
-                            <tr>
-                                <td>Nip</td>
-                                <td>:</td>
-                                <td><?= $user->nip; ?></td>
-                            </tr>
-                            <tr>
-                                <td>No Hanphone</td>
-                                <td>:</td>
-                                <td><?= $user->no; ?></td>
-                            </tr>
-                            <tr>
-                                <td>OPD</td>
-                                <td>:</td>
-                                <td><?= $user->opd ?></td>
-                            </tr>
-                            <tr>
-                                <td>Bidang</td>
-                                <td>:</td>
-                                <td><?= $user->nama_bagian ?></td>
-                            </tr>
-                            <tr>
-                                <td>Role</td>
-                                <td>:</td>
-                                <td><?= $user->role ?></td>
-                            </tr>
-                            <tr>
-                                <td>Status Tenaga</td>
-                                <td>:</td>
-                                <td><?php
-                                    if ($user->statustenaga == 1) {
-                                        echo "Honorer";
-                                    } else {
-                                        echo "PNS";
-                                    }
-                                    ?></td>
-                            </tr>
-                        </table>
+            <div class="page-body">
+                <div class="container-fluid">
+                    <div class="page-header">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h3>Profile</h3>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="<?= base_url('user') ?>">User</a></li>
+                                    <li class="breadcrumb-item active">Profile</li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="card-footer ">
-                    <a href="<?= base_url('user') ?>" class="btn btn-danger btn-icon-split mb-2 ">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-backward"></i>
-                        </span>
-                        <span class="text">Kembali</span>
-                    </a>
+                <!-- Container-fluid starts-->
+                <div class="container-fluid">
+                    <div class="edit-profile">
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="card">
+                                    <div class="card-header pb-0">
+                                        <h4 class="card-title mb-0">Profile</h4>
+                                        <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="profile-title">
+                                                <div class="media"> <img class="img-70 rounded-circle" alt="" src="<?= base_url('assets/backand') ?>/img/profile/<?= $user->foto ?>">
+                                                    <div class="media-body">
+                                                        <h3 class="mb-1 f-20 txt-primary"><?= strtoupper($user->namalengkap); ?></h3>
+                                                        <p class="f-12"><?= strtoupper($user->role); ?></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-8">
+                                <div class="card">
+                                    <div class="card-header pb-0">
+                                        <h4 class="card-title mb-0">Data Profile</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card">
+                                            <div class="collapse show" id="collapseicon2" aria-labelledby="collapseicon2" data-parent="#accordion">
+                                                <div class="card-body filter-cards-view">
+                                                    <div class="filter-view-group"><span class="f-w-600">Nama Lengkap :</span>
+                                                        <p>
+                                                            <?= $user->namalengkap; ?>
+                                                        </p>
+                                                    </div>
+                                                    <div class="filter-view-group"><span class="f-w-600">Email :</span>
+                                                        <p>
+                                                            <?= $user->email; ?>
+                                                        </p>
+                                                    </div>
+                                                    <div class="filter-view-group"><span class="f-w-600">No Handphone :</span>
+                                                        <p>
+                                                            <?= $user->no; ?>
+                                                        </p>
+                                                    </div>
+                                                    <div class="filter-view-group"><span class="f-w-600">NIK :</span>
+                                                        <p>
+                                                            <?= $user->nik; ?>
+                                                        </p>
+                                                    </div>
+                                                    <div class="filter-view-group"><span class="f-w-600">NIP :</span>
+                                                        <p>
+                                                            <?= $user->nip; ?>
+                                                        </p>
+                                                    </div>
+                                                    <div class="filter-view-group"><span class="f-w-600">OPD :</span>
+                                                        <p>
+                                                            <?= $user->opd; ?>
+                                                        </p>
+                                                    </div>
+                                                    <div class="filter-view-group"><span class="f-w-600">Bidang :</span>
+                                                        <p>
+                                                            <?= $user->nama_bagian; ?>
+                                                        </p>
+                                                    </div>
+                                                    <div class="filter-view-group"><span class="f-w-600">Tenaga :</span>
+                                                        <p>
+                                                            <?php
+                                                            if ($user->statustenaga = 1) {
+                                                                echo "Honorer";
+                                                            } else {
+                                                                echo "Pegawai Negeri Sipil";
+                                                            }
+                                                            ?>
+                                                        </p>
+                                                    </div>
+                                                    <div class="filter-view-group"><span class="f-w-600">Created :</span>
+                                                        <p>
+                                                            <?= date('d-F-Y', $user->created_at); ?>
+                                                        </p>
+                                                    </div>
+                                                    <a href="<?= base_url('user') ?>" class="btn btn-smal btn-danger btn-square mt-4">Kembali</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-</div>
-<!---Container Fluid-->
+            <!-- Container-fluid Ends-->
+            </div>
