@@ -1,95 +1,85 @@
-<script src="<?= site_url('assets/backand/js/jquery-3.6.0.min.js') ?>"></script>
-
-
-<!-- Begin Page Content -->
-<div class="container-fluid">
-
-	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800"><?= $judul; ?></h1>
-	<!-- DataTales Example -->
-	<div class="card shadow mb-4">
-		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">Data <?= $judul; ?></h6>
-		</div>
-		<div class="card-body">
-			<a href="#" class="btn btn-success btn-icon-split mb-2 tombol-tambah" data-toggle="modal" data-target="#menumodal">
-				<span class="icon text-white-50">
-					<i class="fas fa-plus-square"></i>
-				</span>
-				<span class="text">Tambah</span>
-			</a>
-			<div class="table-responsive">
-				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-					<thead>
-						<tr>
-							<th>NO</th>
-							<th>Role</th>
-							<th>Aksi</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-						$no = 1;
-						foreach ($data as $d) {
-							if ($d->idrole != 1) {
-						?>
-								<tr>
-									<td scope="row"><?= $no++; ?></td>
-									<td><?= $d->role; ?></td>
-									<td>
-										<a href="#" class="btn btn-warning btn-circle tombol-ubah" data-toggle="modal" data-target="#menumodal" data-id="<?= $d->idrole; ?>">
-											<i class="fas fa-edit"></i>
-										</a>
-										<a href="<?= site_url('role/hapus/') . $d->idrole ?>" class="btn btn-danger btn-circle" onclick="return confirm('Yakin Hapus?')">
-											<i class="fas fa-trash"></i>
-										</a>
-									</td>
-								</tr>
-						<?php }
-						}
-						?>
-					</tbody>
-				</table>
+<div class="page-body">
+	<div class="container-fluid">
+		<div class="page-header">
+			<div class="row">
+				<div class="col-sm-6">
+					<h3 class="">List User</h3>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="<?= base_url('user') ?>">User</a></li>
+					</ol>
+				</div>
 			</div>
 		</div>
 	</div>
-	<!-- /.container-fluid -->
+	<div class="flash-berhasil" data-flashberhasil="<?= $this->session->flashdata('berhasil') ?>"></div>
+	<div class="flash-gagal" data-flashgagal="<?= $this->session->flashdata('gagal') ?>"></div>
+	<!-- Container-fluid starts-->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="sub-title">Data User </h5>
+						<button class="btn btn-primary btn-square mt-2 tombol-tambah" type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal">Tambah Role</button>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive ">
+							<table class="row-border" id="example-style-1">
+								<thead>
+									<tr>
+										<th>NO</th>
+										<th>Role</th>
+										<th>Aksi</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+									$no = 1;
+									foreach ($data as $d) {
+										if ($d->idrole != 1) {
+									?>
+											<tr>
+												<td><?= $no++ ?></td>
+												<td><?= $d->role ?></td>
+												<td style="width: 175px;">
+													<button class="btn btn-warning btn-square tombol-ubah " type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal" data-id="<?= $d->idrole; ?>"><i class="fa fa-edit"></i></button>
+													<a href="<?= base_url('role	/hapus/') . $d->idrole ?>" class="btn btn-danger tombol-hapus"><i class="fa fa-trash"></i></a>
+												</td>
+											</tr>
+									<?php }
+									} ?>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="card-footer">
 
-</div>
-<!-- End of Main Content -->
-<div class="modal fade" id="menumodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<form method="POST" action="<?= site_url('role/tambah') ?>">
-			<input type="text" id="id" name="id" hidden>
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel"></h5>
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<label for="role">Role</label>
-						<input type="text" class="form-control" id="role" name="role" placeholder="role" autocomplete="off" required>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<a href="#" class="btn btn-danger btn-icon-split mb-2">
-						<span class="icon text-white-50">
-							<i class="fas fa-times"></i>
-						</span>
-						<span class="text">Batal</span>
-					</a>
-					<button type="submit" class="btn btn-success btn-icon-split mb-2">
-						<span class="icon text-white-50">
-							<i class="fas fa-plus-square"></i>
-						</span>
-						<span class="text">Simpan</span>
-					</button>
-				</div>
 			</div>
-		</form>
+		</div>
+	</div>
+</div>
+</div>
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog " role="document">
+		<div class="modal-content">
+			<form action="<?= site_url('role/tambah') ?>" method="POST">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Tambah Role</h5>
+					<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<label class="form-label" for="email">Role</label>
+					<input class="" id="id" name="id" type="hidden">
+					<input class="form-control btn-square" id="role" name="role" type="text" required autocomplete="off">
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-danger btn-square" type="button" data-bs-dismiss="modal">Batal</button>
+					<button class="btn btn-primary btn-square" type="submit">Simpan</button>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
 <script>
