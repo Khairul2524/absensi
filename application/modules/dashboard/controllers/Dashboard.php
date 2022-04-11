@@ -49,7 +49,6 @@ class Dashboard extends MY_Controller
 			);
 			$this->load->view('template/header');
 			$this->load->view('template/sidebar');
-			$this->load->view('template/topbar');
 			$this->load->view('form', $data);
 			$this->load->view('template/footer');
 		} else {
@@ -72,7 +71,6 @@ class Dashboard extends MY_Controller
 			);
 			$this->load->view('template/header');
 			$this->load->view('template/sidebar');
-			$this->load->view('template/topbar');
 			$this->load->view('dashboard_staf', $data);
 			$this->load->view('template/footer');
 		}

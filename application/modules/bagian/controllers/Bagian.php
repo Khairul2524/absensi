@@ -30,7 +30,6 @@ class Bagian extends MX_Controller
 		// die();
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('template/topbar');
 		$this->load->view('index', $data);
 		$this->load->view('template/footer');
 	}
@@ -63,6 +62,8 @@ class Bagian extends MX_Controller
 			'id_opd' => $this->input->post('opd'),
 			'nama_bagian' => $this->input->post('bagian')
 		);
+		// print_r($data);
+		// die;
 		$this->bagian->update(htmlspecialchars($this->input->post('id')), $data);
 		$this->session->set_flashdata('berhasil', 'Bagian OPD Berhasil Diubah!');
 		redirect('bagian');
