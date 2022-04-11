@@ -27,6 +27,7 @@
     <!-- Feather icon-->
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/backand') ?>/css/feather-icon.css">
     <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/backand') ?>/css/sweetalert2.css">
     <!-- Plugins css Ends-->
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/backand') ?>/css/bootstrap.css">
@@ -35,6 +36,7 @@
     <link id="color" rel="stylesheet" href="<?= base_url('assets/backand') ?>/css/color-1.css" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/backand') ?>/css/responsive.css">
+    <script src="<?= base_url('assets/backand') ?>/js/jquery-3.5.1.min.js"></script>
 </head>
 
 <body>
@@ -48,6 +50,8 @@
     <!-- page-wrapper Start-->
     <section>
         <div class="container-fluid p-0">
+            <div class="flash-berhasil" data-flashberhasil="<?= $this->session->flashdata('berhasil') ?>"></div>
+            <div class="flash-gagal" data-flashgagal="<?= $this->session->flashdata('gagal') ?>"></div>
             <div class="row">
                 <div class="col-12">
                     <div class="login-card">
@@ -87,7 +91,7 @@
     </section>
     <!-- page-wrapper end-->
     <!-- latest jquery-->
-    <script src="<?= base_url('assets/backand') ?>/js/jquery-3.5.1.min.js"></script>
+
     <!-- feather icon js-->
     <script src="<?= base_url('assets/backand') ?>/js/icons/feather-icon/feather.min.js"></script>
     <script src="<?= base_url('assets/backand') ?>/js/icons/feather-icon/feather-icon.js"></script>
@@ -98,9 +102,12 @@
     <script src="<?= base_url('assets/backand') ?>/js/bootstrap/popper.min.js"></script>
     <script src="<?= base_url('assets/backand') ?>/js/bootstrap/bootstrap.min.js"></script>
     <!-- Plugins JS start-->
+    <script src="<?= base_url('assets/backand') ?>/js/sweet-alert/sweetalert.min.js"></script>
+    <script src="<?= base_url('assets/backand') ?>/js/sweet-alert/app.js"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="<?= base_url('assets/backand') ?>/js/script.js"></script>
+    <script src="<?= base_url('assets/backand') ?>/js/scriptku.js"></script>
     <!-- login js-->
     <!-- Plugin used-->
 </body>

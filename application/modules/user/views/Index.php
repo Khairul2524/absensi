@@ -11,6 +11,8 @@
             </div>
         </div>
     </div>
+    <div class="flash-berhasil" data-flashberhasil="<?= $this->session->flashdata('berhasil') ?>"></div>
+    <div class="flash-gagal" data-flashgagal="<?= $this->session->flashdata('gagal') ?>"></div>
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
@@ -47,7 +49,7 @@
                                             <td style="width: 175px;">
                                                 <a href="<?= base_url('user/profile/') . $u->iduser ?>" class="btn btn-primary px-2"><i class="fa fa-user"></i></a>
                                                 <a href="<?= base_url('user/edit/') . $u->iduser ?>" class="btn btn-warning px-2"><i class="fa fa-edit"></i></a>
-                                                <a href="" class="btn btn-danger px-2"><i class="fa fa-trash"></i></a>
+                                                <a href="<?= base_url('user/hapus/') . $u->iduser ?>" class="btn btn-danger px-2 tombol-hapus"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -55,7 +57,9 @@
                             </table>
                         </div>
                     </div>
-                    <div class="card-footer"></div>
+                    <div class="card-footer">
+
+                    </div>
                 </div>
             </div>
         </div>

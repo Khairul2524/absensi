@@ -194,7 +194,7 @@ class User extends MY_Controller
 			// print_r($data);
 			// die;
 			$this->user->update($id, $data);
-			$this->session->set_flashdata('berhasil', 'Password Berhasil Diubah!');
+			$this->session->set_flashdata('berhasil', 'Foto Berhasil Diubah!');
 			redirect('user/edit/' . $id);
 		}
 	}
@@ -223,6 +223,7 @@ class User extends MY_Controller
 		// die;
 
 		$this->user->update($id, $data);
+		$this->session->set_flashdata('berhasil', 'Foto Berhasil Diubah!');
 		redirect('user/edit/' . $id);
 	}
 	public function ubah_password()

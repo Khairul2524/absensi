@@ -13,7 +13,7 @@
         </footer>
         </div>
         </div>
-        
+
         <!-- feather icon js-->
         <script src="<?= base_url('assets/backand') ?>/js/icons/feather-icon/feather.min.js"></script>
         <script src="<?= base_url('assets/backand') ?>/js/icons/feather-icon/feather-icon.js"></script>
@@ -35,6 +35,8 @@
         <script src="<?= base_url('assets/backand') ?>/js/theme-customizer/customizer.js"></script>
         <!-- login js-->
         <!-- Plugin used-->
+        <!-- my script -->
+        <script src="<?= base_url('assets/backand') ?>/js/scriptku.js"></script>
         </body>
 
         </html>

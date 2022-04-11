@@ -1,4 +1,3 @@
-
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-header">
@@ -13,6 +12,8 @@
             </div>
         </div>
     </div>
+    <div class="flash-berhasil" data-flashberhasil="<?= $this->session->flashdata('berhasil') ?>"></div>
+    <div class="flash-gagal" data-flashgagal="<?= $this->session->flashdata('gagal') ?>"></div>
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">

@@ -95,7 +95,6 @@ class Auth extends MY_Controller
 		$this->session->unset_userdata('opd');
 		$this->session->unset_userdata('iduser');
 		$this->session->unset_userdata('idbagian');
-
 		$this->session->unset_userdata('foto');
 
 		redirect('auth');
