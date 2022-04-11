@@ -1,107 +1,40 @@
-<!-- Modal Logout -->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        <!-- footer start-->
+        <footer class="footer footer-fix">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 footer-copyright">
+                        <p class="mb-0">Copyright <?= date('Y'); ?> © Kominfo All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="pull-right mb-0">Dinas Kominfo Lombok Tengah</p>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <p>Are you sure you want to logout?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                <a href="<?= base_url('auth/logout') ?>" class="btn btn-primary">Logout</a>
-            </div>
+        </footer>
         </div>
-    </div>
-</div>
-</div>
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>copyright &copy; <script>
-                    document.write(new Date().getFullYear());
-                </script> Kominfo Loteng
-
-            </span>
         </div>
-    </div>
-</footer>
-<!-- Footer -->
-</div>
-</div>
+        
+        <!-- feather icon js-->
+        <script src="<?= base_url('assets/backand') ?>/js/icons/feather-icon/feather.min.js"></script>
+        <script src="<?= base_url('assets/backand') ?>/js/icons/feather-icon/feather-icon.js"></script>
+        <!-- Sidebar jquery-->
+        <script src="<?= base_url('assets/backand') ?>/js/sidebar-menu.js"></script>
+        <script src="<?= base_url('assets/backand') ?>/js/config.js"></script>
+        <!-- Bootstrap js-->
+        <script src="<?= base_url('assets/backand') ?>/js/bootstrap/popper.min.js"></script>
+        <script src="<?= base_url('assets/backand') ?>/js/bootstrap/bootstrap.min.js"></script>
+        <!-- Plugins JS start-->
+        <script src="<?= base_url('assets/backand') ?>/js/datatable/datatables/jquery.dataTables.min.js"></script>
+        <script src="<?= base_url('assets/backand') ?>/js/datatable/datatables/datatable.custom.js"></script>
+        <script src="<?= base_url('assets/backand') ?>/js/sweet-alert/sweetalert.min.js"></script>
+        <script src="<?= base_url('assets/backand') ?>/js/sweet-alert/app.js"></script>
+        <script src="<?= base_url('assets/backand') ?>/js/tooltip-init.js"></script>
+        <!-- Plugins JS Ends-->
+        <!-- Theme js-->
+        <script src="<?= base_url('assets/backand') ?>/js/script.js"></script>
+        <script src="<?= base_url('assets/backand') ?>/js/theme-customizer/customizer.js"></script>
+        <!-- login js-->
+        <!-- Plugin used-->
+        </body>
 
-<!-- Scroll to top -->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-
-
-<script src="<?= base_url('assets/backand/') ?>vendor/jquery/jquery.min.js"></script>
-<script src="<?= base_url('assets/backand/') ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="<?= base_url('assets/backand/') ?>vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="<?= base_url('assets/backand/') ?>js/ruang-admin.js"></script>
-<script src="<?= base_url('assets/backand/') ?>js/sweetalert2.all.min.js"></script>
-<script src="<?= base_url('assets/backand/') ?>vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="<?= base_url('assets/backand/') ?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
-<!-- Page level custom scripts -->
-
-<script>
-    // sweat alert
-    const flashGagal = $('.flash-gagal').data('flashgagal')
-    // console.log(flashData) 
-    if (flashGagal) {
-        Swal.fire(
-            flashGagal,
-            '',
-            'error'
-        )
-    }
-    const flashberhasil = $('.flash-berhasil').data('flashberhasil')
-    // console.log(flashberhasil)
-    if (flashberhasil) {
-        Swal.fire(
-            flashberhasil,
-            '',
-            'success'
-        )
-    }
-    const flashinfo = $('.flash-info').data('flashinfo')
-    // console.log(flashinfo)
-    if (flashinfo) {
-        Swal.fire(
-            flashinfo,
-            '',
-            'info'
-        )
-    }
-</script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        var table = $('#dataTable').DataTable({
-            responsive: true
-        });
-
-        new $.fn.DataTable.FixedHeader(table);
-    });
-</script>
-
-
-<script>
-    $(document).ready(function() {
-        $('#dataTable').DataTable(); // ID From dataTable 
-        $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-    });
-</script>
-
-</body>
-
-</html>
+        </html>

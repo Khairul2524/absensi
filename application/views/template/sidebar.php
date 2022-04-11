@@ -1,133 +1,66 @@
-<?php
-// admin atasan
-
-if ($this->session->userdata('role') == 4) {
-    $hide = "hidden";
-} else {
-    $hide = "";
-}
-?>
-
-<body id="page-top">
-    <div id="wrapper">
-        <!-- Sidebar -->
-        <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon">
-                    <img src="<?= base_url('assets/backand/') ?>img/logo32.png">
-                </div>
-                <div class="sidebar-brand-text mx-3">Absensi Loteng</div>
+<!-- Page Body Start-->
+<div class="page-body-wrapper horizontal-menu">
+    <!-- Page Sidebar Start-->
+    <header class="main-nav">
+        <div class="sidebar-user text-center"><a class="setting-primary" href="javascript:void(0)"><i data-feather="settings"></i></a>
+            <?php
+            if ($this->session->userdata('foto')) {
+            ?>
+                <img class="img-90 rounded-circle" src="<?= base_url('assets/backand/img/profile/') . $this->session->userdata('foto') ?>" alt="">
+            <?php } else {
+            ?>
+                <img class="img-90 rounded-circle" src="<?= base_url('assets/backand/img/default.png') ?>">
+            <?php
+            } ?>
+            <div class="badge-bottom"><span class="badge badge-primary">New</span></div><a href="user-profile.html">
+                <h6 class="mt-3 f-14 f-w-600"><?= $this->session->userdata('namalengkap') ?></h6>
             </a>
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item" <?= $hide; ?>>
-                <a class="nav-link" href="<?= base_url('dashboard/dash') ?>">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('dashboard/cek') ?>">
-                    <i class="fas fa-fw fa-user-tie"></i>
-                    <span>Profile</span></a>
-            </li>
-            <?php
-            if ($this->session->userdata('role') == 1) {
-            ?>
-                <hr class="sidebar-divider">
-                <div class="sidebar-heading">
-                    Admin
-                </div>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('absensi') ?>">
-                        <i class="fas fa-fw fa-user"></i>
-                        <span>Absen</span>
-                    </a>
-                </li>
-                <a class="nav-link" href="<?= base_url('opd') ?>">
-                    <i class="fas fa-fw fa-building"></i>
-                    <span>OPD</span>
-                </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('bagian') ?>">
-                        <i class="fas fa-fw fa-landmark"></i>
-                        <span>Bagian</span>
+            <p class="mb-0 font-roboto">
+                <?php
+                $getrole = $this->db->get_where('role', ['idrole' => $this->session->userdata('role')])->row();
+                // var_dump($getrole);
+                echo $getrole->role;
+                ?>
+            </p>
+        </div>
+        <nav>
+            <div class="main-navbar">
+                <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
+                <div id="mainnav">
+                    <ul class="nav-menu custom-scrollbar">
+                        <li class="back-btn">
+                            <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
+                        </li>
+                        <li class="dropdown"><a class="nav-link menu-title link-nav" href="<?= base_url('dashboard/dash') ?>"><i data-feather="home"></i><span>Dashboard</span></a>
+                        </li>
+                        <li class="dropdown"><a class="nav-link menu-title link-nav" href="<?= base_url('dashboard/cek') ?>"><i data-feather="user"></i><span>Profile</span></a>
+                        </li>
+                        <li class="dropdown"><a class="nav-link menu-title link-nav" href="<?= base_url('absensi') ?>"><i data-feather="user-check"></i><span>Absen</span></a>
+                        </li>
+                        <li class="dropdown"> <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="server"></i><span>Admin OPD </span></a>
+                            <ul class="nav-submenu menu-content">
+                                <li><a href="<?= base_url('opd') ?>">OPD Loteng</a></li>
+                                <li><a href="<?= base_url('bagian') ?>">Bidang OPD</a></li>
+                                <li><a href="<?= base_url('hari_libur') ?>">Hari Libur</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"> <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="package"></i><span>Rekapan Absensi</span></a>
+                            <ul class="nav-submenu menu-content">
+                                <li><a href="datepicker.html">Rekapan</a></li>
+                                <li><a href="time-picker.html">Laporan</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"> <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="users"></i><span>Manajemen User</span></a>
+                            <ul class="nav-submenu menu-content">
+                                <li><a href="<?= base_url('user') ?>">User</a></li>
+                                <li><a href="<?= base_url('role') ?>">Role</a></li>
+                            </ul>
+                        </li>
 
-                    </a>
-                </li> -->
-            <?php } ?>
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Absensi
-            </div>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('absensi') ?>">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Absensi</span>
-                </a>
-            </li>
-            <hr class="sidebar-divider" <?= $hide; ?>>
-            <div class="sidebar-heading" <?= $hide; ?>>
-                Rekapan
-            </div>
-            <li class="nav-item" <?= $hide; ?>>
-                <a class="nav-link" href="<?= base_url('rekapan') ?>">
-                    <i class="fas fa-fw fa-user-clock"></i>
-                    <span>Laporan Mingguan</span>
-                </a>
-            </li>
-            <li class="nav-item" <?= $hide; ?>>
-                <a class="nav-link" href="<?= base_url('jam_kerja') ?>">
-                    <i class="fas fa-fw fa-user-clock"></i>
-                    <span>Laporan Bulanan</span>
-                </a>
-            </li>
-            <li class="nav-item" <?= $hide; ?>>
-                <a class="nav-link" href="<?= base_url('jam_kerja') ?>">
-                    <i class="fas fa-fw fa-user-clock"></i>
-                    <span>Laporan Tahunan</span>
-                </a>
-            </li>
-            <?php
-            if ($this->session->userdata('role') == 1 || $this->session->userdata('role') == 2) {
-            ?>
-                <hr class="sidebar-divider" <?= $hide; ?>>
-                <div class="sidebar-heading" <?= $hide; ?>>
-                    Setting
+                    </ul>
                 </div>
-                <li class="nav-item" <?= $hide; ?>>
-                    <a class="nav-link" href="<?= base_url('hari_libur') ?>">
-                        <i class="fas fa-fw fa-user-clock"></i>
-                        <span>Hari Libur</span>
-                    </a>
-                </li>
-            <?php } ?>
-            <hr class="sidebar-divider" <?= $hide; ?>>
-            <div class="sidebar-heading" <?= $hide; ?>>
-                Manajemen User
+                <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
             </div>
-            <li class="nav-item" <?= $hide; ?>>
-                <a class="nav-link" href="<?= base_url('user') ?>">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Users</span>
-                </a>
-            </li>
-            <?php
-            if ($this->session->userdata('role') == 1) {
-            ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('role') ?>">
-                        <i class="fas fa-fw fa-users-cog"></i>
-                        <span>Role</span>
-                    </a>
-                </li>
-            <?php } ?>
-
-            <hr class="sidebar-divider" <?= $hide; ?>>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('role/hakases') ?>" data-toggle="modal" data-target="#logoutModal">
-                    <i class="fas fa-fw fa-sign-out-alt"></i>
-                    <span>Keluar</span>
-                </a>
-            </li>
-        </ul>
-        <!-- Sidebar -->
+        </nav>
+    </header>
+    <!-- Page Sidebar Ends-->

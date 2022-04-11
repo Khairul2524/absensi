@@ -131,46 +131,48 @@ class Dashboard extends MY_Controller
 
 	public function dash()
 	{
-		$absen_masuk = $this->all->get_all_absen_masuk();
+		// $absen_masuk = $this->all->get_all_absen_masuk();
 		// var_dump($absen_masuk);
 		// die;
-		$time = time();
-		$tanggal = date('Y-m-d', $time);
-		// echo $tanggal;
-		// die;
-		$absen = [];
-		$tepat = [];
-		$telat = [];
-		$izin = [];
-		foreach ($absen_masuk as $am) {
-			if ($tanggal == $am->tanggal) {
-				$absen[] = $am->absen_masuk;
-				if ($am->status_masuk == 1) {
-					$tepat[] = $am->absen_masuk;
-				} elseif ($am->status_masuk == 2) {
-					$telat[] = $am->absen_masuk;
-				} else {
-					$izin[] = $am->absen_masuk;
-				}
-			}
-		}
+		// $time = time();
+		// $tanggal = date('Y-m-d', $time);
+		// // echo $tanggal;
+		// // die;
+		// $absen = [];
+		// $tepat = [];
+		// $telat = [];
+		// $izin = [];
+		// foreach ($absen_masuk as $am) {
+		// 	if ($tanggal == $am->tanggal) {
+		// 		$absen[] = $am->absen_masuk;
+		// 		if ($am->status_masuk == 1) {
+		// 			$tepat[] = $am->absen_masuk;
+		// 		} elseif ($am->status_masuk == 2) {
+		// 			$telat[] = $am->absen_masuk;
+		// 		} else {
+		// 			$izin[] = $am->absen_masuk;
+		// 		}
+		// 	}
+		// }
 
 		// var_dump($tepat);
 		// var_dump($telat);
 
 		// die;
 
-		$data = array(
-			'jumlah_absen' => count($absen),
-			'jumlah_tepat' => count($tepat),
-			'jumlah_telat' => count($telat),
-			'jumlah_izin' => count($izin),
-		);
+		// $data = array(
+		// 	'jumlah_absen' => count($absen),
+		// 	'jumlah_tepat' => count($tepat),
+		// 	'jumlah_telat' => count($telat),
+		// 	'jumlah_izin' => count($izin),
+		// );
+		// template ruang admin
+		// $this->load->view('template/header');
+		// $this->load->view('template/sidebar');
+		// $this->load->view('template/topbar');
+		$this->load->view('index');
+		// $this->load->view('template/footer');
 
-		$this->load->view('template/header');
-		$this->load->view('template/sidebar');
-		$this->load->view('template/topbar');
-		$this->load->view('index', $data);
-		$this->load->view('template/footer');
+		// $this->load->view('viho_dashboard');
 	}
 }

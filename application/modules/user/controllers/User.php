@@ -19,20 +19,22 @@ class User extends MY_Controller
 			'judul' => 'User',
 			'user' => $this->all->getuser(),
 		);
+		// var_dump($data['user']);
+		// die;
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('template/topbar');
 		$this->load->view('index', $data);
 		$this->load->view('template/footer');
 	}
 	public function tambah()
 	{
 		$data = array(
-			'kode'			=> 1,
+
 			'action' 		=> site_url('user/simpan'),
 			'opd' 			=> $this->all->getopd(),
 			'role' 			=> $this->all->getrole(),
+			'id'			=> set_value('id'),
 			'email'         => set_value('email'),
 			'nama'          => set_value('nama'),
 			'password'      => set_value('password'),
@@ -40,21 +42,26 @@ class User extends MY_Controller
 			'nip'           => set_value('nip'),
 			'no'            => set_value('no'),
 			'idopd'         => set_value('idopd'),
-			'id_bagian'     => set_value('bagian'),
+			'idrole'         => set_value('idrole'),
+			'bagian'     => set_value('bagian'),
 			'statustenaga'  => set_value('statustenaga'),
 			'foto'  => set_value('foto'),
 		);
-		// var_dump($data['role']);
+		// var_dump($data['idopd']);
 		// die;
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('template/topbar');
-		$this->load->view('form', $data);
+		$this->load->view('form_tambah', $data);
 		$this->load->view('template/footer');
 	}
 	public function get_bagian()
 	{
 		$id = $_POST['opd_id'];
+		echo json_encode($this->all->getidbagian($id));
+	}
+	public function get_id_bagian()
+	{
+		$id = $_POST['bagian_id'];
 		echo json_encode($this->all->getidbagian($id));
 	}
 
@@ -67,12 +74,28 @@ class User extends MY_Controller
 			$config['upload_path']      = './assets/backand/img/profile/';
 			$config['allowed_types']    = 'jpg|png|jpeg|gif';
 			$config['overwrite']        = 'true';
+			// $config['file_name']        = 'file_name';
 			$this->load->library('upload', $config);
 			if (!$this->upload->do_upload('foto')) {
 				$this->session->set_flashdata('gagal', 'Foto Gagal Diupload');
 				redirect('user/tambah');
 			} else {
 				$foto = $this->upload->data('file_name');
+
+				// library yang disediakan codeigniter
+				$config['image_library']  = 'gd2';
+				// gambar yang akan dibuat thumbnail
+				$config['source_image']   = './assets/backand/img/profile/' . $foto . '';
+
+				// rasio resolusi
+				$config['maintain_ratio'] = FALSE;
+				// lebar
+				$config['width']          = 200;
+				// tinggi
+				$config['height']         = 200;
+
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
 			}
 		}
 
@@ -107,8 +130,7 @@ class User extends MY_Controller
 		// var_dump($user);
 		// die;
 		$data = array(
-			'id'			=> $id,
-			'kode'			=> 0,
+			'id'			=> set_value('id', $id),
 			'opd' 			=> $this->all->getopd(),
 			'role' 			=> $this->all->getrole(),
 			'action' 		=> site_url('user/ubah'),
@@ -118,15 +140,63 @@ class User extends MY_Controller
 			'nip'           => set_value('nip', $user->nip),
 			'no'  			=> set_value('no', $user->no),
 			'idopd'			=> set_value('idopd', $user->idopd),
-			'bagian'		=> set_value('idopd', $user->id_bagian),
+			'bagian'		=> set_value('idbagian', $user->id_bagian),
+			'idrole'		=> set_value('idrole', $user->idrole),
 			'statustenaga'	=> set_value('statustenaga', $user->statustenaga),
 			'foto'	=> set_value('foto', $user->foto),
 		);
+		// var_dump($data['idrole']);
+		// die;
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('template/topbar');
 		$this->load->view('form', $data);
 		$this->load->view('template/footer');
+	}
+	public function edit_profile()
+	{
+		$foto = $_FILES['foto'];
+		// var_dump($foto);
+		// die;
+		if ($foto) {
+			$config['upload_path']      = './assets/backand/img/profile/';
+			$config['allowed_types']    = 'jpg|png|jpeg|gif';
+			$config['overwrite']        = 'true';
+			// $config['file_name']        = 'file_name';
+			$this->load->library('upload', $config);
+			if (!$this->upload->do_upload('foto')) {
+				$this->session->set_flashdata('gagal', 'Foto Gagal Diupload');
+				redirect('user/tambah');
+			} else {
+				$foto = $this->upload->data('file_name');
+
+				// library yang disediakan codeigniter
+				$config['image_library']  = 'gd2';
+				// gambar yang akan dibuat thumbnail
+				$config['source_image']   = './assets/backand/img/profile/' . $foto . '';
+
+				// rasio resolusi
+				$config['maintain_ratio'] = FALSE;
+				// lebar
+				$config['width']          = 300;
+				// tinggi
+				$config['height']         = 300;
+
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+			}
+			$id = $this->input->post('id');
+			$foto_lama = $this->input->post('foto_lama');
+			unlink("./assets/backand/img/profile/$foto_lama");
+			$data = array(
+				'iduser' => $id,
+				'foto' => $foto,
+			);
+			// print_r($data);
+			// die;
+			$this->user->update($id, $data);
+			$this->session->set_flashdata('berhasil', 'Password Berhasil Diubah!');
+			redirect('user/edit/' . $id);
+		}
 	}
 	public function getubah()
 	{
@@ -137,7 +207,7 @@ class User extends MY_Controller
 	{
 		$id = $this->input->post('id');
 		$data = array(
-			'iduser' => $id,
+			'iduser' => intval($id),
 			'email' => $this->input->post('email'),
 			'namalengkap' => $this->input->post('nama'),
 			'nik'	=> htmlspecialchars($this->input->post('nik')),
@@ -146,13 +216,14 @@ class User extends MY_Controller
 			'idopd'	=> htmlspecialchars($this->input->post('opd')),
 			'statustenaga'	=> htmlspecialchars($this->input->post('st')),
 			'aktif'	=> 1,
-			'idrole' => 4,
+			'idrole' => htmlspecialchars($this->input->post('role')),
 			'created_at' => time()
 		);
-		// print_r($data);
+		// var_dump($data);
 		// die;
+
 		$this->user->update($id, $data);
-		redirect('user');
+		redirect('user/edit/' . $id);
 	}
 	public function ubah_password()
 	{
@@ -165,7 +236,7 @@ class User extends MY_Controller
 		// die;
 		$this->user->update($id, $data);
 		$this->session->set_flashdata('berhasil', 'Password Berhasil Diubah!');
-		redirect('user');
+		redirect('user/edit/' . $id);
 	}
 	public function profile($id)
 	{
@@ -176,7 +247,6 @@ class User extends MY_Controller
 		// die;
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('template/topbar');
 		$this->load->view('profile', $data);
 		$this->load->view('template/footer');
 	}
