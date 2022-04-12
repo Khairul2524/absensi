@@ -10,6 +10,10 @@ class Opd extends MX_Controller
 		parent::__construct();
 		if ($this->session->userdata('role') != 1) {
 			redirect('auth');
+		} else {
+			if (!$this->session->userdata('role')) {
+				redirect('auth');
+			}
 		}
 		$this->load->model('opd_model', 'opd');
 		// $this->load->model('All_model', 'all');
@@ -66,10 +70,10 @@ class Opd extends MX_Controller
 			$params['size'] = 10;
 			$params['savename'] = FCPATH . $config['imagedir'] . $image_name;
 			$this->ciqrcode->generate($params);
-			$this->session->set_flashdata('berhasil', 'opd Berhasil Ditambah!');
+			$this->session->set_flashdata('berhasil', 'OPD Berhasil Ditambah!');
 			redirect('opd');
 		} else {
-			$this->session->set_flashdata('gagal', 'opd Gagal Ditambah!');
+			$this->session->set_flashdata('gagal', 'OPD Gagal Ditambah!');
 			redirect('opd');
 		}
 	}
@@ -97,7 +101,7 @@ class Opd extends MX_Controller
 		$config['white']        = array(70, 130, 180);
 		$this->ciqrcode->initialize($config);
 
-		$image_name = htmlspecialchars($this->input->post('id')) . '.png';
+		$image_name = $opd . '.png';
 
 		$params['data'] = htmlspecialchars($this->input->post('id'));
 		$params['level'] = 'H';
@@ -109,8 +113,11 @@ class Opd extends MX_Controller
 			'opd' => $opd,
 			'qr_code' => $image_name
 		);
+		// print_r($data);
+		// var_dump($data);
+		// die;
 		$this->opd->update(htmlspecialchars($this->input->post('id')), $data);
-		$this->session->set_flashdata('berhasil', 'opd Berhasil Diubah!');
+		$this->session->set_flashdata('berhasil', 'OPD Berhasil Diubah!');
 		redirect('opd');
 	}
 	public function hapus($id)
@@ -122,7 +129,7 @@ class Opd extends MX_Controller
 		unlink("./assets/backand/img/qrcode/" . $data->qr_code);
 
 		$this->opd->delete($id);
-		$this->session->set_flashdata('berhasil', 'opd Berhasil Dihapus!');
+		$this->session->set_flashdata('berhasil', 'OPD Berhasil Dihapus!');
 		redirect('opd');
 	}
 }
