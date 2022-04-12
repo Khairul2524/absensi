@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <div class="page-body">
+=======
+            <div class="page-body">
+>>>>>>> f269a04f5d6323646934ac5c959b136d10f350e7
                 <div class="container-fluid">
                     <div class="page-header">
                         <div class="row">

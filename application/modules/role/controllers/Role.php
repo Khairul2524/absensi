@@ -10,6 +10,10 @@ class Role extends MX_Controller
 		parent::__construct();
 		if ($this->session->userdata('role') != 1) {
 			redirect('auth');
+		} else {
+			if (!$this->session->userdata('role')) {
+				redirect('auth');
+			}
 		}
 		$this->load->model('Role_model', 'role');
 		// $this->load->model('All_model', 'all');
@@ -25,10 +29,15 @@ class Role extends MX_Controller
 		);
 		// var_dump($data['data']);
 		// die();
+<<<<<<< HEAD
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
+=======
+		$this->load->view('viho/header');
+		$this->load->view('viho/sidebar');
+>>>>>>> f269a04f5d6323646934ac5c959b136d10f350e7
 		$this->load->view('index', $data);
-		$this->load->view('template/footer');
+		$this->load->view('viho/footer');
 	}
 
 	public function tambah()

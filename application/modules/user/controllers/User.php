@@ -22,10 +22,15 @@ class User extends MY_Controller
 		// var_dump($data['user']);
 		// die;
 
+<<<<<<< HEAD
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
+=======
+		$this->load->view('viho/header');
+		$this->load->view('viho/sidebar');
+>>>>>>> f269a04f5d6323646934ac5c959b136d10f350e7
 		$this->load->view('index', $data);
-		$this->load->view('template/footer');
+		$this->load->view('viho/footer');
 	}
 	public function tambah()
 	{
@@ -49,10 +54,17 @@ class User extends MY_Controller
 		);
 		// var_dump($data['idopd']);
 		// die;
+<<<<<<< HEAD
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
 		$this->load->view('form_tambah', $data);
 		$this->load->view('template/footer');
+=======
+		$this->load->view('viho/header');
+		$this->load->view('viho/sidebar');
+		$this->load->view('form_viho', $data);
+		$this->load->view('viho/footer');
+>>>>>>> f269a04f5d6323646934ac5c959b136d10f350e7
 	}
 	public function get_bagian()
 	{
@@ -140,17 +152,75 @@ class User extends MY_Controller
 			'nip'           => set_value('nip', $user->nip),
 			'no'  			=> set_value('no', $user->no),
 			'idopd'			=> set_value('idopd', $user->idopd),
+<<<<<<< HEAD
 			'bagian'		=> set_value('idbagian', $user->id_bagian),
 			'idrole'		=> set_value('idrole', $user->idrole),
+=======
+			'bagian'		=> set_value('idopd', $user->id_bagian),
+			'idrole'		=> set_value('idopd', $user->idrole),
+>>>>>>> f269a04f5d6323646934ac5c959b136d10f350e7
 			'statustenaga'	=> set_value('statustenaga', $user->statustenaga),
 			'foto'	=> set_value('foto', $user->foto),
 		);
 		// var_dump($data['idrole']);
 		// die;
+<<<<<<< HEAD
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
 		$this->load->view('form', $data);
 		$this->load->view('template/footer');
+=======
+		$this->load->view('viho/header');
+		$this->load->view('viho/sidebar');
+		$this->load->view('form_viho', $data);
+		$this->load->view('viho/footer');
+	}
+	public function edit_profile()
+	{
+		$foto = $_FILES['foto'];
+		// var_dump($foto);
+		// die;
+		if ($foto) {
+			$config['upload_path']      = './assets/backand/img/profile/';
+			$config['allowed_types']    = 'jpg|png|jpeg|gif';
+			$config['overwrite']        = 'true';
+			// $config['file_name']        = 'file_name';
+			$this->load->library('upload', $config);
+			if (!$this->upload->do_upload('foto')) {
+				$this->session->set_flashdata('gagal', 'Foto Gagal Diupload');
+				redirect('user/tambah');
+			} else {
+				$foto = $this->upload->data('file_name');
+
+				// library yang disediakan codeigniter
+				$config['image_library']  = 'gd2';
+				// gambar yang akan dibuat thumbnail
+				$config['source_image']   = './assets/backand/img/profile/' . $foto . '';
+
+				// rasio resolusi
+				$config['maintain_ratio'] = FALSE;
+				// lebar
+				$config['width']          = 300;
+				// tinggi
+				$config['height']         = 300;
+
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+			}
+			$id = $this->input->post('id');
+			$foto_lama = $this->input->post('foto_lama');
+			unlink("./assets/backand/img/profile/$foto_lama");
+			$data = array(
+				'iduser' => $id,
+				'foto' => $foto,
+			);
+			// print_r($data);
+			// die;
+			$this->user->update($id, $data);
+			$this->session->set_flashdata('berhasil', 'Password Berhasil Diubah!');
+			redirect('user/edit/' . $id);
+		}
+>>>>>>> f269a04f5d6323646934ac5c959b136d10f350e7
 	}
 	public function edit_profile()
 	{
@@ -223,7 +293,10 @@ class User extends MY_Controller
 		// die;
 
 		$this->user->update($id, $data);
+<<<<<<< HEAD
 		$this->session->set_flashdata('berhasil', 'Foto Berhasil Diubah!');
+=======
+>>>>>>> f269a04f5d6323646934ac5c959b136d10f350e7
 		redirect('user/edit/' . $id);
 	}
 	public function ubah_password()
@@ -246,10 +319,15 @@ class User extends MY_Controller
 		);
 		// var_dump($data['user']);
 		// die;
+<<<<<<< HEAD
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
+=======
+		$this->load->view('viho/header');
+		$this->load->view('viho/sidebar');
+>>>>>>> f269a04f5d6323646934ac5c959b136d10f350e7
 		$this->load->view('profile', $data);
-		$this->load->view('template/footer');
+		$this->load->view('viho/footer');
 	}
 	public function hapus($id)
 	{

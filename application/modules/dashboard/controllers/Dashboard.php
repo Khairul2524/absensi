@@ -168,9 +168,16 @@ class Dashboard extends MY_Controller
 		// $this->load->view('template/header');
 		// $this->load->view('template/sidebar');
 		// $this->load->view('template/topbar');
+<<<<<<< HEAD
 		$this->load->view('index');
 		// $this->load->view('template/footer');
 
 		// $this->load->view('viho_dashboard');
+=======
+		// $this->load->view('index', $data);
+		// $this->load->view('template/footer');
+
+		$this->load->view('viho_dashboard');
+>>>>>>> f269a04f5d6323646934ac5c959b136d10f350e7
 	}
 }

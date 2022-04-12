@@ -10,7 +10,10 @@ class Auth extends MY_Controller
 
 	public function index()
 	{
-		$this->load->view('index');
+		// template admin gratis
+		// $this->load->view('index');
+		// template viho
+		$this->load->view('viho_index');
 	}
 	public function register()
 	{
