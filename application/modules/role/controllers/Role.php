@@ -29,15 +29,10 @@ class Role extends MX_Controller
 		);
 		// var_dump($data['data']);
 		// die();
-<<<<<<< HEAD
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-=======
-		$this->load->view('viho/header');
-		$this->load->view('viho/sidebar');
->>>>>>> f269a04f5d6323646934ac5c959b136d10f350e7
 		$this->load->view('index', $data);
-		$this->load->view('viho/footer');
+		$this->load->view('template/footer');
 	}
 
 	public function tambah()

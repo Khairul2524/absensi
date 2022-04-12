@@ -3,11 +3,7 @@
 		<div class="page-header">
 			<div class="row">
 				<div class="col-sm-6">
-<<<<<<< HEAD
-					<h3 class="">List User</h3>
-=======
 					<h3>List Role</h3>
->>>>>>> f269a04f5d6323646934ac5c959b136d10f350e7
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="<?= base_url('user') ?>">User</a></li>
 					</ol>
@@ -15,7 +11,6 @@
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
 	<div class="flash-berhasil" data-flashberhasil="<?= $this->session->flashdata('berhasil') ?>"></div>
 	<div class="flash-gagal" data-flashgagal="<?= $this->session->flashdata('gagal') ?>"></div>
 	<!-- Container-fluid starts-->
@@ -84,19 +79,6 @@
 					<button class="btn btn-primary btn-square" type="submit">Simpan</button>
 				</div>
 			</form>
-=======
-	<div class="container-fluid">
-		<div class="card">
-			<div class="card-header">
-
-			</div>
-			<div class="card-body">
-
-			</div>
-			<div class="card-footer">
-
-			</div>
->>>>>>> f269a04f5d6323646934ac5c959b136d10f350e7
 		</div>
 	</div>
 </div>
