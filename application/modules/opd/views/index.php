@@ -29,7 +29,8 @@
 									<tr>
 										<th>NO</th>
 										<th>Organisasi Perangkakt Daerah</th>
-										<th>QR Code</th>
+										<th>Latitude</th>
+										<th>Longitude</th>
 										<th>Aksi</th>
 									</tr>
 								</thead>
@@ -42,9 +43,8 @@
 										<tr>
 											<td><?= $no++ ?></td>
 											<td><?= $d->opd ?></td>
-											<td>
-												<img src="<?= base_url('assets/backand/img/qrcode/') . $d->qr_code ?>" alt="" style="width: 100px;">
-											</td>
+											<td><?= $d->lat ?></td>
+											<td><?= $d->longt ?></td>
 											<td style="width: 150px;">
 												<button class="btn btn-warning btn-square tombol-ubah " type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal" data-id="<?= $d->idopd; ?>"><i class="fa fa-edit"></i></button>
 												<a href="<?= base_url('opd/hapus/') . $d->idopd ?>" class="btn btn-danger tombol-hapus"><i class="fa fa-trash"></i></a>

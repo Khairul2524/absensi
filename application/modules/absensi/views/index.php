@@ -31,11 +31,12 @@
 							<button class="btn btn-danger absen-pulang btn-square mt-2">
 								Absen Pulang
 							</button>
-							<button class="btn btn-warning btn-square mt-2" type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal">Absen Izin</button>
+							<button class="btn btn-warning btn-square mt-2 tombol-izin" type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal">Absen Izin</button>
 						<?php
 						}
 						?>
 					</div>
+
 					<div class="card-body">
 						<div class="table-responsive ">
 							<table class="row-border" id="basic-1">
@@ -168,7 +169,7 @@
 			}
 		})
 		// Absen Izin
-		$('.absen-izin').on('click', function() {
+		$('.tombol-izin').on('click', function() {
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(showPosition);
 			} else {
@@ -181,11 +182,31 @@
 				$('#lat').val(lat)
 				$('#long').val(long)
 			}
+		})
+		$('.absen-izin').on('click', function() {
+
 			var data = $('.absenizin').serialize()
 			$.ajax({
 				type: 'POST',
 				url: `<?= site_url('absensi/absen_izin') ?>`,
 				data: data,
+				// dataType: 'json',
+				// success: function(data) {
+				// 	if (data.status == 0) {
+				// 		// console.log('oke')
+				// 		swal(
+				// 			data.keterangan,
+				// 			'',
+				// 			'info'
+				// 		)
+				// 	} else {
+				// 		swal(
+				// 			data.keterangan,
+				// 			'',
+				// 			'success'
+				// 		)
+				// 	}
+				// }
 			});
 
 		})
