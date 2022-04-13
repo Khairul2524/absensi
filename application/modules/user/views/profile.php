@@ -70,7 +70,7 @@
                                                 <?= $user->nip; ?>
                                             </p>
                                         </div>
-                                        <div class="filter-view-group"><span class="f-w-600">OPD :</span>
+                                        <div class="filter-view-group"><span class="f-w-600">Organisasi Perangkat Daerah :</span>
                                             <p>
                                                 <?= $user->opd; ?>
                                             </p>
@@ -108,4 +108,3 @@
     </div>
 </div>
 <!-- Container-fluid Ends-->
-</div>

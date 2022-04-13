@@ -223,7 +223,7 @@
     </div>
 </div>
 <!-- Container-fluid Ends-->
-</div>
+
 
 <script>
     $(document).ready(function() {

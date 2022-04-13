@@ -22,7 +22,6 @@ class Absensi extends MX_Controller
 		);
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('template/topbar');
 		$this->load->view('index', $data);
 		$this->load->view('template/footer');
 	}
@@ -62,7 +61,7 @@ class Absensi extends MX_Controller
 								'long_masuk' => $longitude_sekarang,
 								'lat_pulang' => 0,
 								'long_pulang' => 0,
-								'status' => 1
+								'foto' => 1
 							);
 							$this->absensi->insert($datak);
 							$data = array(
@@ -178,6 +177,9 @@ class Absensi extends MX_Controller
 		$hari_ini = time();
 		$hari = date('D', $hari_ini);
 		$tgl = date('Y-m-d');
+		$foto = $_FILES['foto'];
+		// var_dump($foto);
+		// die;
 		$cek_hari_libur = $this->db->get_where('hari_libur', ['tanggal' => $tgl])->row();
 		if (!$cek_hari_libur) {
 			if ($hari != 'Sun' || $hari != 'Sat') {
@@ -197,7 +199,7 @@ class Absensi extends MX_Controller
 							'long_masuk' => $longitude_sekarang,
 							'lat_pulang' => $latitude_sekarang,
 							'long_pulang' => $longitude_sekarang,
-							'status' => 0
+							'foto' => 0
 						);
 						$this->absensi->insert($datak);
 						$data = array(
@@ -248,11 +250,11 @@ class Absensi extends MX_Controller
 			'user' => $this->all->getiduser($id),
 			'absen' => $this->all->getabsenuser($id)
 		);
+		// var_dump($data['user']);
 		// var_dump($data['absen']);
 		// die;
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
-		$this->load->view('template/topbar');
 		$this->load->view('detail', $data);
 		$this->load->view('template/footer');
 	}

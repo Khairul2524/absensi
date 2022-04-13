@@ -224,17 +224,12 @@
     </div>
 </div>
 <!-- Container-fluid Ends-->
-</div>
+
 
 <script>
     $(document).ready(function() {
         $("#opd").change(function() {
             var id_opd = $(this).val();
-<<<<<<< HEAD
-            console.log(id_opd);
-=======
-
->>>>>>> f269a04f5d6323646934ac5c959b136d10f350e7
             $.ajax({
                 url: `<?= base_url('user/get_bagian') ?>`,
                 type: 'post',

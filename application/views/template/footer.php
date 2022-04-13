@@ -26,8 +26,8 @@
         <!-- Plugins JS start-->
         <script src="<?= base_url('assets/backand') ?>/js/datatable/datatables/jquery.dataTables.min.js"></script>
         <script src="<?= base_url('assets/backand') ?>/js/datatable/datatables/datatable.custom.js"></script>
-        <script src="<?= base_url('assets/backand') ?>/js/sweet-alert/sweetalert.min.js"></script>
-        <script src="<?= base_url('assets/backand') ?>/js/sweet-alert/app.js"></script>
+        <!-- <script src="<?= base_url('assets/backand') ?>/js/sweet-alert/sweetalert.min.js"></script>
+        <script src="<?= base_url('assets/backand') ?>/js/sweet-alert/app.js"></script> -->
         <script src="<?= base_url('assets/backand') ?>/js/tooltip-init.js"></script>
         <!-- Plugins JS Ends-->
         <!-- Theme js-->
