@@ -45,7 +45,7 @@
 											<td><?= $d->opd ?></td>
 											<td><?= $d->lat ?></td>
 											<td><?= $d->longt ?></td>
-											<td style="width: 150px;">
+											<td style="width: 200px;">
 												<button class="btn btn-warning btn-square tombol-ubah " type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal" data-id="<?= $d->idopd; ?>"><i class="fa fa-edit"></i></button>
 												<a href="<?= base_url('opd/hapus/') . $d->idopd ?>" class="btn btn-danger tombol-hapus"><i class="fa fa-trash"></i></a>
 											</td>
@@ -79,6 +79,14 @@
 						<label class="form-label">Organisasi Perangkat Daerah</label>
 						<input class="form-control btn-square" id="opd" name="opd" type="text" required autocomplete="off">
 					</div>
+					<div class="form-group">
+						<label class="form-label">Latitude</label>
+						<input class="form-control btn-square" id="lat" name="lat" type="text" required autocomplete="off">
+					</div>
+					<div class="form-group">
+						<label class="form-label">Longtitude</label>
+						<input class="form-control btn-square" id="long" name="long" type="text" required autocomplete="off">
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-danger btn-square" type="button" data-bs-dismiss="modal">Batal</button>
@@ -97,6 +105,8 @@
 			$('.modal-footer button[type= submit] ').html('Simpan')
 			$('#id').val('')
 			$('#opd').val('')
+			$('#lat').val('')
+			$('#long').val('')
 		})
 		// ubah
 		$('.tombol-ubah').on('click', function() {
@@ -117,6 +127,8 @@
 
 					$('#id').val(data.idopd)
 					$('#opd').val(data.opd)
+					$('#lat').val(data.lat)
+					$('#long').val(data.longt)
 
 				}
 			})

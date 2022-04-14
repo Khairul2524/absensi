@@ -8,7 +8,7 @@ class Opd extends MX_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('role') != 1) {
+		if ($this->session->userdata('role') == 4) {
 			redirect('auth');
 		} else {
 			if (!$this->session->userdata('role')) {
@@ -46,6 +46,8 @@ class Opd extends MX_Controller
 		if (!$cek) {
 			$data = array(
 				'opd' => $opd,
+				'lat' => $this->input->post('lat'),
+				'longt' => $this->input->post('long'),
 				'qr_code' => $opd . '.png'
 			);
 			$this->db->insert('opd', $data);
@@ -111,6 +113,8 @@ class Opd extends MX_Controller
 		$data = array(
 			'idopd' => htmlspecialchars($this->input->post('id')),
 			'opd' => $opd,
+			'lat' => $this->input->post('lat'),
+			'longt' => $this->input->post('long'),
 			'qr_code' => $image_name
 		);
 		// print_r($data);

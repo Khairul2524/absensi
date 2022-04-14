@@ -201,7 +201,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 col-xl-6 box-col-6">
+                            <!-- <div class="col-sm-12 col-xl-6 box-col-6">
                                 <div class="card">
                                     <div class="card-header pb-0">
                                         <h5>Performence </h5>
@@ -265,196 +265,196 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Container-fluid Ends-->
-                </div>
-                <!-- Container-fluid starts-->
-                <div class="container-fluid calendar-basic">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div id="menu">
-                                                <div id="menu-navi">
-                                                    <div class="menu-navi-left">
-                                                        <button class="btn btn-primary move-today" type="button" data-action="move-today">Today</button>
+                    </div> -->
+                            <!-- Container-fluid Ends-->
+                            <!-- </div> -->
+                            <!-- Container-fluid starts-->
+                            <div class="container-fluid calendar-basic">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div id="menu">
+                                                            <div id="menu-navi">
+                                                                <div class="menu-navi-left">
+                                                                    <button class="btn btn-primary move-today" type="button" data-action="move-today">Today</button>
+                                                                </div>
+                                                                <div class="render-range menu-navi-center" id="renderRange"></div>
+                                                                <div class="menu-navi-right">
+                                                                    <button class="btn btn-primary" id="dropdownMenu-calendarType" type="button" data-bs-toggle="dropdown"><i id="calendarTypeIcon"></i><span id="calendarTypeName">Dropdown</span><i class="fa fa-angle-down"></i></button>
+                                                                    <ul class="dropdown-menu" role="menu">
+                                                                        <li role="presentation"><a class="dropdown-menu-title" role="menuitem" data-action="toggle-daily"><i class="fa fa-bars"></i>Daily</a></li>
+                                                                        <li role="presentation"><a class="dropdown-menu-title" role="menuitem" data-action="toggle-weekly"><i class="fa fa-th-large"></i>Weekly</a></li>
+                                                                        <li role="presentation"><a class="dropdown-menu-title" role="menuitem" data-action="toggle-monthly"><i class="fa fa-th"></i>Month</a></li>
+                                                                        <li role="presentation"><a class="dropdown-menu-title" role="menuitem" data-action="toggle-weeks2"><i class="fa fa-th-large"></i>2 weeks</a></li>
+                                                                        <li role="presentation"><a class="dropdown-menu-title" role="menuitem" data-action="toggle-weeks3"><i class="fa fa-th-large"></i>3 weeks</a></li>
+                                                                        <li class="dropdown-divider" role="presentation"></li>
+                                                                        <li role="presentation"><a role="menuitem" data-action="toggle-workweek">
+                                                                                <input class="tui-full-calendar-checkbox-square" type="checkbox" value="toggle-workweek" checked=""><span class="checkbox-title"></span>Show weekends</a></li>
+                                                                        <li role="presentation"><a role="menuitem" data-action="toggle-start-day-1">
+                                                                                <input class="tui-full-calendar-checkbox-square" type="checkbox" value="toggle-start-day-1"><span class="checkbox-title"></span>Start Week on Monday</a></li>
+                                                                        <li role="presentation"><a role="menuitem" data-action="toggle-narrow-weekend">
+                                                                                <input class="tui-full-calendar-checkbox-square" type="checkbox" value="toggle-narrow-weekend"><span class="checkbox-title"></span>Narrower than weekdays</a></li>
+                                                                    </ul>
+                                                                    <div class="move-btn">
+                                                                        <button class="btn btn-primary move-day" type="button" data-action="move-prev"><i class="fa fa-angle-left" data-action="move-prev"></i></button>
+                                                                        <button class="btn btn-primary move-day" type="button" data-action="move-next"><i class="fa fa-angle-right" data-action="move-next"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="lnb">
+                                                            <div class="lnb-new-schedule">
+                                                                <button class="btn lnb-new-schedule-btn btn-primary" id="btn-new-schedule" type="button" data-bs-toggle="modal">New schedule</button>
+                                                            </div>
+                                                            <div class="lnb-calendars" id="lnb-calendars">
+                                                                <div class="lnb-calendars-d1" id="calendarList"></div>
+                                                                <div class="lnb-calendars-item m-0 p-0">
+                                                                    <label>
+                                                                        <input class="tui-full-calendar-checkbox-square" type="checkbox" value="all" checked=""><span></span><strong>View all</strong>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="render-range menu-navi-center" id="renderRange"></div>
-                                                    <div class="menu-navi-right">
-                                                        <button class="btn btn-primary" id="dropdownMenu-calendarType" type="button" data-bs-toggle="dropdown"><i id="calendarTypeIcon"></i><span id="calendarTypeName">Dropdown</span><i class="fa fa-angle-down"></i></button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li role="presentation"><a class="dropdown-menu-title" role="menuitem" data-action="toggle-daily"><i class="fa fa-bars"></i>Daily</a></li>
-                                                            <li role="presentation"><a class="dropdown-menu-title" role="menuitem" data-action="toggle-weekly"><i class="fa fa-th-large"></i>Weekly</a></li>
-                                                            <li role="presentation"><a class="dropdown-menu-title" role="menuitem" data-action="toggle-monthly"><i class="fa fa-th"></i>Month</a></li>
-                                                            <li role="presentation"><a class="dropdown-menu-title" role="menuitem" data-action="toggle-weeks2"><i class="fa fa-th-large"></i>2 weeks</a></li>
-                                                            <li role="presentation"><a class="dropdown-menu-title" role="menuitem" data-action="toggle-weeks3"><i class="fa fa-th-large"></i>3 weeks</a></li>
-                                                            <li class="dropdown-divider" role="presentation"></li>
-                                                            <li role="presentation"><a role="menuitem" data-action="toggle-workweek">
-                                                                    <input class="tui-full-calendar-checkbox-square" type="checkbox" value="toggle-workweek" checked=""><span class="checkbox-title"></span>Show weekends</a></li>
-                                                            <li role="presentation"><a role="menuitem" data-action="toggle-start-day-1">
-                                                                    <input class="tui-full-calendar-checkbox-square" type="checkbox" value="toggle-start-day-1"><span class="checkbox-title"></span>Start Week on Monday</a></li>
-                                                            <li role="presentation"><a role="menuitem" data-action="toggle-narrow-weekend">
-                                                                    <input class="tui-full-calendar-checkbox-square" type="checkbox" value="toggle-narrow-weekend"><span class="checkbox-title"></span>Narrower than weekdays</a></li>
-                                                        </ul>
-                                                        <div class="move-btn">
-                                                            <button class="btn btn-primary move-day" type="button" data-action="move-prev"><i class="fa fa-angle-left" data-action="move-prev"></i></button>
-                                                            <button class="btn btn-primary move-day" type="button" data-action="move-next"><i class="fa fa-angle-right" data-action="move-next"></i></button>
+                                                    <div class="col-md-12">
+                                                        <div id="right">
+                                                            <div id="calendar"></div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div id="lnb">
-                                                <div class="lnb-new-schedule">
-                                                    <button class="btn lnb-new-schedule-btn btn-primary" id="btn-new-schedule" type="button" data-bs-toggle="modal">New schedule</button>
-                                                </div>
-                                                <div class="lnb-calendars" id="lnb-calendars">
-                                                    <div class="lnb-calendars-d1" id="calendarList"></div>
-                                                    <div class="lnb-calendars-item m-0 p-0">
-                                                        <label>
-                                                            <input class="tui-full-calendar-checkbox-square" type="checkbox" value="all" checked=""><span></span><strong>View all</strong>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div id="right">
-                                                <div id="calendar"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Container-fluid Ends-->
                         </div>
                     </div>
+                    <!-- footer start-->
+                    <footer class="footer footer-fix">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 footer-copyright">
+                                    <p class="mb-0">Copyright <?= date('Y'); ?> © Kominfo All rights reserved.</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="pull-right mb-0">Dinas Kominfo Lombok Tengah</p>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
                 </div>
-                <!-- Container-fluid Ends-->
             </div>
-        </div>
-        <!-- footer start-->
-        <footer class="footer footer-fix">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6 footer-copyright">
-                        <p class="mb-0">Copyright <?= date('Y'); ?> © Kominfo All rights reserved.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p class="pull-right mb-0">Dinas Kominfo Lombok Tengah</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-    </div>
-    <!-- latest jquery-->
-    <script src="<?= base_url('assets/viho') ?>/js/jquery-3.5.1.min.js"></script>
-    <!-- feather icon js-->
-    <script src="<?= base_url('assets/viho') ?>/js/icons/feather-icon/feather.min.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/icons/feather-icon/feather-icon.js"></script>
-    <!-- Sidebar jquery-->
-    <script src="<?= base_url('assets/viho') ?>/js/sidebar-menu.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/config.js"></script>
-    <!-- Bootstrap js-->
-    <script src="<?= base_url('assets/viho') ?>/js/bootstrap/popper.min.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/bootstrap/bootstrap.min.js"></script>
-    <!-- Plugins JS start-->
-    <script src="<?= base_url('assets/viho') ?>/js/chart/chartist/chartist.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/chart/chartist/chartist-plugin-tooltip.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/chart/knob/knob.min.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/chart/knob/knob-chart.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/chart/apex-chart/apex-chart.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/chart/apex-chart/stock-prices.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/prism/prism.min.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/clipboard/clipboard.min.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/counter/jquery.waypoints.min.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/counter/jquery.counterup.min.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/counter/counter-custom.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/custom-card/custom-card.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/notify/bootstrap-notify.min.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/vector-map/jquery-jvectormap-2.0.2.min.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/vector-map/map/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/vector-map/map/jquery-jvectormap-us-aea-en.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/vector-map/map/jquery-jvectormap-uk-mill-en.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/vector-map/map/jquery-jvectormap-au-mill.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/vector-map/map/jquery-jvectormap-chicago-mill-en.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/vector-map/map/jquery-jvectormap-in-mill.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/vector-map/map/jquery-jvectormap-asia-mill.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/dashboard/default.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/notify/index.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/datepicker/date-picker/datepicker.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/datepicker/date-picker/datepicker.en.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/datepicker/date-picker/datepicker.custom.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/chart/apex-chart/apex-chart.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/chart/apex-chart/stock-prices.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/calendar/tui-code-snippet.min.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/calendar/tui-time-picker.min.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/calendar/tui-date-picker.min.js"></script>
-    <!-- <script src="<?= base_url('assets/viho') ?>/js/calendar/moment.min.js"></script> -->
-    <!-- <script src="<?= base_url('assets/viho') ?>/js/calendar/chance.min.js"></script> -->
-    <script src="<?= base_url('assets/viho') ?>/js/calendar/tui-calendar.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/calendar/calendars.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/calendar/schedules.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/calendar/app.js"></script>
-    <!-- <script src="<?= base_url('assets/viho') ?>/js/chart/apex-chart/chart-custom.js"></script> -->
-    <!-- Plugins JS Ends-->
-    <!-- Theme js-->
-    <script src="<?= base_url('assets/viho') ?>/js/script.js"></script>
-    <script src="<?= base_url('assets/viho') ?>/js/theme-customizer/customizer.js"></script>
-    <!-- login js-->
-    <!-- Plugin used-->
-    <script>
-        // donut chart
-        var options9 = {
-            chart: {
-                width: 380,
-                type: 'donut',
-            },
-            series: [17, 15, 10],
-            labels: ["Hadir", "Izin", "Tidak Masuk"],
-            responsive: [{
-                breakpoint: 480,
-                options: {
+            <!-- latest jquery-->
+            <script src="<?= base_url('assets/viho') ?>/js/jquery-3.5.1.min.js"></script>
+            <!-- feather icon js-->
+            <script src="<?= base_url('assets/viho') ?>/js/icons/feather-icon/feather.min.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/icons/feather-icon/feather-icon.js"></script>
+            <!-- Sidebar jquery-->
+            <script src="<?= base_url('assets/viho') ?>/js/sidebar-menu.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/config.js"></script>
+            <!-- Bootstrap js-->
+            <script src="<?= base_url('assets/viho') ?>/js/bootstrap/popper.min.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/bootstrap/bootstrap.min.js"></script>
+            <!-- Plugins JS start-->
+            <script src="<?= base_url('assets/viho') ?>/js/chart/chartist/chartist.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/chart/chartist/chartist-plugin-tooltip.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/chart/knob/knob.min.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/chart/knob/knob-chart.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/chart/apex-chart/apex-chart.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/chart/apex-chart/stock-prices.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/prism/prism.min.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/clipboard/clipboard.min.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/counter/jquery.waypoints.min.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/counter/jquery.counterup.min.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/counter/counter-custom.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/custom-card/custom-card.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/notify/bootstrap-notify.min.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/vector-map/jquery-jvectormap-2.0.2.min.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/vector-map/map/jquery-jvectormap-world-mill-en.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/vector-map/map/jquery-jvectormap-us-aea-en.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/vector-map/map/jquery-jvectormap-uk-mill-en.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/vector-map/map/jquery-jvectormap-au-mill.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/vector-map/map/jquery-jvectormap-chicago-mill-en.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/vector-map/map/jquery-jvectormap-in-mill.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/vector-map/map/jquery-jvectormap-asia-mill.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/dashboard/default.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/notify/index.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/datepicker/date-picker/datepicker.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/datepicker/date-picker/datepicker.en.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/datepicker/date-picker/datepicker.custom.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/chart/apex-chart/apex-chart.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/chart/apex-chart/stock-prices.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/calendar/tui-code-snippet.min.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/calendar/tui-time-picker.min.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/calendar/tui-date-picker.min.js"></script>
+            <!-- <script src="<?= base_url('assets/viho') ?>/js/calendar/moment.min.js"></script> -->
+            <!-- <script src="<?= base_url('assets/viho') ?>/js/calendar/chance.min.js"></script> -->
+            <script src="<?= base_url('assets/viho') ?>/js/calendar/tui-calendar.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/calendar/calendars.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/calendar/schedules.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/calendar/app.js"></script>
+            <!-- <script src="<?= base_url('assets/viho') ?>/js/chart/apex-chart/chart-custom.js"></script> -->
+            <!-- Plugins JS Ends-->
+            <!-- Theme js-->
+            <script src="<?= base_url('assets/viho') ?>/js/script.js"></script>
+            <script src="<?= base_url('assets/viho') ?>/js/theme-customizer/customizer.js"></script>
+            <!-- login js-->
+            <!-- Plugin used-->
+            <script>
+                // donut chart
+                var options9 = {
                     chart: {
-                        width: 200
+                        width: 380,
+                        type: 'donut',
                     },
-                    legend: {
-                        position: 'bottom'
-                    },
+                    series: [17, 15, 10],
+                    labels: ["Hadir", "Izin", "Tidak Masuk"],
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            chart: {
+                                width: 200
+                            },
+                            legend: {
+                                position: 'bottom'
+                            },
+                        }
+                    }],
+                    colors: [vihoAdminConfig.primary, vihoAdminConfig.secondary, '#222222', '#717171', '#e2c636']
                 }
-            }],
-            colors: [vihoAdminConfig.primary, vihoAdminConfig.secondary, '#222222', '#717171', '#e2c636']
-        }
 
-        var chart9 = new ApexCharts(
-            document.querySelector("#donutchart"),
-            options9
-        );
-        chart9.render();
-    </script>
-    <script>
-        calendar.createSchedules([{
-                id: '1',
-                calendarId: '1',
-                title: 'my schedule',
-                category: 'time',
-                dueDateClass: '',
-                start: '2018-01-18T22:30:00+09:00',
-                end: '2018-01-19T02:30:00+09:00'
-            },
-            {
-                id: '2',
-                calendarId: '1',
-                title: 'second schedule',
-                category: 'time',
-                dueDateClass: '',
-                start: '2022-03-23T17:30:00+09:00',
-                end: '2022-03-24T17:31:00+09:00',
-                isReadOnly: true // schedule is read-only
-            }
-        ]);
-    </script>
+                var chart9 = new ApexCharts(
+                    document.querySelector("#donutchart"),
+                    options9
+                );
+                chart9.render();
+            </script>
+            <script>
+                calendar.createSchedules([{
+                        id: '1',
+                        calendarId: '1',
+                        title: 'my schedule',
+                        category: 'time',
+                        dueDateClass: '',
+                        start: '2018-01-18T22:30:00+09:00',
+                        end: '2018-01-19T02:30:00+09:00'
+                    },
+                    {
+                        id: '2',
+                        calendarId: '1',
+                        title: 'second schedule',
+                        category: 'time',
+                        dueDateClass: '',
+                        start: '2022-03-23T17:30:00+09:00',
+                        end: '2022-03-24T17:31:00+09:00',
+                        isReadOnly: true // schedule is read-only
+                    }
+                ]);
+            </script>
 </body>
 
 </html>

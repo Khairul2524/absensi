@@ -1,3 +1,11 @@
+<?php
+if ($this->session->userdata('role') == 4) {
+    $hidden = 'hidden';
+} else {
+    $hidden = '';
+}
+
+?>
 <!-- Page Body Start-->
 <div class="page-body-wrapper horizontal-menu">
     <!-- Page Sidebar Start-->
@@ -31,26 +39,26 @@
                         <li class="back-btn">
                             <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                         </li>
-                        <li class="dropdown"><a class="nav-link menu-title link-nav" href="<?= base_url('dashboard/dash') ?>"><i data-feather="home"></i><span>Dashboard</span></a>
+                        <li class="dropdown"><a class="nav-link menu-title link-nav" href="<?= base_url('dashboard/dash') ?>" <?= $hidden ?>><i data-feather="home"></i><span>Dashboard</span></a>
                         </li>
                         <li class="dropdown"><a class="nav-link menu-title link-nav" href="<?= base_url('dashboard/cek') ?>"><i data-feather="user"></i><span>Profile</span></a>
                         </li>
                         <li class="dropdown"><a class="nav-link menu-title link-nav" href="<?= base_url('absensi') ?>"><i data-feather="user-check"></i><span>Absen</span></a>
                         </li>
-                        <li class="dropdown"> <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="server"></i><span>Admin OPD </span></a>
+                        <li class="dropdown"> <a class="nav-link menu-title" href="javascript:void(0)" <?= $hidden ?>><i data-feather="server"></i><span>Admin OPD </span></a>
                             <ul class="nav-submenu menu-content">
                                 <li><a href="<?= base_url('opd') ?>">OPD Loteng</a></li>
                                 <li><a href="<?= base_url('bagian') ?>">Bidang OPD</a></li>
                                 <li><a href="<?= base_url('hari_libur') ?>">Hari Libur</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown"> <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="package"></i><span>Rekapan Absensi</span></a>
+                        <!-- <li class="dropdown"> <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="package"></i><span>Rekapan Absensi</span></a>
                             <ul class="nav-submenu menu-content">
                                 <li><a href="datepicker.html">Rekapan</a></li>
                                 <li><a href="time-picker.html">Laporan</a></li>
                             </ul>
-                        </li>
-                        <li class="dropdown"> <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="users"></i><span>Manajemen User</span></a>
+                        </li> -->
+                        <li class="dropdown"> <a class="nav-link menu-title" href="javascript:void(0)" <?= $hidden ?>><i data-feather="users"></i><span>Manajemen User</span></a>
                             <ul class="nav-submenu menu-content">
                                 <li><a href="<?= base_url('user') ?>">User</a></li>
                                 <li><a href="<?= base_url('role') ?>">Role</a></li>
