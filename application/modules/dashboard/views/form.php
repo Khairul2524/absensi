@@ -70,7 +70,7 @@
                                                 <option value="">Piih OPD</option>
                                                 <?php
                                                 foreach ($opd as $opd) {
-                                                    echo ' <option ' . $select . ' class="pilihan" value=" ' . $opd->idopd . '">' . $opd->opd . '</option>';
+                                                    echo ' <option value=" ' . $opd->idopd . '">' . $opd->opd . '</option>';
                                                 } ?>
                                             </select>
                                         </div>
@@ -78,7 +78,7 @@
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label>Bidang</label>
-                                            <select name="bagian" id="bagian" class="form-control btn-square" required autocomplete="off">
+                                            <select name="bidang" id="bidang" class="form-control btn-square" required autocomplete="off">
                                             </select>
                                         </div>
                                     </div>
@@ -124,25 +124,25 @@
     $(document).ready(function() {
         $("#opd").change(function() {
             var id_opd = $(this).val();
-            console.log(id_opd);
+            // console.log(id_opd);
             $.ajax({
-                url: `<?= base_url('user/get_bagian') ?>`,
+                url: `<?= base_url('dashboard/get_bagian') ?>`,
                 type: 'post',
                 data: {
                     opd_id: id_opd
                 },
                 dataType: 'json',
                 success: function(response) {
-                    console.log(response)
+                    // console.log(response)
                     var len = response.length;
 
-                    $("#bagian").empty();
-                    $("#bagian").append("<option value=''>Pilih Bidang</option>");
+                    $("#bidang").empty();
+                    $("#bidang").append("<option value=''>Pilih Bidang</option>");
                     for (var i = 0; i < len; i++) {
                         var id = response[i]['id_bagian'];
                         var name = response[i]['nama_bagian'];
 
-                        $("#bagian").append("<option value='" + id + "'>" + name + "</option>");
+                        $("#bidang").append("<option value='" + id + "'>" + name + "</option>");
                     }
                 }
             });
