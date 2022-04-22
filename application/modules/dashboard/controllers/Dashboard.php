@@ -6,6 +6,7 @@ class Dashboard extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
+
 		$this->load->model('All_model', 'all');
 	}
 
@@ -25,19 +26,28 @@ class Dashboard extends MY_Controller
 		$google_oauthv2 = new Google_Oauth2Service($google_client);
 		if ($google_client->authenticate($_GET['code'])) {
 			$gpuserprofile = $google_oauthv2->userinfo->get();
+
 			$nama = $gpuserprofile['given_name'] . " " . $gpuserprofile['family_name'];
 			$email = $gpuserprofile['email'];
+			// $foto = $gpuserprofile['picture'];
 			$data = array(
 				'namalengkap' => $nama,
 				'email' => $email,
-				'role' => 4
+				'role' => 4,
+				// 'foto' => $foto,
 			);
 			$this->session->set_userdata($data);
+			$porfile = array(
+				'user' => $gpuserprofile
+			);
+			$this->session->set_userdata($porfile);
 			redirect('dashboard/cek');
 		}
 	}
 	public function cek()
 	{
+		// var_dump($this->session->userdata('user'));
+		// die;
 		$email = $this->session->userdata('email');
 		$cek = $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->join('role', 'role.idrole=user.idrole')->join('bagian', 'bagian.id_bagian=user.id_bagian')->where(['email' => $email])->get()->row();
 		// var_dump($cek);
@@ -94,12 +104,28 @@ class Dashboard extends MY_Controller
 			$config['upload_path']      = './assets/backand/img/profile/';
 			$config['allowed_types']    = 'jpg|png|jpeg|gif';
 			$config['overwrite']        = 'true';
+			// $config['file_name']        = 'file_name';
 			$this->load->library('upload', $config);
 			if (!$this->upload->do_upload('foto')) {
 				$this->session->set_flashdata('gagal', 'Foto Gagal Diupload');
 				redirect('user/tambah');
 			} else {
 				$foto = $this->upload->data('file_name');
+
+				// library yang disediakan codeigniter
+				$config['image_library']  = 'gd2';
+				// gambar yang akan dibuat thumbnail
+				$config['source_image']   = './assets/backand/img/profile/' . $foto . '';
+
+				// rasio resolusi
+				$config['maintain_ratio'] = FALSE;
+				// lebar
+				$config['width']          = 200;
+				// tinggi
+				$config['height']         = 200;
+
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
 			}
 		}
 		$data = array(

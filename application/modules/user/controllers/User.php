@@ -6,7 +6,7 @@ class User extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('role') == 1) {
+		if ($this->session->userdata('role') == 4) {
 			redirect('auth');
 		}
 		$this->load->model('All_model', 'all');

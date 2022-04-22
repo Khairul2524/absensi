@@ -21,6 +21,7 @@ class Auth extends MY_Controller
 	}
 	public function akun()
 	{
+		// $urls = base_url('') 'http://localhost/absensi/dashboard'
 		$url = include_once APPPATH . "../assets/google/Google_Client.php";
 		$url = include_once APPPATH . "../assets/google/contrib/Google_Oauth2Service.php";
 		$google_client = new Google_Client();
@@ -47,7 +48,7 @@ class Auth extends MY_Controller
 			$data = array(
 				'nama' => $nama,
 				'email' => $email,
-				'role'		=> 5,
+				'role'		=> 4,
 			);
 			$this->session->set_userdata($data);
 			redirect('dashboard/cek');
