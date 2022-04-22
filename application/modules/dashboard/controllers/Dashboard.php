@@ -95,6 +95,11 @@ class Dashboard extends MY_Controller
 		$this->load->view('profile', $data);
 		$this->load->view('template/footer');
 	}
+	public function get_bagian()
+	{
+		$id = $_POST['opd_id'];
+		echo json_encode($this->all->getidbagian($id));
+	}
 	public function simpan()
 	{
 		$foto = $_FILES['foto'];
