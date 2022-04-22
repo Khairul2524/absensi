@@ -133,7 +133,7 @@
                 },
                 dataType: 'json',
                 success: function(response) {
-                    console.log(response)
+                    // console.log(response)
                     var len = response.length;
 
                     $("#bagian").empty();

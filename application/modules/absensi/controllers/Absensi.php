@@ -63,7 +63,8 @@ class Absensi extends MX_Controller
 								'long_masuk' => $longitude_sekarang,
 								'lat_pulang' => 0,
 								'long_pulang' => 0,
-								'foto' => 1
+								'foto' => 1,
+								'ket'  => '-'
 							);
 							$this->absensi->insert($datak);
 							$data = array(
