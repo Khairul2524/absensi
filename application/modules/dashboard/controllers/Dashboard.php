@@ -142,7 +142,7 @@ class Dashboard extends MY_Controller
 			'no'	=> htmlspecialchars($this->input->post('no')),
 			'idopd'	=> htmlspecialchars($this->input->post('opd')),
 			'statustenaga'	=> htmlspecialchars($this->input->post('st')),
-			'id_bagian' => htmlspecialchars($this->input->post('bagian')),
+			'id_bagian' => htmlspecialchars($this->input->post('bidang')),
 			'foto' =>  $foto,
 			'aktif'	=> 1,
 			'idrole' => 4,

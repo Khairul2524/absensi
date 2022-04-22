@@ -20,7 +20,7 @@ if ($this->session->userdata('role') == 4) {
                 <img class="img-90 rounded-circle" src="<?= base_url('assets/backand/img/default.png') ?>">
             <?php
             } ?>
-            <div class="badge-bottom"><span class="badge badge-primary">New</span></div><a href="user-profile.html">
+            <div class="badge-bottom"><span class="badge badge-primary">New</span></div><a href="#">
                 <h6 class="mt-3 f-14 f-w-600"><?= $this->session->userdata('namalengkap') ?></h6>
             </a>
             <p class="mb-0 font-roboto">

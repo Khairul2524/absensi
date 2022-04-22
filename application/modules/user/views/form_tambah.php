@@ -138,7 +138,7 @@
   $(document).ready(function() {
     $("#opd").change(function() {
       var id_opd = $(this).val();
-      console.log(id_opd);
+      // console.log(id_opd);
       $.ajax({
         url: `<?= base_url('user/get_bagian') ?>`,
         type: 'post',
@@ -147,7 +147,7 @@
         },
         dataType: 'json',
         success: function(response) {
-          console.log(response)
+          // console.log(response)
           var len = response.length;
 
           $("#bagian").empty();

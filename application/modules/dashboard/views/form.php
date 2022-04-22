@@ -104,8 +104,8 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="text-end">
-                                            <button class="btn btn-primary me-3 btn-square" type="submit">Simpan</button>
-                                            <button class="btn btn-warning me-3 btn-square" type="reset">Reset</button>
+                                            <button class="btn btn-primary btn-square" type="submit">Simpan</button>
+                                            <button class="btn btn-warning btn-square" type="reset">Reset</button>
                                             <a class="btn btn-danger btn-square" href="<?= base_url('user') ?>">Kembali</a>
                                         </div>
                                     </div>
