@@ -60,117 +60,11 @@
                                                 <?= $user->no; ?>
                                             </p>
                                         </div>
-                                        <div class="filter-view-group"><span class="f-w-600">NIK :</span>
-                                            <p>
-                                                <?= $user->nik; ?>
-                                            </p>
-                                        </div>
-                                        <div class="filter-view-group"><span class="f-w-600">NIP :</span>
-                                            <p>
-                                                <?= $user->nip; ?>
-                                            </p>
-                                        </div>
-                                        <div class="filter-view-group"><span class="f-w-600">Tenaga :</span>
-                                            <p>
-                                                <?php
-                                                if ($user->statustenaga = 1) {
-                                                    echo "Honorer";
-                                                } else {
-                                                    echo "Pegawai Negeri Sipil";
-                                                }
-                                                ?>
-                                            </p>
-                                        </div>
-                                        <div class="filter-view-group"><span class="f-w-600">Created :</span>
-                                            <p>
-                                                <?= date('d-F-Y', $user->created_at); ?>
-                                            </p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header pb-0">
-                            <h5 class="sub-title mb-0">Organisasi Perangkat Daerah</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="card">
-                                <div class="collapse show" id="collapseicon2" aria-labelledby="collapseicon2" data-parent="#accordion">
-                                    <?php
-
-                                    $opd = $this->db->get_where('user', ['idopd' => $user->idopd, 'idrole' => 2])->row();
-                                    // var_dump($opd);
-                                    ?>
-                                    <div class="card-body filter-cards-view">
-                                        <div class="filter-view-group"><span class="f-w-600">Organisasi Perangkat Daerah :</span>
-                                            <p>
-                                                <?= $user->opd; ?>
-                                            </p>
-                                        </div>
-                                        <div class="filter-view-group"><span class="f-w-600">Admin OPD :</span>
-                                            <p>
-                                                <?= $opd->namalengkap; ?>
-                                            </p>
-                                        </div>
-
-                                        <div class="filter-view-group"><span class="f-w-600">NIP :</span>
-                                            <p>
-                                                <?= $opd->nip; ?>
-                                            </p>
-                                        </div>
-                                        <div class="filter-view-group"><span class="f-w-600">NO Hanphone :</span>
-                                            <p>
-                                                <?= $opd->no; ?>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header pb-0">
-                            <h6 class="sub-title mb-0">Bidang Organisasi Perangkat Daerah</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="card">
-                                <div class="collapse show" id="collapseicon2" aria-labelledby="collapseicon2" data-parent="#accordion">
-                                    <?php
-
-                                    $bagian = $this->db->get_where('user', ['id_bagian' => $user->id_bagian, 'idrole' => 3])->row();
-                                    // var_dump($opd);
-                                    ?>
-                                    <div class="card-body filter-cards-view">
-                                        <div class="filter-view-group"><span class="f-w-600">Bidang Organisasi Perangkat Daerah :</span>
+                                        <div class="filter-view-group"><span class="f-w-600">Bidang OPD :</span>
                                             <p>
                                                 <?= $user->nama_bagian; ?>
                                             </p>
                                         </div>
-                                        <div class="filter-view-group"><span class="f-w-600">Admin Atasan :</span>
-                                            <p>
-                                                <?= $bagian->namalengkap; ?>
-                                            </p>
-                                        </div>
-
-                                        <div class="filter-view-group"><span class="f-w-600">NIP :</span>
-                                            <p>
-                                                <?= $bagian->nip; ?>
-                                            </p>
-                                        </div>
-                                        <div class="filter-view-group"><span class="f-w-600">NO Hanphone :</span>
-                                            <p>
-                                                <?= $bagian->no; ?>
-                                            </p>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -178,6 +72,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row mb-lg-5">
                 <div class="col-md-12">
                     <div class="card">
@@ -193,7 +88,8 @@
                                         <th>Tanggal</th>
                                         <th>Jam Masuk</th>
                                         <th>Jam Pulang</th>
-
+                                        <th>Foto</th>
+                                        <th>Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -206,6 +102,10 @@
                                             <td><?= $ab->tgl ?></td>
                                             <td><?= $ab->jam_masuk ?></td>
                                             <td><?= $ab->jam_pulang ?></td>
+                                            <td class="text-center">
+                                                <img src="<?= site_url('assets/backand/img/izin/') . $ab->foto ?>" alt="" style="width: 100px;">
+                                            </td>
+                                            <td><?= $ab->ket ?></td>
                                         </tr>
                                     <?php } ?>
 

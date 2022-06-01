@@ -8,11 +8,12 @@ class Bagian extends MX_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		// if (!$this->session->userdata('email')) {
-		// 	redirect('auth');
-		// }
-		if ($this->session->userdata('role') != 1) {
+		if ($this->session->userdata('role') == 4 || $this->session->userdata('role') == 3) {
 			redirect('auth');
+		} else {
+			if (!$this->session->userdata('role')) {
+				redirect('auth');
+			}
 		}
 		$this->load->model('bagian_model', 'bagian');
 		$this->load->model('All_model', 'all');
@@ -20,12 +21,20 @@ class Bagian extends MX_Controller
 
 	public function index()
 	{
-
-		$data = array(
-			'judul' => 'Bagian Organisasi Perangkat Daerah',
-			'data' => $this->bagian->get(),
-			'opd' => $this->all->getopd()
-		);
+		$opd = $this->session->userdata('opd');
+		if ($this->session->userdata('role') == 1) {
+			$data = array(
+				'judul' => 'Bagian Organisasi Perangkat Daerah',
+				'data' => $this->bagian->get(),
+				'opd' => $this->all->getopd()
+			);
+		} else {
+			$data = array(
+				'judul' => 'Bagian Organisasi Perangkat Daerah',
+				'data' => $this->bagian->get($opd),
+				'opd' => $this->all->getopd($opd)
+			);
+		}
 		// var_dump($data['data']);
 		// die();
 		$this->load->view('template/header');

@@ -39,43 +39,9 @@
                                     <?php
                                     $no = 1;
                                     foreach ($user as $u) {
-                                        if ($this->session->userdata('role') == 2) {
-                                            if ($this->session->userdata('opd') == $u->idopd) {
+                                        if ($u->idrole != 1) {
 
                                     ?>
-                                                <tr>
-                                                    <td><?= $no++ ?></td>
-                                                    <td><?= $u->namalengkap ?></td>
-                                                    <td><?= $u->role ?></td>
-                                                    <td><?= $u->opd ?></td>
-                                                    <td><?= $u->nama_bagian ?></td>
-                                                    <td style="width: 175px;">
-                                                        <a href="<?= base_url('user/profile/') . $u->iduser ?>" class="btn btn-primary px-2"><i class="fa fa-user"></i></a>
-                                                        <a href="<?= base_url('user/edit/') . $u->iduser ?>" class="btn btn-warning px-2"><i class="fa fa-edit"></i></a>
-                                                        <a href="<?= base_url('user/hapus/') . $u->iduser ?>" class="btn btn-danger px-2 tombol-hapus"><i class="fa fa-trash"></i></a>
-                                                    </td>
-                                                </tr>
-                                            <?php }
-                                        } elseif ($this->session->userdata('role') == 3) {
-                                            if ($this->session->userdata('idbagian') == $u->id_bagian) {
-                                            ?>
-                                                <tr>
-                                                    <td><?= $no++ ?></td>
-                                                    <td><?= $u->namalengkap ?></td>
-                                                    <td><?= $u->role ?></td>
-                                                    <td><?= $u->opd ?></td>
-                                                    <td><?= $u->nama_bagian ?></td>
-                                                    <td style="width: 175px;">
-                                                        <a href="<?= base_url('user/profile/') . $u->iduser ?>" class="btn btn-primary px-2"><i class="fa fa-user"></i></a>
-                                                        <a href="<?= base_url('user/edit/') . $u->iduser ?>" class="btn btn-warning px-2"><i class="fa fa-edit"></i></a>
-                                                        <a href="<?= base_url('user/hapus/') . $u->iduser ?>" class="btn btn-danger px-2 tombol-hapus"><i class="fa fa-trash"></i></a>
-                                                    </td>
-                                                </tr>
-
-                                            <?php
-                                            }
-                                        } elseif ($this->session->userdata('role') == 1) {
-                                            ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $u->namalengkap ?></td>
@@ -88,11 +54,10 @@
                                                     <a href="<?= base_url('user/hapus/') . $u->iduser ?>" class="btn btn-danger px-2 tombol-hapus"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
-
-
                                     <?php
                                         }
-                                    } ?>
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>

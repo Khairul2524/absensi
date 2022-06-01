@@ -78,7 +78,7 @@
                                     <li><a href="<?= site_url('auth/akun') ?>" target="_blank"><i data-feather="mail"></i></a></li>
                                 </ul>
                             </div>
-                            <p>Don't have account?<a class="ms-2" href="log-in.html">Create Account</a></p>
+                            <!-- <p>Don't have account?<a class="ms-2" href="log-in.html">Create Account</a></p> -->
                         </form>
                     </div>
                 </div>

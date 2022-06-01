@@ -44,7 +44,7 @@
 											<td><?= $d->tanggal ?></td>
 											<td><?= $d->keterangan ?></td>
 											<td>
-												<button class="btn btn-warning btn-square tombol-ubah " type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal" data-id="<?= $d->id_hari_libur; ?>"><i class="fa fa-edit"></i></button>
+												<button class="btn btn-warning  tombol-ubah " type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal" data-id="<?= $d->id_hari_libur; ?>"><i class="fa fa-edit"></i></button>
 												<a href="<?= base_url('hari_libur/hapus/') . $d->id_hari_libur ?>" class="btn btn-danger tombol-hapus"><i class="fa fa-trash"></i></a>
 											</td>
 										</tr>

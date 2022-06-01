@@ -23,9 +23,13 @@ class All_model extends CI_Model
     }
     // Akhir Query Absensi
     // Awal Query OPD
-    public function getopd()
+    public function getopd($opd = null)
     {
-        return $this->db->get('opd')->result();
+        if ($opd) {
+            return $this->db->where('idopd', $opd)->get('opd')->result();
+        } else {
+            return $this->db->get('opd')->result();
+        }
     }
     public function getidopd($id)
     {
@@ -73,9 +77,17 @@ class All_model extends CI_Model
     }
     // Akhir Query Role
     // Awal Query User
-    public function getuser()
+    public function getuser($opd_id = null, $bagian_id = null)
     {
-        return $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->join('bagian', 'bagian.id_bagian=user.id_bagian')->join('role', 'role.idrole=user.idrole')->get()->result();
+        if ($opd_id) {
+            if ($bagian_id) {
+                return $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->join('bagian', 'bagian.id_bagian=user.id_bagian')->join('role', 'role.idrole=user.idrole')->order_by('role.idrole', 'ASC')->where('user.id_bagian', $bagian_id)->get()->result();
+            } else {
+                return $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->join('bagian', 'bagian.id_bagian=user.id_bagian')->join('role', 'role.idrole=user.idrole')->order_by('role.idrole', 'ASC')->where('id_opd', $opd_id)->get()->result();
+            }
+        } else {
+            return $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->join('bagian', 'bagian.id_bagian=user.id_bagian')->join('role', 'role.idrole=user.idrole')->order_by('role.idrole', 'ASC')->get()->result();
+        }
     }
     public function getiduser($id)
     {

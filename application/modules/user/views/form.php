@@ -195,14 +195,15 @@
                                         <select class="form-select btn-square digits" id="role" name="role" required autocomplete="off">
                                             <option value="">Piih Role</option>
                                             <?php
+
                                             foreach ($role as $role) {
 
-                                                if ($idrole == $role->idrole) {
-                                                    $select = "selected";
-                                                } else {
-                                                    $select = "";
-                                                }
-                                                if ($role->idrole != 1 && $role->idrole != 5) {
+                                                if ($role->idrole != 1) {
+                                                    if ($idrole == $role->idrole) {
+                                                        $select = "selected";
+                                                    } else {
+                                                        $select = "";
+                                                    }
                                             ?>
                                                     <option <?= $select; ?> value="<?= $role->idrole; ?>"><?= $role->role; ?></option>
                                             <?php }

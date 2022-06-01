@@ -232,7 +232,8 @@ class Absensi extends MX_Controller
 							'long_masuk' => $longitude_sekarang,
 							'lat_pulang' => $latitude_sekarang,
 							'long_pulang' => $longitude_sekarang,
-							'foto' => $foto
+							'foto' => $foto,
+							'ket' => htmlspecialchars($this->input->post('ket'))
 						);
 						$this->absensi->insert($datak);
 						$this->session->set_flashdata('berhasil', 'Anda Berhasil Absen Izin');

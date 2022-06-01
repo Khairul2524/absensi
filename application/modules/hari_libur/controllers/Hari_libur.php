@@ -8,8 +8,12 @@ class Hari_libur extends MX_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if (!$this->session->userdata('email')) {
+		if ($this->session->userdata('role') == 4 || $this->session->userdata('role') == 3 || $this->session->userdata('role') == 2) {
 			redirect('auth');
+		} else {
+			if (!$this->session->userdata('role')) {
+				redirect('auth');
+			}
 		}
 		$this->load->model('Hari_libur_model', 'hari_libur');
 		// $this->load->model('All_model', 'all');

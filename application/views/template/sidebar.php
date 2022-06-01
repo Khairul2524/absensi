@@ -45,13 +45,19 @@ if ($this->session->userdata('role') == 4) {
                         </li>
                         <li class="dropdown"><a class="nav-link menu-title link-nav" href="<?= base_url('absensi') ?>"><i data-feather="user-check"></i><span>Absen</span></a>
                         </li>
-                        <li class="dropdown"> <a class="nav-link menu-title" href="javascript:void(0)" <?= $hidden ?>><i data-feather="server"></i><span>Admin OPD </span></a>
-                            <ul class="nav-submenu menu-content">
-                                <li><a href="<?= base_url('opd') ?>">OPD Loteng</a></li>
-                                <li><a href="<?= base_url('bagian') ?>">Bidang OPD</a></li>
-                                <li><a href="<?= base_url('hari_libur') ?>">Hari Libur</a></li>
-                            </ul>
-                        </li>
+                        <?php
+                        if ($this->session->userdata('role') != 3) {
+                        ?>
+                            <li class="dropdown"> <a class="nav-link menu-title" href="javascript:void(0)" <?= $hidden ?>><i data-feather="server"></i><span>Admin OPD </span></a>
+                                <ul class="nav-submenu menu-content">
+                                    <li><a href="<?= base_url('opd') ?>">OPD Loteng</a></li>
+
+                                    <li><a href="<?= base_url('bagian') ?>">Bidang OPD</a></li>
+
+                                    <li><a href="<?= base_url('hari_libur') ?>">Hari Libur</a></li>
+                                </ul>
+                            </li>
+                        <?php } ?>
                         <!-- <li class="dropdown"> <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="package"></i><span>Rekapan Absensi</span></a>
                             <ul class="nav-submenu menu-content">
                                 <li><a href="datepicker.html">Rekapan</a></li>
@@ -61,7 +67,11 @@ if ($this->session->userdata('role') == 4) {
                         <li class="dropdown"> <a class="nav-link menu-title" href="javascript:void(0)" <?= $hidden ?>><i data-feather="users"></i><span>Manajemen User</span></a>
                             <ul class="nav-submenu menu-content">
                                 <li><a href="<?= base_url('user') ?>">User</a></li>
-                                <li><a href="<?= base_url('role') ?>">Role</a></li>
+                                <?php
+                                if ($this->session->userdata('role') == 1) {
+                                ?>
+                                    <li><a href="<?= base_url('role') ?>">Role</a></li>
+                                <?php } ?>
                             </ul>
                         </li>
 

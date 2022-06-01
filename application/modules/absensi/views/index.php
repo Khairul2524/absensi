@@ -42,11 +42,12 @@
 							<table class="row-border" id="basic-1">
 								<thead>
 									<tr>
-										<th>NO </th>
+										<th>Nama </th>
 										<th>Tanggal</th>
 										<th>Jam Masuk</th>
 										<th>Jam Pulang</th>
-										<th style="width:200px">Aksi</th>
+										<th>Keterangan</th>
+										<th>Aksi</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -79,6 +80,11 @@
 						<input class="" id="lat" name="lat" hidden>
 						<input class="" id="long" name="long" hidden>
 						<input class="form-control btn-square" id="foto" name="foto" type="file" required autocomplete="off">
+					</div>
+					<div class="form-group">
+						<label class="form-label">Keterangan</label>
+						<textarea name="ket" id="ket" class="form-control btn-square" cols="30" rows="5" required autocomplete="off"></textarea>
+
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -227,20 +233,20 @@
 			// console.log(data.result);
 			$.each(data.result, function() {
 				if (`<?= $this->session->userdata('role') ?>` == 1) {
-					$("tbody").append("<tr><td>" + this['namalengkap'] + "</td><td>" + this['tgl'] + "</td><td>" + this['jam_masuk'] + "</td><td>" + this['jam_pulang'] + "</td><td>" + `<a href="<?php echo base_url('absensi/detail/') ?>` + this['iduser'] + `" class="btn btn-primary btn-square ml-5"><i class="fa fa-eye"></i></a>` + "</td></tr>");
+					$("tbody").append("<tr><td>" + this['namalengkap'] + "</td><td>" + this['tgl'] + "</td><td>" + this['jam_masuk'] + "</td><td>" + this['jam_pulang'] + "</td><td>" + this['ket'] + "</td><td>" + `<a href="<?php echo base_url('absensi/detail/') ?>` + this['iduser'] + `" class="btn btn-outline-primary btn-square ml-5"><i class="fa fa-eye"></i></a>` + "</td></tr>");
 				} else if (`<?= $this->session->userdata('role') ?>` == 2) {
 					if (this['idopd'] == `<?= $this->session->userdata('opd') ?>`) {
-						$("tbody").append("<tr><td>" + this['namalengkap'] + "</td><td>" + this['tgl'] + "</td><td>" + this['jam_masuk'] + "</td><td>" + this['jam_pulang'] + "</td><td>" + `<a href="<?php echo base_url('absensi/detail/') ?>` + this['iduser'] + `" class="btn btn-primary btn-square"><i class="fa fa-eye"></i></a>` + "</td></tr>");
+						$("tbody").append("<tr><td>" + this['namalengkap'] + "</td><td>" + this['tgl'] + "</td><td>" + this['jam_masuk'] + "</td><td>" + this['jam_pulang'] + "</td><td>" + this['ket'] + "</td><td>" + `<a href="<?php echo base_url('absensi/detail/') ?>` + this['iduser'] + `" class="btn btn-outline-primary btn-square"><i class="fa fa-eye"></i></a>` + "</td></tr>");
 					}
 				} else if (`<?= $this->session->userdata('role') ?>` == 3) {
 					if (this['idopd'] == `<?= $this->session->userdata('opd') ?>`) {
 						if (this['id_bagian'] == `<?= $this->session->userdata('idbagian') ?>`) {
-							$("tbody").append("<tr><td>" + this['namalengkap'] + "</td><td>" + this['tgl'] + "</td><td>" + this['jam_masuk'] + "</td><td>" + this['jam_pulang'] + "</td><td>" + `<a href="<?php echo base_url('absensi/detail/') ?>` + this['iduser'] + `" class="btn btn-primary btn-square"><i class="fa fa-eye"></i></a>` + "</td></tr>");
+							$("tbody").append("<tr><td>" + this['namalengkap'] + "</td><td>" + this['tgl'] + "</td><td>" + this['jam_masuk'] + "</td><td>" + this['jam_pulang'] + "</td><td>" + this['ket'] + "</td><td>" + `<a href="<?php echo base_url('absensi/detail/') ?>` + this['iduser'] + `" class="btn btn-outline-primary btn-square"><i class="fa fa-eye"></i></a>` + "</td></tr>");
 						}
 					}
 				} else if (`<?= $this->session->userdata('role') ?>` == 4) {
 					if (this['id_user'] == `<?= $this->session->userdata('iduser') ?>`) {
-						$("tbody").append("<tr><td>" + this['namalengkap'] + "</td><td>" + this['tgl'] + "</td><td>" + this['jam_masuk'] + "</td><td>" + this['jam_pulang'] + "</td><td>" + `<a href="<?php echo base_url('absensi/detail/') ?>` + this['iduser'] + `" class="btn btn-primary btn-square"><i class="fa fa-eye"></i></a>` + "</td></tr>");
+						$("tbody").append("<tr><td>" + this['namalengkap'] + "</td><td>" + this['tgl'] + "</td><td>" + this['jam_masuk'] + "</td><td>" + this['jam_pulang'] + "</td><td>" + this['ket'] + "</td><td>" + `<ul><li><a href="<?php echo base_url('absensi/detail/') ?>` + this['iduser'] + `" class="btn btn-outline-warning btn-square">TD</i></li><li></a> <a href="<?php echo base_url('absensi/detail/') ?>` + this['iduser'] + `" class="btn  btn-outline-primary btn-square">Detail</i></a></li>` + "</td></tr>");
 					}
 				}
 			});

@@ -4,9 +4,13 @@ class Bagian_model extends CI_Model
 {
     public $tabel = 'bagian';
     public $id  = 'id_bagian';
-    public function get()
+    public function get($opd = null)
     {
-        return  $this->db->from($this->tabel)->join('opd', 'opd.idopd=bagian.id_opd')->get()->result();
+        if ($opd) {
+            return  $this->db->from($this->tabel)->join('opd', 'opd.idopd=bagian.id_opd')->where('id_opd', $opd)->get()->result();
+        } else {
+            return  $this->db->from($this->tabel)->join('opd', 'opd.idopd=bagian.id_opd')->get()->result();
+        }
     }
     public function insert($data)
     {

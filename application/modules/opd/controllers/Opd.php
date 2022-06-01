@@ -8,7 +8,7 @@ class Opd extends MX_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('role') == 4) {
+		if ($this->session->userdata('role') == 4 || $this->session->userdata('role') == 3 || $this->session->userdata('role') == 2) {
 			redirect('auth');
 		} else {
 			if (!$this->session->userdata('role')) {

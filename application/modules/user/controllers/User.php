@@ -15,10 +15,25 @@ class User extends MY_Controller
 
 	public function index()
 	{
-		$data = array(
-			'judul' => 'User',
-			'user' => $this->all->getuser(),
-		);
+		if ($this->session->userdata('role') == 1) {
+			$data = array(
+				'judul' => 'User',
+				'user' => $this->all->getuser(),
+			);
+		} elseif ($this->session->userdata('role') == 2) {
+			$opd_id = $this->session->userdata('opd');
+			$data = array(
+				'judul' => 'User',
+				'user' => $this->all->getuser($opd_id),
+			);
+		} elseif ($this->session->userdata('role') == 3) {
+			$opd_id = $this->session->userdata('opd');
+			$bagian_id = $this->session->userdata('idbagian');
+			$data = array(
+				'judul' => 'User',
+				'user' => $this->all->getuser($opd_id, $bagian_id),
+			);
+		}
 		// var_dump($data['user']);
 		// die;
 		$this->load->view('template/header');
