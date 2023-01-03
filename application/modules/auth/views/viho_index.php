@@ -70,14 +70,14 @@
                             <div class="form-group">
                                 <button class="btn btn-primary btn-block" type="submit">Sign in</button>
                             </div>
-                            <div class="login-social-title">
+                            <!-- <div class="login-social-title">
                                 <h5>Sign in with</h5>
                             </div>
                             <div class="form-group">
                                 <ul class="login-social">
                                     <li><a href="<?= site_url('auth/akun') ?>" target="_blank"><i data-feather="mail"></i></a></li>
                                 </ul>
-                            </div>
+                            </div> -->
                             <!-- <p>Don't have account?<a class="ms-2" href="log-in.html">Create Account</a></p> -->
                         </form>
                     </div>

@@ -39,7 +39,7 @@ if ($this->session->userdata('role') == 4) {
                         <li class="back-btn">
                             <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                         </li>
-                        <li class="dropdown"><a class="nav-link menu-title link-nav" href="<?= base_url('dashboard/dash') ?>" <?= $hidden ?>><i data-feather="home"></i><span>Dashboard</span></a>
+                        <li class="dropdown"><a class="nav-link menu-title link-nav" href="<?= base_url('dashb') ?>" <?= $hidden ?>><i data-feather="home"></i><span>Dashboard</span></a>
                         </li>
                         <li class="dropdown"><a class="nav-link menu-title link-nav" href="<?= base_url('dashboard/cek') ?>"><i data-feather="user"></i><span>Profile</span></a>
                         </li>

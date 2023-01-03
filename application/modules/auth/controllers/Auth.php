@@ -10,9 +10,6 @@ class Auth extends MY_Controller
 
 	public function index()
 	{
-		// template admin gratis
-		// $this->load->view('index');
-		// template viho
 		$this->load->view('viho_index');
 	}
 	public function register()
@@ -80,7 +77,7 @@ class Auth extends MY_Controller
 				// var_dump($data);
 				// die;
 				$this->session->set_userdata($data);
-				redirect('dashboard/dash');
+				redirect('dashb');
 			} else {
 				$this->session->set_flashdata('gagal', 'Password Anda Salah!');
 				redirect('auth');

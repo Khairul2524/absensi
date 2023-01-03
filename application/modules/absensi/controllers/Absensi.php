@@ -20,6 +20,7 @@ class Absensi extends MX_Controller
 			'judul' => 'Absensi',
 			'data' => $this->db->get('absensi')->result(),
 		);
+
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
 		$this->load->view('index', $data);
@@ -32,7 +33,7 @@ class Absensi extends MX_Controller
 		$tgl = date('Y-m-d');
 		$cek_hari_libur = $this->db->get_where('hari_libur', ['tanggal' => $tgl])->row();
 		if (!$cek_hari_libur) {
-			if ($hari != 'Sun' || $hari != 'Sat') {
+			if ($hari != 'Sun' && $hari != 'Sat') {
 				$cek_absen = $this->db->get_where('absensi', ['id_user' => $this->session->userdata('iduser'), 'tgl' => $tgl])->row();
 				if (!$cek_absen) {
 					// ambil titik opd 	
@@ -183,10 +184,9 @@ class Absensi extends MX_Controller
 		$hari = date('D', $hari_ini);
 		$tgl = date('Y-m-d');
 		$foto_izin = $_FILES['foto'];
-
 		$cek_hari_libur = $this->db->get_where('hari_libur', ['tanggal' => $tgl])->row();
 		if (!$cek_hari_libur) {
-			if ($hari != 'Sun' || $hari != 'Sat') {
+			if ($hari != 'Sun' && $hari != 'Sat') {
 				$cek_absen = $this->db->get_where('absensi', ['id_user' => $this->session->userdata('iduser'), 'tgl' => $tgl])->row();
 				if (!$cek_absen) {
 					// upload foto surat izin
@@ -255,6 +255,60 @@ class Absensi extends MX_Controller
 			redirect('absensi');
 		}
 	}
+	public function tugas_dinas()
+	{
+		$tgl = date('Y-m-d');
+		$foto_td = $_FILES['foto'];
+		$cek_absen = $this->db->get_where('absensi', ['id_user' => $this->session->userdata('iduser'), 'tgl' => $tgl])->row();
+		// var_dump($cek_absen);
+		if ($cek_absen) {
+			if ($cek_absen->jam_pulang == '00:00') {
+				$config['upload_path']      = './assets/backand/img/izin/';
+				$config['allowed_types']    = 'jpg|png|jpeg|gif';
+				$config['overwrite']        = 'true';
+				// $config['file_name']        = 'file_name';
+				$this->load->library('upload', $config);
+				if (!$this->upload->do_upload('foto')) {
+					$this->session->set_flashdata('gagal', 'Foto Gagal Diupload');
+					redirect('user/tambah');
+				} else {
+					$foto = $this->upload->data('file_name');
+
+					// library yang disediakan codeigniter
+					$config['image_library']  = 'gd2';
+					// gambar yang akan dibuat thumbnail
+					$config['source_image']   = './assets/backand/img/izin/' . $foto . '';
+
+					// rasio resolusi
+					$config['maintain_ratio'] = FALSE;
+					// lebar
+					$config['width']          = 500;
+					// tinggi
+					$config['height']         = 500;
+
+					$this->load->library('image_lib', $config);
+					$this->image_lib->resize();
+				}
+				$jam_pulang = date('H:i', time());
+				$dataks = array(
+					'id_absensi' => $cek_absen->id_absensi,
+					'id_user' => $this->session->userdata('iduser'),
+					'jam_pulang' => $jam_pulang,
+					'foto' => $foto,
+					'ket' => htmlspecialchars($this->input->post('ket'))
+				);
+				$this->absensi->update($cek_absen->id_absensi, $dataks);
+				$this->session->set_flashdata('berhasil', 'Anda Berhasil Absen Tugas Dinas');
+				redirect('absensi');
+			} else {
+				$this->session->set_flashdata('gagal', 'Anda Sudah Absen');
+				redirect('absensi');
+			}
+		} else {
+			$this->session->set_flashdata('gagal', 'Anda Sudah Absen');
+			redirect('absensi');
+		}
+	}
 	public function getdata()
 	{
 		foreach ($this->absensi->getall() as $data) {
@@ -276,17 +330,7 @@ class Absensi extends MX_Controller
 		$this->load->view('detail', $data);
 		$this->load->view('template/footer');
 	}
-	public function rest()
-	{
-
-		$hari_ini = time();
-		$hari = date('D', $hari_ini);
-		$tgl = date('Y-m-d');
-		echo $this->session->userdata('iduser');
-		$cek_absen = $this->db->get_where('absensi', ['id_user' => $this->session->userdata('iduser'), 'tgl' => $tgl])->row();
-		var_dump($cek_absen);
-	}
-	public function lokasi()
+	public function coba()
 	{
 		$this->load->view('lokasi');
 	}

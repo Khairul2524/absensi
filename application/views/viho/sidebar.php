@@ -44,12 +44,12 @@
                                 <li><a href="<?= base_url('hari_libur') ?>">Hari Libur</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown"> <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="package"></i><span>Rekapan Absensi</span></a>
+                        <!-- <li class="dropdown"> <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="package"></i><span>Rekapan Absensi</span></a>
                             <ul class="nav-submenu menu-content">
                                 <li><a href="datepicker.html">Rekapan</a></li>
                                 <li><a href="time-picker.html">Laporan</a></li>
                             </ul>
-                        </li>
+                        </li> -->
                         <li class="dropdown"> <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="users"></i><span>Manajemen User</span></a>
                             <ul class="nav-submenu menu-content">
                                 <li><a href="<?= base_url('user') ?>">User</a></li>

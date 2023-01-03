@@ -18,20 +18,54 @@
 	<!-- Container-fluid starts-->
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-xl-4">
+				<div class="card">
+					<div class="card-body">
+						<div class="row mb-2">
+							<div class="profile-title">
+								<div class="row">
+									<div class="col-6 bg-primary">
+										<button class="btn btn-primary absen-masuk btn-square m-3">
+											Check IN
+										</button>
+									</div>
+									<div class="col-6 bg-danger">
+										<button class="btn btn-danger absen-pulang btn-square m-3">
+											Check OUT
+										</button>
+									</div>
+								</div>
+								<div class="row mt-4">
+									<div class="col-6 bg-info">
+										<button class="btn btn-info btn-square tombol-izin m-3" type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal">Absen IZIN</button>
+									</div>
+									<div class="col-6 bg-warning">
+										<button class="btn btn-warning absen-masuk btn-square m-3 ">
+											Tugas Dinas
+										</button>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xl-8">
 				<div class="card">
 					<div class="card-header">
 						<h5 class="sub-title">Data Absensi </h5>
 						<?php
 						if ($this->session->userdata('role') == 4) {
 						?>
-							<button class="btn btn-success absen-masuk btn-square mt-2">
+							<!-- <button class="btn btn-success absen-masuk btn-square mt-2">
 								Absen Masuk
 							</button>
 							<button class="btn btn-danger absen-pulang btn-square mt-2">
 								Absen Pulang
 							</button>
-							<button class="btn btn-warning btn-square mt-2 tombol-izin" type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal">Absen Izin</button>
+							<button class="btn btn-warning btn-square mt-2 tombol-izin" type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal">Absen Izin</button> -->
 						<?php
 						}
 						?>
@@ -96,6 +130,35 @@
 	</div>
 </div>
 <!-- modal -->
+<!-- modal TD-->
+<div class="modal fade " id="modalTD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog " role="document">
+		<div class="modal-content">
+			<form action="<?= site_url('absensi/tugas_dinas') ?>" method="POST" enctype="multipart/form-data" class="tugas-dinas">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Tugas Dinas</h5>
+					<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label class="form-label">Foto</label>
+						<input class="form-control btn-square" id="foto" name="foto" type="file" required autocomplete="off">
+					</div>
+					<div class="form-group">
+						<label class="form-label">Keterangan</label>
+						<textarea name="ket" id="ket" class="form-control btn-square" cols="30" rows="5" required autocomplete="off"></textarea>
+
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-danger btn-square" type="button" data-bs-dismiss="modal">Batal</button>
+					<button class="btn btn-primary btn-square tugas-dinas" type="submit">Simpan</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- modal -->
 
 <script>
 	$(function() {
@@ -111,6 +174,7 @@
 			function showPosition(position) {
 				const long = position.coords.longitude
 				const lat = position.coords.latitude
+
 				$.ajax({
 					url: `<?= site_url('absensi/absen_masuk') ?>`,
 					data: {
@@ -213,8 +277,8 @@
 				// 	}
 				// }
 			});
-
 		})
+
 	})
 	$(document).ready(function() {
 		selesai();
@@ -246,7 +310,7 @@
 					}
 				} else if (`<?= $this->session->userdata('role') ?>` == 4) {
 					if (this['id_user'] == `<?= $this->session->userdata('iduser') ?>`) {
-						$("tbody").append("<tr><td>" + this['namalengkap'] + "</td><td>" + this['tgl'] + "</td><td>" + this['jam_masuk'] + "</td><td>" + this['jam_pulang'] + "</td><td>" + this['ket'] + "</td><td>" + `<ul><li><a href="<?php echo base_url('absensi/detail/') ?>` + this['iduser'] + `" class="btn btn-outline-warning btn-square">TD</i></li><li></a> <a href="<?php echo base_url('absensi/detail/') ?>` + this['iduser'] + `" class="btn  btn-outline-primary btn-square">Detail</i></a></li>` + "</td></tr>");
+						$("tbody").append("<tr><td>" + this['namalengkap'] + "</td><td>" + this['tgl'] + "</td><td>" + this['jam_masuk'] + "</td><td>" + this['jam_pulang'] + "</td><td>" + this['ket'] + "</td><td style='width: 375px;'>" + `<a data-bs-toggle="modal" data-original-title="test" data-bs-target="#modalTD" class="btn btn-outline-warning btn-square tombol-izin">TD</a> <a href="<?php echo base_url('absensi/detail/') ?>` + this['iduser'] + `" class="btn  btn-outline-primary btn-square">Detail</i></a></li>` + "</td></tr>");
 					}
 				}
 			});
