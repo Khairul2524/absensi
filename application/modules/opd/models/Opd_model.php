@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Opd_model extends CI_Model
 {
     public $tabel = 'opd';
-    public $id  = 'idopd';
+    public $id  = 'id_opd';
     public function get()
     {
         return  $this->db->get($this->tabel)->result();

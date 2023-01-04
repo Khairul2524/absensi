@@ -3,263 +3,68 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3>User</h3>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?= base_url('user') ?>">User </a></li>
-                        <li class="breadcrumb-item active"><a href="<?= base_url('user') ?>">Edit User </a></li>
-                    </ol>
+                    <h3>Form User</h3>
+
                 </div>
+
             </div>
         </div>
     </div>
-    <div class="flash-berhasil" data-flashberhasil="<?= $this->session->flashdata('berhasil') ?>"></div>
-    <div class="flash-gagal" data-flashgagal="<?= $this->session->flashdata('gagal') ?>"></div>
     <!-- Container-fluid starts-->
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="edit-profile">
-                    <div class="card">
-                        <div class="card-body">
-                            <form method="POST" enctype="multipart/form-data" action="<?= site_url('user/edit_profile') ?>">
-                                <div class="row mb-2">
-                                    <div class="profile-title">
-                                        <div class="media"> <img class="img-70 rounded-circle" alt="" src="<?= base_url('assets/backand') ?>/img/profile/<?= $foto ?>">
-                                            <div class="media-body">
-                                                <h3 class="mb-1 f-20 txt-primary"><?= strtoupper($nama) ?></h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <input type="hidden" name="id" id="id" value="<?= $id ?>">
-                                    <input type="hidden" name="foto_lama" id="foto_lama" value="<?= $foto ?>">
-                                    <label class="form-label">Foto</label>
-                                    <input class="form-control" type="file" name="foto">
-                                </div>
-
-                                <div class="form-footer">
-                                    <button class="btn btn-primary btn-block btn-square" type="submit">Simpan</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <?php
-                    if ($this->session->userdata('role') == 1) {
-                    ?>
-                        <div class="card">
-                            <form action="<?= site_url('user/ubah_password') ?>" class="form theme-form" method="POST">
-                                <div class="card-header pb-0">
-                                    <h5>Ubah Password</h5>
-                                </div>
-                                <div class="card-body">
-                                    <input type="hidden" name="id" id="id" value="<?= $id ?>">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="mb-3">
-                                                <label class="form-label" for="email">Email</label>
-                                                <input class="form-control btn-square" id="email" name="email" type="text" placeholder="Kominfo@gmail.com" value="<?= $email ?>" readonly>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="mb-3">
-                                                <label class="form-label" for="email">Password</label>
-                                                <input class="form-control btn-square" id="password" name="password" type="text" placeholder="**********" required autocomplete="off">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-primary btn-square" type="submit">Simpan</button>
-                                </div>
-                            </form>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-            <div class="col-md-8">
+        <div class="row starter-main">
+            <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header pb-0">
-                        <h5>Data User</h5>
+                    <div class="card-body">
+                        <form class="needs-validation" novalidate="">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="validationCustom01">Nama Lengkap</label>
+                                    <input class="form-control" id="validationCustom01" type="text" value="Mark" required="">
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" for="validationCustom02">Alamat Email</label>
+                                    <input class="form-control" id="validationCustom02" type="text" value="Otto" required="">
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="validationCustom03">City</label>
+                                    <input class="form-control" id="validationCustom03" type="text" placeholder="City" required="">
+                                    <div class="invalid-feedback">Please provide a valid city.</div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="validationCustom04">State</label>
+                                    <select class="form-select" id="validationCustom04" required="">
+                                        <option selected="" disabled="" value="">Choose...</option>
+                                        <option>...</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select a valid state.</div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label" for="validationCustom05">Zip</label>
+                                    <input class="form-control" id="validationCustom05" type="text" placeholder="Zip" required="">
+                                    <div class="invalid-feedback">Please provide a valid zip.</div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <div class="checkbox p-0">
+                                        <input class="form-check-input" id="invalidCheck" type="checkbox" required="">
+                                        <label class="form-check-label" for="invalidCheck">Agree to terms and conditions</label>
+                                    </div>
+                                    <div class="invalid-feedback">You must agree before submitting.</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        </form>
                     </div>
-                    <form class="form theme-form" method="POST" action="<?= $action ?>">
-                        <input type="text" name="id" id="id" hidden value="<?= $id ?>">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="nama">Nama Lengkap</label>
-                                        <input class="form-control btn-square" id="nama" name="nama" type="text" placeholder="Abdul Aziz Al Jaelani" value="<?= $nama ?>" required autocomplete="off">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="email">Email</label>
-                                        <input class="form-control btn-square" id="email" name="email" type="text" placeholder="Kominfo@gmail.com" value="<?= $email ?>" required autocomplete="off">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="nik">NIK</label>
-                                        <input class="form-control btn-square" id="nik" type="text" name="nik" placeholder="52*************" value="<?= $nik ?>" maxlength="16" onkeypress="return Angka(event)" required autocomplete="off">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="nip">NIP</label>
-                                        <input class="form-control btn-square" id="nip" type="text" name="nip" placeholder="19****************" value="<?= $nip ?>" maxlength="20" onkeypress="return Angka(event)" required autocomplete="off">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="no">NO Handphone</label>
-                                        <input class="form-control btn-square" id="no" name="no" type="text" placeholder="08**********" value="<?= $no ?>" maxlength="12" onkeypress="return Angka(event)" required autocomplete="off">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label class="form-label">Organisasi Perangkat Daerah</label>
-                                        <select class="form-select btn-square digits" id="opd" name="opd" required autocomplete="off">
-                                            <option value="">Piih OPD</option>
-                                            <?php
-                                            foreach ($opd as $opd) {
-                                                if ($idopd == $opd->idopd) {
-                                                    $select = "selected";
-                                                } else {
-                                                    $select = "";
-                                                }
-                                                echo ' <option ' . $select . ' class="pilihan" value=" ' . $opd->idopd . '">' . $opd->opd . '</option>';
-                                            } ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label class="form-label">Bidang</label>
-                                        <select name="bagian" id="bagian" class="form-control" required autocomplete="off">
-
-                                            <?php
-                                            if ($bagian) {
-                                                $get = $this->db->get_where('bagian', ['id_bagian' => $bagian])->row();
-                                                echo '<option value="' . $get->id_bagian . '">' . $get->nama_bagian . '</option>';
-                                            } else {
-                                            ?>
-                                                <option value="">Pilih Bagian</option>
-                                            <?php
-                                            }
-
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label class="form-label">Status Tenaga</label>
-                                        <select class="form-select btn-square digits" id="st" name="st" required autocomplete="off">
-                                            <option value="<?= $statustenaga ?>" selected>
-                                                <?php if ($statustenaga == 1) {
-                                                    echo "Honorer";
-                                                } elseif ($statustenaga == 2) {
-                                                    echo "PNS";
-                                                } else {
-                                                    echo "Pilih Status Tenaga";
-                                                }  ?></option>
-                                            <option value="1">Honorer</option>
-                                            <option value="2">PNS</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label class="form-label">Role</label>
-                                        <select class="form-select btn-square digits" id="role" name="role" required autocomplete="off">
-                                            <option value="">Piih Role</option>
-                                            <?php
-
-                                            foreach ($role as $role) {
-
-                                                if ($role->idrole != 1) {
-                                                    if ($idrole == $role->idrole) {
-                                                        $select = "selected";
-                                                    } else {
-                                                        $select = "";
-                                                    }
-                                            ?>
-                                                    <option <?= $select; ?> value="<?= $role->idrole; ?>"><?= $role->role; ?></option>
-                                            <?php }
-                                            } ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer text-end">
-                            <button class="btn btn-primary btn-square" type="submit">Simpan</button>
-                            <input class="btn btn-light btn-square" type="reset" value="Cancel">
-                            <a href="<?= base_url('user') ?>" class="btn btn-danger btn-square">Kembali</a>
-                        </div>
-                    </form>
                 </div>
             </div>
+
         </div>
     </div>
+    <!-- Container-fluid Ends-->
 </div>
-<!-- Container-fluid Ends-->
-
-
-<script>
-    $(document).ready(function() {
-        $("#opd").change(function() {
-            var id_opd = $(this).val();
-            $.ajax({
-                url: `<?= base_url('user/get_bagian') ?>`,
-                type: 'post',
-                data: {
-                    opd_id: id_opd
-                },
-                dataType: 'json',
-                success: function(response) {
-                    console.log(response)
-                    var len = response.length;
-
-                    $("#bagian").empty();
-                    $("#bagian").append("<option value=''>Pilih Bidang</option>");
-                    for (var i = 0; i < len; i++) {
-                        var id = response[i]['id_bagian'];
-                        var name = response[i]['nama_bagian'];
-
-                        $("#bagian").append("<option value='" + id + "'>" + name + "</option>");
-                    }
-                }
-            });
-        })
-    })
-</script>
-<script>
-    function Angka(event) {
-        var angka = (event.which) ? event.which : event.keyCode
-        if (angka != 46 && angka > 31 && (angka < 48 || angka > 57))
-            return false;
-        return true;
-    }
-</script>

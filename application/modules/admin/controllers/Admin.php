@@ -2,7 +2,7 @@
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Role extends MX_Controller
+class Admin extends MX_Controller
 {
 
 	public function __construct()
@@ -15,7 +15,7 @@ class Role extends MX_Controller
 		// 		redirect('auth');
 		// 	}
 		// }
-		$this->load->model('Role_model', 'role');
+		// $this->load->model('Role_model', 'role');
 		// $this->load->model('All_model', 'all');
 	}
 
@@ -23,8 +23,8 @@ class Role extends MX_Controller
 	{
 		$id = $this->session->userdata('idrole');
 		$data = array(
-			'judul' => 'Role',
-			'data' => $this->role->get(),
+			'judul' => 'Dashboard',
+			// 'data' => $this->role->get(),
 			// 'role' => $this->all->getidrole($id)
 		);
 		// var_dump($data['data']);
@@ -39,11 +39,11 @@ class Role extends MX_Controller
 	public function tambah()
 	{
 		$data = array(
-			'role' => htmlspecialchars($this->input->post('nama')),
+			'role' => htmlspecialchars($this->input->post('role')),
 		);
 		// print_r($data);
 		// die;
-		$cek = $this->db->get_where('role', ['role' => htmlspecialchars($this->input->post('nama'))])->row();
+		$cek = $this->db->get_where('role', ['role' => htmlspecialchars($this->input->post('role'))])->row();
 		// var_dump($cek);
 		if (!$cek) {
 			$this->role->insert($data);
@@ -62,8 +62,8 @@ class Role extends MX_Controller
 	public function ubah()
 	{
 		$data = array(
-			'id_role' => htmlspecialchars($this->input->post('id')),
-			'role' => htmlspecialchars($this->input->post('nama')),
+			'idrole' => htmlspecialchars($this->input->post('id')),
+			'role' => htmlspecialchars($this->input->post('role')),
 		);
 		// print_r($data);
 		// die;

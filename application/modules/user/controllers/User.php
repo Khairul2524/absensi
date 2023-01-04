@@ -15,31 +15,12 @@ class User extends MY_Controller
 
 	public function index()
 	{
-		if ($this->session->userdata('role') == 1) {
-			$data = array(
-				'judul' => 'User',
-				'user' => $this->all->getuser(),
-			);
-		} elseif ($this->session->userdata('role') == 2) {
-			$opd_id = $this->session->userdata('opd');
-			$data = array(
-				'judul' => 'User',
-				'user' => $this->all->getuser($opd_id),
-			);
-		} elseif ($this->session->userdata('role') == 3) {
-			$opd_id = $this->session->userdata('opd');
-			$bagian_id = $this->session->userdata('idbagian');
-			$data = array(
-				'judul' => 'User',
-				'user' => $this->all->getuser($opd_id, $bagian_id),
-			);
-		}
-		// var_dump($data['user']);
-		// die;
-		$this->load->view('template/header');
-		$this->load->view('template/sidebar');
-		$this->load->view('index', $data);
-		$this->load->view('viho/footer');
+
+		$this->load->view('layout/header');
+		$this->load->view('layout/navbar');
+		$this->load->view('layout/sidebar');
+		$this->load->view('index');
+		$this->load->view('layout/footer');
 	}
 	public function tambah()
 	{
@@ -63,10 +44,11 @@ class User extends MY_Controller
 		);
 		// var_dump($data['idopd']);
 		// die;
-		$this->load->view('template/header');
-		$this->load->view('template/sidebar');
-		$this->load->view('form_tambah', $data);
-		$this->load->view('template/footer');
+		$this->load->view('layout/header');
+		$this->load->view('layout/navbar');
+		$this->load->view('layout/sidebar');
+		$this->load->view('form');
+		$this->load->view('layout/footer');
 	}
 	public function get_bagian()
 	{

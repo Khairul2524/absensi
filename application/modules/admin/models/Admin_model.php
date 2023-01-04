@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Role_model extends CI_Model
 {
     public $tabel = 'role';
-    public $id  = 'id_role';
+    public $id  = 'idrole';
     public function get()
     {
         return  $this->db->get($this->tabel)->result();

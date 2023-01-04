@@ -3,116 +3,101 @@
 		<div class="page-header">
 			<div class="row">
 				<div class="col-sm-6">
-					<h3 class="">List OPD</h3>
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="<?= base_url('hari_libur') ?>">OPD</a></li>
-					</ol>
+					<h3>List OPD</h3>
+					<button class="btn-primary btn btn-sm mt-2 btn-square tombol-tambah" type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal"> Add New</button>
 				</div>
+
 			</div>
 		</div>
 	</div>
 	<div class="flash-berhasil" data-flashberhasil="<?= $this->session->flashdata('berhasil') ?>"></div>
 	<div class="flash-gagal" data-flashgagal="<?= $this->session->flashdata('gagal') ?>"></div>
+
 	<!-- Container-fluid starts-->
 	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12">
+		<div class="row starter-main">
+
+			<div class="col-sm-12">
 				<div class="card">
-					<div class="card-header">
-						<h5 class="sub-title">Organisasi Perangkat Daerah </h5>
-						<button class="btn btn-primary btn-square mt-2 tombol-tambah" type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal">Tambah OPD</button>
-					</div>
 					<div class="card-body">
-						<div class="table-responsive ">
-							<table class="row-border" id="example-style-1">
+						<div class="dt-ext table-responsive">
+							<table class="display" id="basic-1">
 								<thead>
 									<tr>
 										<th>NO</th>
-										<th>Organisasi Perangkakt Daerah</th>
-										<th>Latitude</th>
-										<th>Longitude</th>
+										<th>OPD</th>
 										<th>Aksi</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php
 									$no = 1;
-									foreach ($data as $d) {
-
+									foreach ($data as $row) {
 									?>
 										<tr>
 											<td><?= $no++ ?></td>
-											<td><?= $d->opd ?></td>
-											<td><?= $d->lat ?></td>
-											<td><?= $d->longt ?></td>
-											<td style="width: 200px;">
-												<button class="btn btn-warning btn-square tombol-ubah " type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal" data-id="<?= $d->idopd; ?>"><i class="fa fa-edit"></i></button>
-												<a href="<?= base_url('opd/hapus/') . $d->idopd ?>" class="btn btn-danger tombol-hapus"><i class="fa fa-trash"></i></a>
+											<td><?= $row->nama_opd ?></td>
+											<td>
+												<button class="btn-warning btn btn-sm btn-square tombol-ubah" type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal" data-id="<?= $row->id_opd ?>"> <i class="fa fa-edit"></i></button>
+												<button class="btn btn-danger btn-sm tombol-h" href="<?= base_url('opd/hapus/') . $row->id_opd ?>"><i class="fa fa-trash"></i></button>
 											</td>
 										</tr>
-									<?php }
-									?>
+									<?php } ?>
+
 								</tbody>
 							</table>
 						</div>
-					</div>
-					<div class="card-footer">
-
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!-- Container-fluid Ends-->
 </div>
 
-<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog " role="document">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<form action="<?= site_url('opd/tambah') ?>" method="POST">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel"></h5>
-					<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Form Role</h5>
+				<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<form class="needs-validation" action="<?= base_url('opd/tambah') ?>" method="post">
 				<div class="modal-body">
-					<div class="form-group">
-						<input type="hidden" name="id" id="id">
-						<label class="form-label">Organisasi Perangkat Daerah</label>
-						<input class="form-control btn-square" id="opd" name="opd" type="text" required autocomplete="off">
-					</div>
-					<div class="form-group">
-						<label class="form-label">Latitude</label>
-						<input class="form-control btn-square" id="lat" name="lat" type="text" required autocomplete="off">
-					</div>
-					<div class="form-group">
-						<label class="form-label">Longtitude</label>
-						<input class="form-control btn-square" id="long" name="long" type="text" required autocomplete="off">
+
+					<input type="text" name="id" id="id" hidden>
+					<div class="row g-3 mb-3">
+						<div class="col-md-12">
+							<label class="form-label" for="nama">Nama OPD</label>
+							<input class="form-control" id="nama" type="text" name="nama" required="" autocomplete="off">
+						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-danger btn-square" type="button" data-bs-dismiss="modal">Batal</button>
-					<button class="btn btn-primary btn-square" type="submit">Simpan</button>
+					<button class="btn btn-primary btn-square" type="button" data-bs-dismiss="modal">Keluar</button>
+					<button class="btn btn-secondary btn-square" type="submit">Simpan</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
+
 <script>
 	$(function() {
 		// tambah
 		$('.tombol-tambah').on('click', function() {
-			$('.modal-title').html('Tambah OPD')
 
-			$('.modal-footer button[type= submit] ').html('Simpan')
+			$('#exampleModalLabel').html('Form OPD')
+			$('.modal-footer button[type= submit]').html('Simpan')
 			$('#id').val('')
-			$('#opd').val('')
-			$('#lat').val('')
-			$('#long').val('')
+			$('#nama').val('')
 		})
 		// ubah
 		$('.tombol-ubah').on('click', function() {
-			$('.modal-title').html('Ubah OPD')
-			$('.modal-footer button[type= submit] ').html('Ubah')
-			$('.modal-dialog form').attr('action', `<?= site_url('opd/ubah') ?>`)
+			$('#exampleModalLabel').html('Form OPD')
+			$('.modal-footer button[type= submit]').html('Ubah')
+			$('.modal-content form').attr('action', `<?= site_url('opd/ubah') ?>`)
+
 			const id = $(this).data('id')
 			// console.log(id)
 			$.ajax({
@@ -123,13 +108,9 @@
 				method: 'post',
 				dataType: 'json',
 				success: function(data) {
-					// console.log(data)	
-
-					$('#id').val(data.idopd)
-					$('#opd').val(data.opd)
-					$('#lat').val(data.lat)
-					$('#long').val(data.longt)
-
+					// console.log(data)
+					$('#id').val(data.id_opd)
+					$('#nama').val(data.nama_opd)
 				}
 			})
 		})
