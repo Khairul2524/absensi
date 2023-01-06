@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/backend') ?>/css/autoselect.min.css">
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-header">
@@ -16,49 +17,60 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="needs-validation" novalidate="">
+                        <form action="<?= $action ?>" method="POST" enctype="multipart/form-data">
+                            <input type="text" id="id" name="id" hidden value="<?= $id ?>">
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label class="form-label" for="validationCustom01">Nama Lengkap</label>
-                                    <input class="form-control" id="validationCustom01" type="text" value="Mark" required="">
-                                    <div class="valid-feedback">Looks good!</div>
+                                    <label class="form-label" for="nama">Nama Lengkap</label>
+                                    <input class="form-control" id="nama" name="nama" type="text" autocomplete="off" required="" value="<?= $nama ?>">
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="validationCustom02">Alamat Email</label>
-                                    <input class="form-control" id="validationCustom02" type="text" value="Otto" required="">
-                                    <div class="valid-feedback">Looks good!</div>
+                                    <label class="form-label" for="email">Alamat Email</label>
+                                    <input class="form-control" id="email" name="email" autocomplete="off" type="email" required="" value="<?= $email ?>">
                                 </div>
                             </div>
-                            <div class="row g-3">
+                            <div class=" row g-3 ">
+                                <div class=" col-md-6">
+                                    <label class="form-label" for="password">Password</label>
+                                    <input class="form-control" id="password" name="password" type="password" required="" value="<?= $password ?>">
+                                </div>
                                 <div class="col-md-6">
-                                    <label class="form-label" for="validationCustom03">City</label>
-                                    <input class="form-control" id="validationCustom03" type="text" placeholder="City" required="">
-                                    <div class="invalid-feedback">Please provide a valid city.</div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom04">State</label>
-                                    <select class="form-select" id="validationCustom04" required="">
-                                        <option selected="" disabled="" value="">Choose...</option>
-                                        <option>...</option>
+                                    <label class="form-label" for="opd">OPD</label>
+                                    <select name="opd" id="opd" class="form-control autoselect">
+                                        <?php
+                                        foreach ($opd as $opd) {
+                                        ?>
+                                            <option value="<?= $opd->id_opd ?>"><?= $opd->nama_opd ?></option>
+                                        <?php } ?>
+
                                     </select>
-                                    <div class="invalid-feedback">Please select a valid state.</div>
                                 </div>
-                                <div class="col-md-3 mb-3">
-                                    <label class="form-label" for="validationCustom05">Zip</label>
-                                    <input class="form-control" id="validationCustom05" type="text" placeholder="Zip" required="">
-                                    <div class="invalid-feedback">Please provide a valid zip.</div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="bidang">Bidang</label>
+                                    <select name="bidang" id="bidang" class="form-control">
+
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="role">Role</label>
+                                    <select name="role" id="role" class="form-control " require>
+                                        <option value="">-- Pilih Role --</option>
+                                        <?php
+                                        foreach ($role as $role) {
+                                        ?>
+                                            <option value="<?= $role->id_role ?>"><?= $role->role ?></option>
+                                        <?php } ?>
+
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="foto">Foto</label>
+                                    <input type="file" name="foto" id="foto" class="form-control" value="<?= $foto ?>">
+
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <div class="form-check">
-                                    <div class="checkbox p-0">
-                                        <input class="form-check-input" id="invalidCheck" type="checkbox" required="">
-                                        <label class="form-check-label" for="invalidCheck">Agree to terms and conditions</label>
-                                    </div>
-                                    <div class="invalid-feedback">You must agree before submitting.</div>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary" type="submit">Submit form</button>
+
+                            <button class="btn btn-primary mt-3" type="submit">Simpan</button>
                         </form>
                     </div>
                 </div>
@@ -68,3 +80,33 @@
     </div>
     <!-- Container-fluid Ends-->
 </div>
+<script src="<?= base_url('assets/backend') ?>/js/autoselect/autoselect.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $("#opd").change(function() {
+            var id_opd = $(this).val();
+            $.ajax({
+                url: `<?= base_url('user/get_bidang') ?>`,
+                type: 'post',
+                data: {
+                    opd_id: id_opd
+                },
+                dataType: 'json',
+                success: function(response) {
+                    // console.log(response)
+                    var len = response.length;
+
+                    $("#bidang").empty();
+                    $("#bidang").append("<option value=''>Pilih Bidang</option>");
+                    for (var i = 0; i < len; i++) {
+                        var id = response[i]['id_bidang'];
+                        var name = response[i]['nama_bidang'];
+
+                        $("#bidang").append("<option value='" + id + "'>" + name + "</option>");
+                    }
+                }
+            });
+        })
+    })
+</script>

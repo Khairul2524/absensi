@@ -42,12 +42,12 @@ class All_model extends CI_Model
     }
     public function updateopd($data, $id)
     {
-        $this->db->update('opd', $data, ['idopd' => $id]);
+        $this->db->update('opd', $data, ['id_opd' => $id]);
         return $this->db->affected_rows();
     }
     public function deleteopd($id)
     {
-        $this->db->delete('opd', ['idopd' => $id]);
+        $this->db->delete('opd', ['id_opd' => $id]);
         return $this->db->affected_rows();
     }
     // Akhir Query OPD
@@ -91,7 +91,7 @@ class All_model extends CI_Model
     }
     public function getiduser($id)
     {
-        return $this->db->from('user')->join('opd', 'opd.idopd=user.idopd')->join('bagian', 'bagian.id_bagian=user.id_bagian')->join('role', 'role.idrole=user.idrole')->where(['iduser' => $id])->get()->row();
+        return $this->db->from('user')->join('opd', 'opd.id_opd=user.id_opd')->join('bidang', 'bidang.id_bidang=user.id_bidang')->join('role', 'role.id_role=user.id_role')->where(['id_user' => $id])->get()->row();
     }
     public function getemailuser($email)
     {
@@ -104,12 +104,12 @@ class All_model extends CI_Model
     }
     public function updateuser($data, $id)
     {
-        $this->db->update('user', $data, ['iduser' => $id]);
+        $this->db->update('user', $data, ['id_user' => $id]);
         return $this->db->affected_rows();
     }
     public function deleteuser($id)
     {
-        $this->db->delete('user', ['iduser' => $id]);
+        $this->db->delete('user', ['id_user' => $id]);
         return $this->db->affected_rows();
     }
     // Akhir Query User
@@ -118,10 +118,10 @@ class All_model extends CI_Model
     {
         return $this->db->from('absen_masuk')->join('user', 'user.iduser=absen_masuk.iduser')->join('jam_kerja', 'jam_kerja.id_jk=absen_masuk.id_jam_kerja')->get()->result();
     }
-    // query Bagian
-    public function getidbagian($id)
+    // query Bidang
+    public function getidbidang($id)
     {
-        return $this->db->get_where('bagian', ['id_opd' => $id])->result();
+        return $this->db->get_where('bidang', ['id_opd' => $id])->result();
     }
     // query absen
     public function getabsenuser($id)

@@ -21,7 +21,7 @@ class Opd extends MX_Controller
 
 	public function index()
 	{
-		$id = $this->session->userdata('id_opd');
+
 		$data = array(
 			'judul' => 'OPD',
 			'data' => $this->opd->get(),

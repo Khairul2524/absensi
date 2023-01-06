@@ -18,19 +18,19 @@
 							<div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
 						</li>
 
-						<li class="dropdown"><a class="nav-link" href="javascript:void(0)"><i data-feather="home"></i><span>Dashboard</span></a></li>
+						<li class="dropdown"><a class="nav-link" href="<?= base_url('admin') ?>"><i data-feather="home"></i><span>Dashboard</span></a></li>
 
-						<li class="dropdown"><a class="nav-link" href="javascript:void(0)"><i data-feather="user"></i><span>Absensi</span></a></li>
+						<li class="dropdown"><a class="nav-link" href="<?= base_url('absen') ?>"><i data-feather="user"></i><span>Absen</span></a></li>
 
 						<li class="sidebar-main-title">
 							<div>
 								<h6>Master</h6>
 							</div>
 						</li>
-						<li class="dropdown"><a class="nav-link" href="javascript:void(0)"><i data-feather="database"></i><span>Rekapan</span></a></li>
+						<li class="dropdown"><a class="nav-link" href="<?= base_url('rekapan') ?>"><i data-feather="database"></i><span>Rekapan</span></a></li>
 						<li class="dropdown"><a class="nav-link" href="<?= base_url('opd') ?>"><i data-feather="folder-plus"></i><span>OPD</span></a></li>
 						<li class="dropdown"><a class="nav-link" href="<?= base_url('bidang') ?>"><i data-feather="folder"></i><span>Bidang</span></a></li>
-
+						<li class="dropdown"><a class="nav-link" href="<?= base_url('hari_libur') ?>"><i data-feather="folder-minus"></i><span>Hari Libur</span></a></li>
 						<li class="sidebar-main-title">
 							<div>
 								<h6>Manajemen User</h6>

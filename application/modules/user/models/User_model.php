@@ -3,10 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class User_model extends CI_Model
 {
     public $tabel = 'user';
-    public $id  = 'iduser';
+    public $id  = 'id_user';
     public function get()
     {
-        return  $this->db->get($this->tabel)->result();
+        return  $this->db->join('opd', 'opd.id_opd=user.id_opd')->join('bidang', 'bidang.id_bidang=user.id_bidang')->get($this->tabel)->result();
     }
     public function insert($data)
     {

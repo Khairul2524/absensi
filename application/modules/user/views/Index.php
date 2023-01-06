@@ -19,35 +19,50 @@
 
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="dt-ext table-responsive">
-                            <table class="display" id="responsive">
-                                <thead>
-                                    <tr>
-                                        <th>NO</th>
-                                        <th>Nama Lengkap</th>
-                                        <th>Role</th>
-                                        <th>OPD</th>
-                                        <th>Bidang</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <h5>Daftar User</h5>
+                                <table class="display" id="basic-1">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Email</th>
+                                            <th>OPD</th>
+                                            <th>Bidang</th>
+                                            <th style="width:auto">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $no = 1;
+                                        foreach ($user as $row) {
+                                        ?>
+                                            <tr>
+                                                <td><?= $no++ ?></td>
+                                                <td><?= $row->nama_lengkap ?></td>
+                                                <td><?= $row->email ?></td>
+                                                <td><?= $row->nama_opd ?></td>
+                                                <td><?= $row->nama_bidang ?></td>
+                                                <td>
+                                                    <a href="<?= base_url('user/edit/') . $row->id_user ?>" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                                                    <a class="btn btn-danger btn-sm tombol-h" href="<?= base_url('role/hapus/') . $row->id_user ?>"><i class="fa fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Container-fluid Ends-->
 </div>
+</div>
+<!-- Container-fluid Ends-->
+</div>
+<script src="<?= base_url('assets/backend') ?>/js/sweet-alert/sweetalert2.all.min.js"></script>
