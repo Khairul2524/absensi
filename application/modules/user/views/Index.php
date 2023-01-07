@@ -31,7 +31,7 @@
                                             <th>Email</th>
                                             <th>OPD</th>
                                             <th>Bidang</th>
-                                            <th style="width:auto">Aksi</th>
+                                            <th style="width: 20%;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -47,7 +47,7 @@
                                                 <td><?= $row->nama_bidang ?></td>
                                                 <td>
                                                     <a href="<?= base_url('user/edit/') . $row->id_user ?>" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                                                    <a class="btn btn-danger btn-sm tombol-h" href="<?= base_url('role/hapus/') . $row->id_user ?>"><i class="fa fa-trash"></i></a>
+                                                    <a class="btn btn-danger btn-sm tombol-h" href="<?= base_url('user/hapus/') . $row->id_user ?>"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         <?php } ?>
@@ -65,4 +65,3 @@
 </div>
 <!-- Container-fluid Ends-->
 </div>
-<script src="<?= base_url('assets/backend') ?>/js/sweet-alert/sweetalert2.all.min.js"></script>

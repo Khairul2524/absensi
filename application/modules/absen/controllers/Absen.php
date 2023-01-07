@@ -197,130 +197,130 @@ class Absen extends MX_Controller
 		$hari_ini = time();
 		$hari = date('D', $hari_ini);
 		$tgl = date('Y-m-d');
-		$foto_izin = $_FILES['foto'];
-		$cek_hari_libur = $this->db->get_where('hari_libur', ['tanggal' => $tgl])->row();
+
+		$cek_hari_libur = $this->db->get_where('hari_libur', ['tgl' => $tgl])->row();
 		if (!$cek_hari_libur) {
 			if ($hari != 'Sun' && $hari != 'Sat') {
-				$cek_absen = $this->db->get_where('absensi', ['id_user' => $this->session->userdata('iduser'), 'tgl' => $tgl])->row();
+				$cek_absen = $this->db->get_where('absen', ['id_user' => 8, 'tgl' => $tgl])->row();
 				if (!$cek_absen) {
 					// upload foto surat izin
-					if ($foto_izin) {
-						$config['upload_path']      = './assets/backand/img/izin/';
-						$config['allowed_types']    = 'jpg|png|jpeg|gif';
-						$config['overwrite']        = 'true';
-						// $config['file_name']        = 'file_name';
-						$this->load->library('upload', $config);
-						if (!$this->upload->do_upload('foto')) {
-							$this->session->set_flashdata('gagal', 'Foto Gagal Diupload');
-							redirect('user/tambah');
-						} else {
-							$foto = $this->upload->data('file_name');
 
-							// library yang disediakan codeigniter
-							$config['image_library']  = 'gd2';
-							// gambar yang akan dibuat thumbnail
-							$config['source_image']   = './assets/backand/img/izin/' . $foto . '';
-
-							// rasio resolusi
-							$config['maintain_ratio'] = FALSE;
-							// lebar
-							$config['width']          = 500;
-							// tinggi
-							$config['height']         = 500;
-
-							$this->load->library('image_lib', $config);
-							$this->image_lib->resize();
-						}
-					}
 					$latitude_sekarang = $this->input->post('lat');
 					$longitude_sekarang = $this->input->post('long');
 
 					if ($latitude_sekarang && $longitude_sekarang) {
 						$jam_izin = date('H:i', time());
 						$datak = array(
-							'id_user' => $this->session->userdata('iduser'),
+							'id_user' => 8,
 							'tgl'	=> $tgl,
 							'jam_masuk' => $jam_izin,
 							'jam_pulang' => $jam_izin,
-							'lat_masuk' => $latitude_sekarang,
-							'long_masuk' => $longitude_sekarang,
-							'lat_pulang' => $latitude_sekarang,
-							'long_pulang' => $longitude_sekarang,
-							'foto' => $foto,
-							'ket' => htmlspecialchars($this->input->post('ket'))
+							'lat' => $latitude_sekarang,
+							'long' => $longitude_sekarang,
+							'foto' => $this->_uploadsfoto(),
+							'status_masuk' => 2,
+							'keterangan' => htmlspecialchars($this->input->post('ket'))
 						);
-						$this->absensi->insert($datak);
+						$this->absen->insert($datak);
 						$this->session->set_flashdata('berhasil', 'Anda Berhasil Absen Izin');
-						redirect('absensi');
+						redirect('absen');
 					} else {
 						$this->session->set_flashdata('gagal', 'Lokasi Anda Tidak Terdeteksi');
-						redirect('absensi');
+						redirect('absen');
 					}
 				} else {
 					$this->session->set_flashdata('gagal', 'Anda Sudah Absen');
-					redirect('absensi');
+					redirect('absen');
 				}
 			} else {
 				$this->session->set_flashdata('gagal', 'Hari Ini Libur');
-				redirect('absensi');
+				redirect('absen');
 			}
 		} else {
 			$this->session->set_flashdata('gagal', 'Hari Ini Libur');
-			redirect('absensi');
+			redirect('absen');
 		}
 	}
 	public function tugas_dinas()
 	{
+		$hari_ini = time();
+		$hari = date('D', $hari_ini);
 		$tgl = date('Y-m-d');
-		$foto_td = $_FILES['foto'];
-		$cek_absen = $this->db->get_where('absensi', ['id_user' => $this->session->userdata('iduser'), 'tgl' => $tgl])->row();
-		// var_dump($cek_absen);
-		if ($cek_absen) {
-			if ($cek_absen->jam_pulang == '00:00') {
-				$config['upload_path']      = './assets/backand/img/izin/';
-				$config['allowed_types']    = 'jpg|png|jpeg|gif';
-				$config['overwrite']        = 'true';
-				// $config['file_name']        = 'file_name';
-				$this->load->library('upload', $config);
-				if (!$this->upload->do_upload('foto')) {
-					$this->session->set_flashdata('gagal', 'Foto Gagal Diupload');
-					redirect('user/tambah');
+
+		$cek_hari_libur = $this->db->get_where('hari_libur', ['tgl' => $tgl])->row();
+		if (!$cek_hari_libur) {
+			// if ($hari != 'Sun' && $hari != 'Sat') {
+			$cek_absen = $this->db->get_where('absen', ['id_user' => 8, 'tgl' => $tgl])->row();
+			if (!$cek_absen) {
+				// upload foto surat izin
+
+				$latitude_sekarang = $this->input->post('lati');
+				$longitude_sekarang = $this->input->post('longi');
+
+				if ($latitude_sekarang && $longitude_sekarang) {
+					$jam_izin = date('H:i', time());
+					$datak = array(
+						'id_user' => 8,
+						'tgl'	=> $tgl,
+						'jam_masuk' => $jam_izin,
+						'jam_pulang' => $jam_izin,
+						'lat' => $latitude_sekarang,
+						'long' => $longitude_sekarang,
+						'foto' => $this->_uploadsfoto(),
+						'status_masuk' => 3,
+						'keterangan' => htmlspecialchars($this->input->post('ket'))
+					);
+					$this->absen->insert($datak);
+					$this->session->set_flashdata('berhasil', 'Anda Berhasil Absen Izin');
+					redirect('absen');
 				} else {
-					$foto = $this->upload->data('file_name');
-
-					// library yang disediakan codeigniter
-					$config['image_library']  = 'gd2';
-					// gambar yang akan dibuat thumbnail
-					$config['source_image']   = './assets/backand/img/izin/' . $foto . '';
-
-					// rasio resolusi
-					$config['maintain_ratio'] = FALSE;
-					// lebar
-					$config['width']          = 500;
-					// tinggi
-					$config['height']         = 500;
-
-					$this->load->library('image_lib', $config);
-					$this->image_lib->resize();
+					$this->session->set_flashdata('gagal', 'Lokasi Anda Tidak Terdeteksi');
+					redirect('absen');
 				}
-				$jam_pulang = date('H:i', time());
-				$dataks = array(
-					'id_absensi' => $cek_absen->id_absensi,
-					'id_user' => $this->session->userdata('iduser'),
-					'jam_pulang' => $jam_pulang,
-					'foto' => $foto,
-					'ket' => htmlspecialchars($this->input->post('ket'))
-				);
-				$this->absensi->update($cek_absen->id_absensi, $dataks);
-				$this->session->set_flashdata('berhasil', 'Anda Berhasil Absen Tugas Dinas');
-				redirect('absensi');
 			} else {
 				$this->session->set_flashdata('gagal', 'Anda Sudah Absen');
-				redirect('absensi');
+				redirect('absen');
 			}
+			// } else {
+			// 	$this->session->set_flashdata('gagal', 'Hari Ini Libur');
+			// 	redirect('absen');
+			// }
 		} else {
-			$this->session->set_flashdata('gagal', 'Anda Sudah Absen');
-			redirect('absensi');
+			$this->session->set_flashdata('gagal', 'Hari Ini Libur');
+			redirect('absen');
 		}
+	}
+	private function _uploadsfoto()
+	{
+		$foto = $_FILES['foto'];
+		if ($foto) {
+			$config['upload_path']      = './assets/backend/img/izin/';
+			$config['allowed_types']    = 'jpg|png|jpeg|gif';
+			$config['overwrite']        = 'true';
+			// $config['file_name']        = 'file_name';
+			$this->load->library('upload', $config);
+			if (!$this->upload->do_upload('foto')) {
+				$this->session->set_flashdata('gagal', 'Foto Gagal Diupload');
+				redirect('absen');
+			} else {
+				$foto = $this->upload->data('file_name');
+
+				// library yang disediakan codeigniter
+				$config['image_library']  = 'gd2';
+				// gambar yang akan dibuat thumbnail
+				$config['source_image']   = './assets/backend/img/izin/' . $foto . '';
+
+				// rasio resolusi
+				$config['maintain_ratio'] = FALSE;
+				// lebar
+				$config['width']          = 500;
+				// tinggi
+				$config['height']         = 500;
+
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+			}
+		}
+		return $foto;
 	}
 }

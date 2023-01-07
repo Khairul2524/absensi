@@ -1,6 +1,5 @@
 <!-- Page Sidebar Ends-->
-<script src="<?= base_url('assets/backend') ?>/js/sweet-alert/sweetalert.min.js"></script>
-<script src="<?= base_url('assets/backend') ?>/js/sweet-alert/app.js"></script>
+
 <div class="page-body">
 	<div class="container-fluid">
 		<div class="page-header">
@@ -38,7 +37,7 @@
 										<button class="btn btn-info btn-square tombol-izin m-3" type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal">Absen Izin</button>
 									</div>
 									<div class="col-md-3 bg-warning">
-										<button class="btn btn-warning tombol_td btn-square m-3 ">
+										<button class="btn btn-warning tombol_tugas_dinas btn-square m-3 " data-bs-toggle="modal" data-original-title="test" data-bs-target="#modalTD">
 											Tugas Dinas
 										</button>
 									</div>
@@ -56,7 +55,7 @@
 <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog " role="document">
 		<div class="modal-content">
-			<form action="<?= site_url('absensi/absen_izin') ?>" method="POST" enctype="multipart/form-data" class="absenizin">
+			<form action="<?= site_url('absen/absen_izin') ?>" method="POST" enctype="multipart/form-data" class="absenizin">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Absen Izin</h5>
 					<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -87,7 +86,7 @@
 <div class="modal fade " id="modalTD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog " role="document">
 		<div class="modal-content">
-			<form action="<?= site_url('absensi/tugas_dinas') ?>" method="POST" enctype="multipart/form-data" class="tugas-dinas">
+			<form action="<?= site_url('absen/tugas_dinas') ?>" method="POST" enctype="multipart/form-data" class="absentd">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Tugas Dinas</h5>
 					<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -95,6 +94,8 @@
 				<div class="modal-body">
 					<div class="form-group">
 						<label class="form-label">Foto</label>
+						<input class="" id="lati" name="lati" hidden>
+						<input class="" id="longi" name="longi" hidden>
 						<input class="form-control btn-square" id="foto" name="foto" type="file" required autocomplete="off">
 					</div>
 					<div class="form-group">
@@ -105,7 +106,7 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-danger btn-square" type="button" data-bs-dismiss="modal">Batal</button>
-					<button class="btn btn-primary btn-square tugas-dinas" type="submit">Simpan</button>
+					<button class="btn btn-primary btn-square absen-td" type="submit">Simpan</button>
 				</div>
 			</form>
 		</div>
@@ -138,16 +139,21 @@
 					method: 'post',
 					dataType: 'json',
 					success: function(data) {
-						// console.log(data);
 						if (data.status == 0) {
-							swal(data.keterangan, "", "info")
+							// console.log('oke')
+							swal.fire(
+								data.keterangan,
+								'',
+								'info'
+							)
 						} else {
-							swal(
+							swal.fire(
 								data.keterangan,
 								'',
 								'success'
 							)
 						}
+
 					}
 				})
 			}
@@ -178,13 +184,13 @@
 						// console.log(data)
 						if (data.status == 0) {
 							// console.log('oke')
-							swal(
+							swal.fire(
 								data.keterangan,
 								'',
 								'info'
 							)
 						} else {
-							swal(
+							swal.fire(
 								data.keterangan,
 								'',
 								'success'
@@ -205,6 +211,7 @@
 			function showPosition(position) {
 				const long = position.coords.longitude
 				const lat = position.coords.latitude
+
 				$('#lat').val(lat)
 				$('#long').val(long)
 			}
@@ -217,26 +224,11 @@
 				url: `<?= site_url('absen/absen_izin') ?>`,
 				data: data,
 				dataType: 'json',
-				success: function(data) {
-					if (data.status == 0) {
-						// console.log('oke')
-						swal(
-							data.keterangan,
-							'',
-							'info'
-						)
-					} else {
-						swal(
-							data.keterangan,
-							'',
-							'success'
-						)
-					}
-				}
 			});
 		})
 		// Tugas Dinas
-		$('.tombol-td').on('click', function() {
+		$('.tombol_tugas_dinas').on('click', function() {
+			// console.log('oke');
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(showPosition);
 			} else {
@@ -246,34 +238,20 @@
 			function showPosition(position) {
 				const long = position.coords.longitude
 				const lat = position.coords.latitude
-				$('#lat').val(lat)
-				$('#long').val(long)
+				// console.log(long);
+				// console.log(lat);
+				$('#lati').val(lat)
+				$('#longi').val(long)
 			}
 		})
-		$('.absen-izin').on('click', function() {
+		$('.absen-td').on('click', function() {
 
-			var data = $('.absenizin').serialize()
+			var data = $('.absentd').serialize()
 			$.ajax({
 				type: 'POST',
-				url: `<?= site_url('absen/absen_izin') ?>`,
+				url: `<?= site_url('absen/tugas_dinas') ?>`,
 				data: data,
 				dataType: 'json',
-				success: function(data) {
-					if (data.status == 0) {
-						// console.log('oke')
-						swal(
-							data.keterangan,
-							'',
-							'info'
-						)
-					} else {
-						swal(
-							data.keterangan,
-							'',
-							'success'
-						)
-					}
-				}
 			});
 		})
 	})

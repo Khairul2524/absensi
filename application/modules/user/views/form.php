@@ -1,11 +1,12 @@
-<link rel="stylesheet" type="text/css" href="<?= base_url('assets/backend') ?>/css/autoselect.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="<?= base_url('assets/backend') ?>/css/autoselect.min.css"> -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-6">
                     <h3>Form User</h3>
-
                 </div>
 
             </div>
@@ -32,23 +33,30 @@
                             <div class=" row g-3 ">
                                 <div class=" col-md-6">
                                     <label class="form-label" for="password">Password</label>
-                                    <input class="form-control" id="password" name="password" type="password" required="" value="<?= $password ?>">
+                                    <input class="form-control" id="password" name="password" type="password">
+                                    <?= $kode == '' ? '' : '<p class="text-warning">Kosongkan Jika Tidak Merubah Password</p>'; ?>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label" for="opd">OPD</label>
-                                    <select name="opd" id="opd" class="form-control autoselect">
+                                    <select name="opd" id="opd" class="form-control opd" require>
+                                        <option value="">-- Pilih OPD --</option>
                                         <?php
                                         foreach ($opd as $opd) {
                                         ?>
-                                            <option value="<?= $opd->id_opd ?>"><?= $opd->nama_opd ?></option>
+                                            <option <?= $idopd == $opd->id_opd ? 'selected' : ''; ?> value="<?= $opd->id_opd ?>"><?= $opd->nama_opd ?></option>
                                         <?php } ?>
-
                                     </select>
                                 </div>
+
                                 <div class="col-md-6">
                                     <label class="form-label" for="bidang">Bidang</label>
-                                    <select name="bidang" id="bidang" class="form-control">
-
+                                    <select name="bidang" id="bidang" class="form-control" require>
+                                        <option value="">-- Pilih Bidang --</option>
+                                        <?php
+                                        foreach ($bidang as $bidang) {
+                                        ?>
+                                            <option <?= $idbidang == $bidang->id_bidang ? 'selected' : ''; ?> value="<?= $bidang->id_bidang ?>"><?= $bidang->nama_bidang ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
@@ -58,14 +66,14 @@
                                         <?php
                                         foreach ($role as $role) {
                                         ?>
-                                            <option value="<?= $role->id_role ?>"><?= $role->role ?></option>
+                                            <option <?= $idrole == $role->id_role ? 'selected' : ''; ?> value="<?= $role->id_role ?>"><?= $role->role ?></option>
                                         <?php } ?>
 
                                     </select>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6" <?= $kode == '' ? '' : 'hidden'; ?>>
                                     <label class="form-label" for="foto">Foto</label>
-                                    <input type="file" name="foto" id="foto" class="form-control" value="<?= $foto ?>">
+                                    <input type="file" name="foto" id="foto" class="form-control" <?= $kode == '' ? 'required' : 'hidden'; ?>>
 
                                 </div>
                             </div>
@@ -80,12 +88,21 @@
     </div>
     <!-- Container-fluid Ends-->
 </div>
-<script src="<?= base_url('assets/backend') ?>/js/autoselect/autoselect.min.js"></script>
-
+<!-- <script src="<?= base_url('assets/backend') ?>/js/autoselect/autoselect.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
 <script>
     $(document).ready(function() {
+        $('.opd').select2();
+    });
+</script>
+<script>
+    $(document).ready(function() {
+
         $("#opd").change(function() {
             var id_opd = $(this).val();
+
+            // var nama = document.getElementById("opd").value;
+            // console.log(nama)
             $.ajax({
                 url: `<?= base_url('user/get_bidang') ?>`,
                 type: 'post',
@@ -96,9 +113,8 @@
                 success: function(response) {
                     // console.log(response)
                     var len = response.length;
-
                     $("#bidang").empty();
-                    $("#bidang").append("<option value=''>Pilih Bidang</option>");
+                    $("#bidang").append("<option value=''>-- Pilih Bidang --</option>");
                     for (var i = 0; i < len; i++) {
                         var id = response[i]['id_bidang'];
                         var name = response[i]['nama_bidang'];

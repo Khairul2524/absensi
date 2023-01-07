@@ -119,6 +119,10 @@ class All_model extends CI_Model
         return $this->db->from('absen_masuk')->join('user', 'user.iduser=absen_masuk.iduser')->join('jam_kerja', 'jam_kerja.id_jk=absen_masuk.id_jam_kerja')->get()->result();
     }
     // query Bidang
+    public function getbidang()
+    {
+        return $this->db->get('bidang')->result();
+    }
     public function getidbidang($id)
     {
         return $this->db->get_where('bidang', ['id_opd' => $id])->result();

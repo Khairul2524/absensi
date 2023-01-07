@@ -124,4 +124,3 @@
 		})
 	})
 </script>
-<script src="<?= base_url('assets/backend') ?>/js/sweet-alert/sweetalert2.all.min.js"></script>

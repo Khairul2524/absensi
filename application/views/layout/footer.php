@@ -28,7 +28,8 @@
 			<script src="<?= base_url('assets/backend') ?>/js/tooltip-init.js"></script>
 			<script src="<?= base_url('assets/backend') ?>/js/datatable/datatables/jquery.dataTables.min.js"></script>
 			<script src="<?= base_url('assets/backend') ?>/js/datatable/datatables/datatable.custom.js"></script>
-
+			<script src="<?= base_url('assets/backend') ?>/js/sweet-alert/sweetalert2.all.min.js"></script>
+			<script src="<?= base_url('assets/backend') ?>/js/sweet-alert/app.js"></script>
 			<!-- Plugins JS Ends-->
 			<!-- Theme js-->
 			<script src="<?= base_url('assets/backend') ?>/js/script.js"></script>
