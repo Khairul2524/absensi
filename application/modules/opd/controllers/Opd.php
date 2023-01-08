@@ -8,70 +8,45 @@ class Opd extends MX_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('role') == 4 || $this->session->userdata('role') == 3 || $this->session->userdata('role') == 2) {
-			redirect('auth');
-		} else {
-			if (!$this->session->userdata('role')) {
-				redirect('auth');
-			}
-		}
-		$this->load->model('opd_model', 'opd');
+		// if ($this->session->userdata('role') != 1) {
+		// 	redirect('auth');
+		// } else {
+		// 	if (!$this->session->userdata('role')) {
+		// 		redirect('auth');
+		// 	}
+		// }
+		$this->load->model('Opd_model', 'opd');
 		// $this->load->model('All_model', 'all');
 	}
 
 	public function index()
 	{
-		$id = $this->session->userdata('idopd');
+
 		$data = array(
-			'judul' => 'Organisasi Perangkat Daerah',
+			'judul' => 'OPD',
 			'data' => $this->opd->get(),
-			// 'opd' => $this->all->getidopd($id)
+			// 'role' => $this->all->getidrole($id)
 		);
 		// var_dump($data['data']);
 		// die();
-		$this->load->view('template/header');
-		$this->load->view('template/sidebar');
-		// $this->load->view('template/topbar');
+		$this->load->view('layout/header');
+		$this->load->view('layout/navbar');
+		$this->load->view('layout/sidebar');
 		$this->load->view('index', $data);
-		$this->load->view('template/footer');
+		$this->load->view('layout/footer');
 	}
 
 	public function tambah()
 	{
-		$opd = htmlspecialchars($this->input->post('opd'));
-		// $opdhash = password_hash($opd, PASSWORD_DEFAULT);
-
-		$cek = $this->db->get_where('opd', ['opd' => htmlspecialchars($this->input->post('opd'))])->row();
+		$data = array(
+			'nama_opd' => htmlspecialchars($this->input->post('nama')),
+		);
+		// print_r($data);
+		// die;
+		$cek = $this->db->get_where('opd', ['nama_opd' => htmlspecialchars($this->input->post('nama'))])->row();
 		// var_dump($cek);
 		if (!$cek) {
-			$data = array(
-				'opd' => $opd,
-				'lat' => $this->input->post('lat'),
-				'longt' => $this->input->post('long'),
-				'qr_code' => $opd . '.png'
-			);
-			$this->db->insert('opd', $data);
-			$id = $this->db->insert_id();
-			// var_dump($id);
-			// die;
-			$this->load->library('ciqrcode');
-			$config['cacheable']    = true;
-			$config['cachedir']     = './assets/';
-			$config['errorlog']     = './assets/';
-			$config['imagedir']     = './assets/backand/img/qrcode/';
-			$config['quality']      = true;
-			$config['size']         = '1024';
-			$config['black']        = array(224, 255, 255);
-			$config['white']        = array(70, 130, 180);
-			$this->ciqrcode->initialize($config);
-
-			$image_name = $opd . '.png';
-
-			$params['data'] = $id;
-			$params['level'] = 'H';
-			$params['size'] = 10;
-			$params['savename'] = FCPATH . $config['imagedir'] . $image_name;
-			$this->ciqrcode->generate($params);
+			$this->opd->insert($data);
 			$this->session->set_flashdata('berhasil', 'OPD Berhasil Ditambah!');
 			redirect('opd');
 		} else {
@@ -86,39 +61,11 @@ class Opd extends MX_Controller
 	}
 	public function ubah()
 	{
-		$opd = htmlspecialchars($this->input->post('opd'));
-
-		$cek = $this->db->get_where('opd', ['idopd' =>  htmlspecialchars($this->input->post('id'))])->row();
-		// var_dump($cek);
-		// die;
-		unlink("./assets/backand/img/qrcode/" . $cek->qr_code);
-		$this->load->library('ciqrcode');
-		$config['cacheable']    = true;
-		$config['cachedir']     = './assets/';
-		$config['errorlog']     = './assets/';
-		$config['imagedir']     = './assets/backand/img/qrcode/';
-		$config['quality']      = true;
-		$config['size']         = '1024';
-		$config['black']        = array(224, 255, 255);
-		$config['white']        = array(70, 130, 180);
-		$this->ciqrcode->initialize($config);
-
-		$image_name = $opd . '.png';
-
-		$params['data'] = htmlspecialchars($this->input->post('id'));
-		$params['level'] = 'H';
-		$params['size'] = 10;
-		$params['savename'] = FCPATH . $config['imagedir'] . $image_name;
-		$this->ciqrcode->generate($params);
 		$data = array(
-			'idopd' => htmlspecialchars($this->input->post('id')),
-			'opd' => $opd,
-			'lat' => $this->input->post('lat'),
-			'longt' => $this->input->post('long'),
-			'qr_code' => $image_name
+			'id_opd' => htmlspecialchars($this->input->post('id')),
+			'nama_opd' => htmlspecialchars($this->input->post('nama')),
 		);
 		// print_r($data);
-		// var_dump($data);
 		// die;
 		$this->opd->update(htmlspecialchars($this->input->post('id')), $data);
 		$this->session->set_flashdata('berhasil', 'OPD Berhasil Diubah!');
@@ -128,10 +75,6 @@ class Opd extends MX_Controller
 	{
 		// var_dump($id);
 		// die;
-		$data = $this->db->get_where('opd', ['idopd' => $id])->row();
-
-		unlink("./assets/backand/img/qrcode/" . $data->qr_code);
-
 		$this->opd->delete($id);
 		$this->session->set_flashdata('berhasil', 'OPD Berhasil Dihapus!');
 		redirect('opd');

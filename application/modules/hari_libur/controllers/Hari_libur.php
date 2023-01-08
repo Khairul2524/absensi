@@ -8,13 +8,13 @@ class Hari_libur extends MX_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('role') == 4 || $this->session->userdata('role') == 3 || $this->session->userdata('role') == 2) {
-			redirect('auth');
-		} else {
-			if (!$this->session->userdata('role')) {
-				redirect('auth');
-			}
-		}
+		// if ($this->session->userdata('role') != 1) {
+		// 	redirect('auth');
+		// } else {
+		// 	if (!$this->session->userdata('role')) {
+		// 		redirect('auth');
+		// 	}
+		// }
 		$this->load->model('Hari_libur_model', 'hari_libur');
 		// $this->load->model('All_model', 'all');
 	}
@@ -25,25 +25,26 @@ class Hari_libur extends MX_Controller
 		$data = array(
 			'judul' => 'Hari Libur',
 			'data' => $this->hari_libur->get(),
-
+			// 'role' => $this->all->getidrole($id)
 		);
 		// var_dump($data['data']);
-		// die;
-		$this->load->view('template/header');
-		$this->load->view('template/sidebar');
+		// die();
+		$this->load->view('layout/header');
+		$this->load->view('layout/navbar');
+		$this->load->view('layout/sidebar');
 		$this->load->view('index', $data);
-		$this->load->view('template/footer');
+		$this->load->view('layout/footer');
 	}
 
 	public function tambah()
 	{
 		$data = array(
-			'tanggal' => htmlspecialchars($this->input->post('tgl')),
+			'tgl' => htmlspecialchars($this->input->post('tgl')),
 			'keterangan' => htmlspecialchars($this->input->post('ket')),
 		);
 		// print_r($data);
 		// die;
-		$cek = $this->db->get_where('hari_libur', ['tanggal' => htmlspecialchars($this->input->post('tgl'))])->row();
+		$cek = $this->db->get_where('hari_libur', ['tgl' => htmlspecialchars($this->input->post('tgl'))])->row();
 		// var_dump($cek);
 		if (!$cek) {
 			$this->hari_libur->insert($data);
@@ -63,9 +64,8 @@ class Hari_libur extends MX_Controller
 	{
 		$data = array(
 			'id_hari_libur' => htmlspecialchars($this->input->post('id')),
-			'tanggal' => htmlspecialchars($this->input->post('tgl')),
-			'keterangan' => htmlspecialchars($this->input->post('ket')),
-
+			'tgl' => htmlspecialchars($this->input->post('tgl')),
+			'keterangan' => htmlspecialchars($this->input->post('ket'))
 		);
 		// print_r($data);
 		// die;

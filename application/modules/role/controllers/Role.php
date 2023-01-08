@@ -8,13 +8,13 @@ class Role extends MX_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('role') != 1) {
-			redirect('auth');
-		} else {
-			if (!$this->session->userdata('role')) {
-				redirect('auth');
-			}
-		}
+		// if ($this->session->userdata('role') != 1) {
+		// 	redirect('auth');
+		// } else {
+		// 	if (!$this->session->userdata('role')) {
+		// 		redirect('auth');
+		// 	}
+		// }
 		$this->load->model('Role_model', 'role');
 		// $this->load->model('All_model', 'all');
 	}
@@ -29,20 +29,21 @@ class Role extends MX_Controller
 		);
 		// var_dump($data['data']);
 		// die();
-		$this->load->view('template/header');
-		$this->load->view('template/sidebar');
+		$this->load->view('layout/header');
+		$this->load->view('layout/navbar');
+		$this->load->view('layout/sidebar');
 		$this->load->view('index', $data);
-		$this->load->view('template/footer');
+		$this->load->view('layout/footer');
 	}
 
 	public function tambah()
 	{
 		$data = array(
-			'role' => htmlspecialchars($this->input->post('role')),
+			'role' => htmlspecialchars($this->input->post('nama')),
 		);
 		// print_r($data);
 		// die;
-		$cek = $this->db->get_where('role', ['role' => htmlspecialchars($this->input->post('role'))])->row();
+		$cek = $this->db->get_where('role', ['role' => htmlspecialchars($this->input->post('nama'))])->row();
 		// var_dump($cek);
 		if (!$cek) {
 			$this->role->insert($data);
@@ -61,8 +62,8 @@ class Role extends MX_Controller
 	public function ubah()
 	{
 		$data = array(
-			'idrole' => htmlspecialchars($this->input->post('id')),
-			'role' => htmlspecialchars($this->input->post('role')),
+			'id_role' => htmlspecialchars($this->input->post('id')),
+			'role' => htmlspecialchars($this->input->post('nama')),
 		);
 		// print_r($data);
 		// die;

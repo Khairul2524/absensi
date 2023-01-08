@@ -10,76 +10,46 @@ class Auth extends MY_Controller
 
 	public function index()
 	{
-		$this->load->view('viho_index');
+		$this->load->view('index');
 	}
 	public function register()
 	{
 		$this->load->view('register');
 	}
-	public function akun()
-	{
-		// $urls = base_url('') 'http://localhost/absensi/dashboard'
-		$url = include_once APPPATH . "../assets/google/Google_Client.php";
-		$url = include_once APPPATH . "../assets/google/contrib/Google_Oauth2Service.php";
-		$google_client = new Google_Client();
-		$google_client->setApplicationName('Absensi');
-		$google_client->setClientId('745873830579-umd0lhk7tunj969epai3mdkgffoknjkm.apps.googleusercontent.com');
-		$google_client->setClientSecret('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');
-		$google_client->setRedirectUri('http://localhost/absensi/dashboard');
-		$google_oauthv2 = new Google_Oauth2Service($google_client);
 
-
-		if (isset($_GET['code'])) {
-			$email = $google_client->authenticate($_GET['code']);
-			$_SESSION['token'] = $google_client->getAccessToken();
-			// header('Location: ' . filter_var($redirect_url, FILTER_SANITIZE_URL));
-		}
-
-		if (isset($_SESSION['token'])) {
-			$google_client->setAccessToken($_SESSION['token']);
-		}
-		if ($google_client->getAccessToken()) {
-			$gpuserprofile = $google_oauthv2->userinfo->get();
-			$nama = $gpuserprofile['given_name'] . " " . $gpuserprofile['family_name'];
-			$email = $gpuserprofile['email'];
-			$data = array(
-				'nama' => $nama,
-				'email' => $email,
-				'role'		=> 4,
-			);
-			$this->session->set_userdata($data);
-			redirect('dashboard/cek');
-		} else {
-			$authUrl = $google_client->createAuthUrl();
-			header("location: " . $authUrl);
-		}
-	}
 	public function login()
 	{
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
-		$cekuser = $this->db->get_where('user', ['email' => $email])->row_array();
+		$cekuser = $this->db->join('opd', 'opd.id_opd=user.id_opd')->join('bidang', 'bidang.id_bidang=user.id_bidang')->join('role', 'role.id_role=user.id_role')->get_where('user', ['email' => $email])->row_array();
 		// var_dump($cekuser);
-		// die();
+		// die;
 		if ($cekuser) {
-			if (password_verify($password, $cekuser['password'])) {
+			if ($cekuser['aktif'] == 1) {
+				if (password_verify($password, $cekuser['password'])) {
 
-				$data = array(
-					'namalengkap' => $cekuser['namalengkap'],
-					'email' => $cekuser['email'],
-					'role'	=> $cekuser['idrole'],
-					'opd'	=> $cekuser['idopd'],
-					'iduser' => $cekuser['iduser'],
-					'idbagian' => $cekuser['id_bagian'],
-					'foto' => $cekuser['foto']
-
-				);
-				// var_dump($data);
-				// die;
-				$this->session->set_userdata($data);
-				redirect('dashb');
+					$data = array(
+						'id_user' 	=> $cekuser['id_user'],
+						'namalengkap' => $cekuser['nama_lengkap'],
+						'email' 	=> $cekuser['email'],
+						'id_role'	=> $cekuser['id_role'],
+						'nama_role'	=> $cekuser['role'],
+						'id_opd'	=> $cekuser['id_opd'],
+						'nama_opd'	=> $cekuser['nama_opd'],
+						'id_bidang' => $cekuser['id_bidang'],
+						'nama_bidang' => $cekuser['nama_bidang'],
+						'foto' 		=> $cekuser['foto']
+					);
+					// var_dump($data);
+					// die;
+					$this->session->set_userdata($data);
+					redirect('admin');
+				} else {
+					$this->session->set_flashdata('gagal', 'Password Anda Salah!');
+					redirect('auth');
+				}
 			} else {
-				$this->session->set_flashdata('gagal', 'Password Anda Salah!');
+				$this->session->set_flashdata('gagal', 'Email Anda Belum Di Aktivasi!');
 				redirect('auth');
 			}
 		} else {
