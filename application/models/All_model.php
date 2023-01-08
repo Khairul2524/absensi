@@ -5,20 +5,20 @@ class All_model extends CI_Model
     // Awal Query Absensi
     public function getabsensi()
     {
-        return $this->db->get('absensi')->result();
+        return $this->db->get('absen')->result();
     }
     public function getidabsensi($id)
     {
-        return $this->db->get_where('absensi', ['idabsensi' => $id])->result();
+        return $this->db->get_where('absen', ['id_absen' => $id])->result();
     }
     public function insertabsensi($data)
     {
-        $this->db->insert('absensi', $data);
+        $this->db->insert('absen', $data);
         return $this->db->affected_rows();
     }
     public function updateabsensi($data, $id)
     {
-        $this->db->update('absensi', $data, ['idabsensi' => $id]);
+        $this->db->update('absen', $data, ['id_absen' => $id]);
         return $this->db->affected_rows();
     }
     // Akhir Query Absensi

@@ -38,7 +38,7 @@ class Absen extends MX_Controller
 
 		if (!$cek_hari_libur) {
 			if ($hari != 'Sun' && $hari != 'Sat') {
-				$cek_absen = $this->db->get_where('absen', ['id_user' => 8, 'tgl' => $tgl])->row();
+				$cek_absen = $this->db->get_where('absen', ['id_user' => $this->session->userdata('id_user'), 'tgl' => $tgl])->row();
 
 				if (!$cek_absen) {
 					// ambil titik opd 	
@@ -63,7 +63,7 @@ class Absen extends MX_Controller
 						$jam_masuk = date('H:i', time());
 						if ($meter <= 10) {
 							$datak = array(
-								'id_user' => 8,
+								'id_user' => $this->session->userdata('id_user'),
 								'tgl'	=> $tgl,
 								'jam_masuk' => $jam_masuk,
 								'jam_pulang' => '00:00',
@@ -118,7 +118,7 @@ class Absen extends MX_Controller
 	public function absen_pulang()
 	{
 		$tgl = date('Y-m-d');
-		$cek_absen = $this->db->get_where('absen', ['id_user' => 8, 'tgl' => $tgl])->row();
+		$cek_absen = $this->db->get_where('absen', ['id_user' => $this->session->userdata('id_user'), 'tgl' => $tgl])->row();
 		// echo json_encode($cek_absen);
 		// die();
 		if ($cek_absen) {
@@ -153,7 +153,7 @@ class Absen extends MX_Controller
 
 						$dataks = array(
 							'id_absen' => $cek_absen->id_absen,
-							'id_user' => 8,
+							'id_user' => $this->session->userdata('id_user'),
 							'jam_pulang' => $jam_pulang,
 						);
 						// echo json_encode($dataks);
@@ -201,7 +201,7 @@ class Absen extends MX_Controller
 		$cek_hari_libur = $this->db->get_where('hari_libur', ['tgl' => $tgl])->row();
 		if (!$cek_hari_libur) {
 			if ($hari != 'Sun' && $hari != 'Sat') {
-				$cek_absen = $this->db->get_where('absen', ['id_user' => 8, 'tgl' => $tgl])->row();
+				$cek_absen = $this->db->get_where('absen', ['id_user' => $this->session->userdata('id_user'), 'tgl' => $tgl])->row();
 				if (!$cek_absen) {
 					// upload foto surat izin
 
@@ -211,7 +211,7 @@ class Absen extends MX_Controller
 					if ($latitude_sekarang && $longitude_sekarang) {
 						$jam_izin = date('H:i', time());
 						$datak = array(
-							'id_user' => 8,
+							'id_user' => $this->session->userdata('id_user'),
 							'tgl'	=> $tgl,
 							'jam_masuk' => $jam_izin,
 							'jam_pulang' => $jam_izin,
@@ -249,42 +249,42 @@ class Absen extends MX_Controller
 
 		$cek_hari_libur = $this->db->get_where('hari_libur', ['tgl' => $tgl])->row();
 		if (!$cek_hari_libur) {
-			// if ($hari != 'Sun' && $hari != 'Sat') {
-			$cek_absen = $this->db->get_where('absen', ['id_user' => 8, 'tgl' => $tgl])->row();
-			if (!$cek_absen) {
-				// upload foto surat izin
+			if ($hari != 'Sun' && $hari != 'Sat') {
+				$cek_absen = $this->db->get_where('absen', ['id_user' => $this->session->userdata('id_user'), 'tgl' => $tgl])->row();
+				if (!$cek_absen) {
+					// upload foto surat izin
 
-				$latitude_sekarang = $this->input->post('lati');
-				$longitude_sekarang = $this->input->post('longi');
+					$latitude_sekarang = $this->input->post('lati');
+					$longitude_sekarang = $this->input->post('longi');
 
-				if ($latitude_sekarang && $longitude_sekarang) {
-					$jam_izin = date('H:i', time());
-					$datak = array(
-						'id_user' => 8,
-						'tgl'	=> $tgl,
-						'jam_masuk' => $jam_izin,
-						'jam_pulang' => $jam_izin,
-						'lat' => $latitude_sekarang,
-						'long' => $longitude_sekarang,
-						'foto' => $this->_uploadsfoto(),
-						'status_masuk' => 3,
-						'keterangan' => htmlspecialchars($this->input->post('ket'))
-					);
-					$this->absen->insert($datak);
-					$this->session->set_flashdata('berhasil', 'Anda Berhasil Absen Izin');
-					redirect('absen');
+					if ($latitude_sekarang && $longitude_sekarang) {
+						$jam_izin = date('H:i', time());
+						$datak = array(
+							'id_user' => $this->session->userdata('id_user'),
+							'tgl'	=> $tgl,
+							'jam_masuk' => $jam_izin,
+							'jam_pulang' => $jam_izin,
+							'lat' => $latitude_sekarang,
+							'long' => $longitude_sekarang,
+							'foto' => $this->_uploadsfoto(),
+							'status_masuk' => 3,
+							'keterangan' => htmlspecialchars($this->input->post('ket'))
+						);
+						$this->absen->insert($datak);
+						$this->session->set_flashdata('berhasil', 'Anda Berhasil Absen Izin');
+						redirect('absen');
+					} else {
+						$this->session->set_flashdata('gagal', 'Lokasi Anda Tidak Terdeteksi');
+						redirect('absen');
+					}
 				} else {
-					$this->session->set_flashdata('gagal', 'Lokasi Anda Tidak Terdeteksi');
+					$this->session->set_flashdata('gagal', 'Anda Sudah Absen');
 					redirect('absen');
 				}
 			} else {
-				$this->session->set_flashdata('gagal', 'Anda Sudah Absen');
+				$this->session->set_flashdata('gagal', 'Hari Ini Libur');
 				redirect('absen');
 			}
-			// } else {
-			// 	$this->session->set_flashdata('gagal', 'Hari Ini Libur');
-			// 	redirect('absen');
-			// }
 		} else {
 			$this->session->set_flashdata('gagal', 'Hari Ini Libur');
 			redirect('absen');

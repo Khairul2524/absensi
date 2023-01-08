@@ -9,7 +9,7 @@ class User extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('role') == 4) {
+		if ($this->session->userdata('id_role') == 1) {
 			redirect('auth');
 		}
 		require APPPATH . 'libraries/phpmailer/src/Exception.php';

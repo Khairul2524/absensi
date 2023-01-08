@@ -8,8 +8,8 @@
     <meta name="description" content=/backendadmin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template,/backend admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="<?= base_url('assets/backand') ?>/img/logo32.png" type="image/x-icon">
-    <link rel="shortcut icon" href="<?= base_url('assets/backand') ?>/img/logo32.png" type="image/x-icon">
+    <link rel="icon" href="<?= base_url('assets/backend') ?>/img/logo32.png" type="image/x-icon">
+    <link rel="shortcut icon" href="<?= base_url('assets/backend') ?>/img/logo32.png" type="image/x-icon">
     <title>Absensi Loteng </title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
